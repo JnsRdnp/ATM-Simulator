@@ -27,6 +27,14 @@ function(request, response) {
 });
 
 router.put('cards/:id',
-function(request, response));
+function(request, response) {
+    cards.update(request.params.id, request.body, function(error, dbResult){
+        if (error){
+            response.json(error);
+        } else {
+            response.json(dbResult);
+        }
+    });
+});
 
 module.exports = router;
