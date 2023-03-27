@@ -4,9 +4,9 @@ const cards = requure("../models/cards_model");
 
 router.get('cards/',
 function(request, response) {
-  cards.getAll(function (err, dbResult) {
-    if (err) {
-        response.json(err);
+  cards.getAll(function (error, dbResult) {
+    if (error) {
+        response.json(error);
     } else {
         console.log(dbResult);
         response.json(dbResult);
@@ -16,9 +16,9 @@ function(request, response) {
 
 router.get('cards/:id',
 function(request, response) {
-    cards.getById(function (err, dbResult) {
-        if (err) {
-            response.json(err);
+    cards.getById(function (error, dbResult) {
+        if (error) {
+            response.json(error);
         } else {
             console.log(dbResult);
             response.json(dbResult);
