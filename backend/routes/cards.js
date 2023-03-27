@@ -37,4 +37,15 @@ function(request, response) {
     });
 });
 
+router.post('cards',
+function(request, response) {
+    cards.add(request.body, function(error, dbResult){
+        if (error){
+            response.json(error);
+        } else {
+            response.json(dbResult);
+        }
+    });
+});
+
 module.exports = router;
