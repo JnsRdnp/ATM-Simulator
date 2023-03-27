@@ -16,7 +16,7 @@ function(request, response) {
 
 router.get('cards/:id',
 function(request, response) {
-    cards.getById(function (error, dbResult) {
+    cards.getById(request.params.id, function (error, dbResult) {
         if (error) {
             response.json(error);
         } else {
@@ -29,6 +29,17 @@ function(request, response) {
 router.put('cards/:id',
 function(request, response) {
     cards.update(request.params.id, request.body, function(error, dbResult){
+        if (error){
+            response.json(error);
+        } else {
+            response.json(dbResult);
+        }
+    });
+});
+
+router.delete('cards/:id',
+function(request, response) {
+    cards.delete(request.params.id, function(error, dbResult) {
         if (error){
             response.json(error);
         } else {
