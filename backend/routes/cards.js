@@ -16,6 +16,14 @@ function(request, response) {
 
 router.get('cards/:id',
 function(request, response) {
-})
+    cards.getById(function (err, dbResult) {
+        if (err) {
+            response.json(err);
+        } else {
+            console.log(dbResult);
+            response.json(dbResult);
+        }
+    });
+});
 
 module.exports = router;
