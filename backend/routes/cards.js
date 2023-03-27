@@ -26,4 +26,7 @@ function(request, response) {
     });
 });
 
+router.put('cards/:id',
+function(request, response));
+
 module.exports = router;
