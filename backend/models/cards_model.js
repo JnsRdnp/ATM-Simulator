@@ -17,4 +17,11 @@ const cards={
             [cards.idCard, hash, cards.idUser, cards.credit, cards.debit], callback);
         });
     },
+
+    update: function(id, user, callback) {
+        bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
+            return db.query('update cards set PINcode = ?, user_iduser = ?, credit = ?, debit = ? where idcard = ?) values (?,?,?,?,?)',
+            [hash, cards.idUser, cards.credit, cards.debit, id], callback);
+        });
+    }
 }
