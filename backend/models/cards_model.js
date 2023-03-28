@@ -18,6 +18,8 @@ const cards={
         });
     },
 
+    delete: 
+
     update: function(id, user, callback) {
         bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
             return db.query('update cards set PINcode = ?, user_iduser = ?, credit = ?, debit = ? where idcard = ?) values (?,?,?,?,?)',
