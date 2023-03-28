@@ -9,6 +9,7 @@ dotenv.config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const accountsRouter = require('./routes/accounts');
+const cardsRouter = require('./routes/cards');
 const { constants } = require('fs/promises');
 
 const app = express();
