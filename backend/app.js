@@ -20,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/cards',cardsRouter);
 app.use('/users', usersRouter);
 app.use('/accounts',accountsRouter);
 
