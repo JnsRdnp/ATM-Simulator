@@ -11,14 +11,16 @@ const cards={
         return db.query('select * from cards where idcard=?', [id], callback);
     },
 
-    add: function(user, callback) {
+    add: function(id, user, callback) {
         bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
             return db.query('insert into cards (idcard, PINcode, user_iduser, credit, debit) values (?,?,?,?,?)',
-            [cards.idCard, hash, cards.idUser, cards.credit, cards.debit], callback);
+            [id, hash, cards.idUser, cards.credit, cards.debit], callback);
         });
     },
 
-    delete: 
+    delete: function(id, callback){
+        return db.query('delete from cards where idcard = ?', [id], callback);
+    },
 
     update: function(id, user, callback) {
         bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
