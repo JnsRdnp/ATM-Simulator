@@ -6,6 +6,7 @@ const logger = require('morgan');
 const dotenv=require('dotenv');
 dotenv.config();
 
+const ownershipRouter = require('./routes/ownership');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const { constants } = require('fs/promises');
@@ -20,6 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use('/ownership', ownershipRouter);
 
 app.listen(process.env.port, function(){
     console.log("Application listens to port " + process.env.port);
