@@ -9,6 +9,7 @@ dotenv.config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const accountsRouter = require('./routes/accounts');
+const cardsRouter = require('./routes/cards');
 const { constants } = require('fs/promises');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/cards',cardsRouter);
 app.use('/users', usersRouter);
 app.use('/accounts',accountsRouter);
 
