@@ -11,6 +11,7 @@ const usersRouter = require('./routes/user');
 const accountsRouter = require('./routes/accounts');
 const cardsRouter = require('./routes/cards');
 const { constants } = require('fs/promises');
+const ownershipRouter = require('./routes/ownership')
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/', indexRouter);
 app.use('/cards',cardsRouter);
 app.use('/users', usersRouter);
 app.use('/accounts',accountsRouter);
+app.use('/ownership', ownershipRouter);
 
 app.listen(process.env.port, function(){
     console.log("Application listens to port " + process.env.port);

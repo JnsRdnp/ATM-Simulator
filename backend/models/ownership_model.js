@@ -10,7 +10,8 @@ const ownership={
         , [id], callback);
     },
     addOwnership:function(id, callback) {
-        
+        return db.query('INSERT INTO ownership (idownership, user_iduser, account_idaccount) VALUES(?,?,?',
+        [id.idownership, id.user_iduser, id.account_idaccount], callback);
     }
 }
 
