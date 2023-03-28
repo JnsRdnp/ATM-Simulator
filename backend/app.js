@@ -25,7 +25,7 @@ app.use('/users', usersRouter);
 app.use('/ownership', ownershipRouter);
 
 app.listen(process.env.port, function(){
-    console.log("Application listens to port " + process.env.port);
+    console.log("Application listens to port " + process.env.PORT);
 });
 
 module.exports = app;
