@@ -14,4 +14,15 @@ router.get('/',
         });
     });
 
+router.get('/:id',
+    function(request, response) {
+        ownership.getOwnership(request.params.id, function(error, dbResult) {
+            if (error) {
+                response.json(error);
+            } else {
+                response.json(dbResult[0]);
+            }
+        })
+    })
+
 module.exports=router;
