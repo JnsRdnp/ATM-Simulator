@@ -13,8 +13,8 @@ const cards={
 
     add: function(user, callback) {
         bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
-            return db.query('insert into cards (idcard, PINcode) values (?,?)',
-            [cards.idCard, hash], callback);
+            return db.query('insert into cards (idcard, PINcode, user_iduser, credit, debit) values (?,?,?,?,?)',
+            [cards.idCard, hash, cards.idUser, cards.credit, cards.debit], callback);
         });
     },
 }
