@@ -18,7 +18,7 @@ USE mydb;
     <li>Connect to database to fetch information and next select the correct Model Schema. It should be selected by default.</li>
 <ol>
     
-ALTERNATIVELY:
+##ALTERNATIVELY:
     
     
     
