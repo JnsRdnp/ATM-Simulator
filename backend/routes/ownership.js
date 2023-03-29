@@ -25,4 +25,26 @@ router.get('/:id',
         })
     })
 
+router.post('/:id',
+    function(request, response) {
+        ownership.addOwnership(request.params.id, function(error, dbResult) {
+            if (error) {
+                response.json(error);
+            } else {
+                response.json(dbResult[0]);
+            }
+        });
+    });
+
+router.delete('/:id', 
+    function(request, response) {
+        ownership.deleteOwnership(request.params.id, function(error, dbResult) {
+            if (error) {
+                response.json(error);
+            } else {
+                response.json(dbResult.affectedRows);
+            }
+        });
+});
+
 module.exports=router;
