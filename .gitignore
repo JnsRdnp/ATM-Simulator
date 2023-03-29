@@ -2,6 +2,9 @@ backend/node_modules
 frontend/build/
 frontend/*.user
 
+# Bak-file
+.bak
+
 # Logs
 logs
 *.log
