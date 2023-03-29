@@ -22,17 +22,6 @@ router.get('/:id',
             } else {
                 response.json(dbResult[0]);
             }
-        })
-    })
-
-router.post('/:id',
-    function(request, response) {
-        ownership.addOwnership(request.params.id, function(error, dbResult) {
-            if (error) {
-                response.json(error);
-            } else {
-                response.json(dbResult[0]);
-            }
         });
     });
 
@@ -45,6 +34,17 @@ router.delete('/:id',
                 response.json(dbResult.affectedRows);
             }
         });
-});
+    });
+
+router.put('/:id',
+    function(request, response) {
+        ownership.updateOwnership(request.params.id, request.body, function(err, dbResult){
+            if (error) {
+                response.json(error);
+            } else {
+                response.json(dbResult.affectedRows);
+            }
+        });
+    });
 
 module.exports=router;
