@@ -30,4 +30,4 @@ const cards={
     }
 }
 
-module.exports=ownership;
+module.exports=cards;
