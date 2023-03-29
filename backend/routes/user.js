@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const user = require('../models/user_model');
 
-router.get('/users/',
+router.get('/user/',
     function (request, response) {
-        users.getAll(function (error, dbResult) {
+        user.getAll(function (error, dbResult) {
             if (error) {
                 response.json(error);
             } else {
@@ -14,9 +14,9 @@ router.get('/users/',
         })
     });
 
-router.get('/users/:id',
+router.get('/user/:id',
     function (request, response) {
-        users.getById(request.params.id, function (error, dbResult) {
+        user.getById(request.params.id, function (error, dbResult) {
             if (error) {
                 response.json(error);
             } else {
@@ -26,9 +26,9 @@ router.get('/users/:id',
     });
 
 
-router.post('/users/', 
+router.post('/user/', 
 function(request, response) {
-  users.add(request.body, function(error, dbResult) {
+  user.add(request.body, function(error, dbResult) {
     if (error) {
       response.json(error);
     } else {
@@ -38,9 +38,9 @@ function(request, response) {
 });
 
 
-router.delete('/users/:id', 
+router.delete('/user/:id', 
 function(request, response) {
-  users.delete(request.params.id, function(error, dbResult) {
+  user.delete(request.params.id, function(error, dbResult) {
     if (error) {
       response.json(error);
     } else {
@@ -50,9 +50,9 @@ function(request, response) {
 });
 
 
-router.put('/users/:id', 
+router.put('/:id', 
 function(request, response) {
-  users.update(request.params.id, request.body, function(error, dbResult) {
+  user.update(request.params.id, request.body, function(error, dbResult) {
     if (error) {
       response.json(error);
     } else {
