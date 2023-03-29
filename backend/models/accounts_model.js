@@ -18,7 +18,7 @@ const accounts={
     },
     update: function(id, accounts, callback) {
         return db.query(
-          'update accounts set balance=?,creditLimit=?,card_idcard=?,cards_user_iduser,idowner ,where idaccounts=?',
+          'update accounts set balance=?,creditLimit=?,card_idcard=?,cards_user_iduser=?,idowner=?,where idaccounts=?',
           [accounts.balance, accounts.creditLimit,
             accounts.card_idcard,accounts.cards_user_iduser,
             accounts.idowner,id],callback);
