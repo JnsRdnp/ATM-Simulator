@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 app.listen(process.env.port, function(){
     console.log("Application listens to port " + process.env.port);
