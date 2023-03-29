@@ -29,3 +29,5 @@ const cards={
         });
     }
 }
+
+module.exports=ownership;
