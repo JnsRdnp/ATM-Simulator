@@ -1,5 +1,5 @@
 const db = require('../database');
-const bcrypt = require('bcryptijs');
+const bcrypt = require('bcryptjs');
 
 const saltRounds=20;
 const cards={
