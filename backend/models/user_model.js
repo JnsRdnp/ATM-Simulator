@@ -7,6 +7,7 @@ const user = {
   getById: function(id, callback) {
     return db.query('select * from user where id_user=?', [id], callback);
   },
+
   add: function(user, callback) {
     return db.query(
       'insert into user (firstName, lastName, cardNumber, address, phoneNumber) values(?,?,?,?,?)',
@@ -14,9 +15,11 @@ const user = {
       callback
     );
   },
+
   delete: function(id, callback) {
     return db.query('delete from user where id_user=?', [id], callback);
   },
+
   update: function(id, user, callback) {
     return db.query(
       'update user set firstName=?, lastName=?, cardNumber=?, address=?, phoneNumber=?, where id_user=?',
@@ -25,4 +28,5 @@ const user = {
     );
   }
 };
+
 module.exports = user;
