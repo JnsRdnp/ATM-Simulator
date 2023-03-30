@@ -38,7 +38,7 @@ function(request, response) {
 });
 
 
-router.delete('/user/:id', 
+router.delete('/:id', 
 function(request, response) {
   user.delete(request.params.id, function(error, dbResult) {
     if (error) {
@@ -49,7 +49,7 @@ function(request, response) {
   });
 });
 
-router.put('/user/:id', 
+router.put('/:id', 
 function(request, response) {
   user.update(request.params.id, request.body, function(error, dbResult) {
     if (error) {
