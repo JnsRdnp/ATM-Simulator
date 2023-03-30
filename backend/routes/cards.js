@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cards = require("../models/cards_model");
 
-router.get('/cards/',
+router.get('/',
 function(request, response) {
   cards.getAll(function (error, dbResult) {
     if (error) {
@@ -14,7 +14,7 @@ function(request, response) {
   });
 });
 
-router.get('/cards/:id',
+router.get('/:id',
 function(request, response) {
     cards.getById(request.params.id, function (error, dbResult) {
         if (error) {
@@ -26,7 +26,7 @@ function(request, response) {
     });
 });
 
-router.put('/cards/:id',
+router.put('/:id',
 function(request, response) {
     cards.update(request.params.id, request.body, function(error, dbResult){
         if (error){
@@ -37,7 +37,7 @@ function(request, response) {
     });
 });
 
-router.delete('/cards/:id',
+router.delete('/:id',
 function(request, response) {
     cards.delete(request.params.id, function(error, dbResult) {
         if (error){
@@ -48,7 +48,7 @@ function(request, response) {
     });
 });
 
-router.post('/cards',
+router.post('/',
 function(request, response) {
     cards.add(request.body, function(error, dbResult){
         if (error){
