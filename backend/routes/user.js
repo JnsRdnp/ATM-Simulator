@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const user = require('../models/user_model');
 
-router.get('/user/',
+router.get('/',
     function (request, response) {
         user.getAll(function (error, dbResult) {
             if (error) {
@@ -14,7 +14,7 @@ router.get('/user/',
         })
     });
 
-router.get('/user/:id',
+router.get('/:id',
     function (request, response) {
         user.getById(request.params.id, function (error, dbResult) {
             if (error) {
@@ -26,7 +26,7 @@ router.get('/user/:id',
     });
 
 
-router.post('/user/', 
+router.post('/', 
 function(request, response) {
   user.add(request.body, function(error, dbResult) {
     if (error) {
@@ -48,7 +48,6 @@ function(request, response) {
     }
   });
 });
-
 
 router.put('/user/:id', 
 function(request, response) {
