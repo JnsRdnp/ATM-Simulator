@@ -47,4 +47,13 @@ router.put('/:id',
         });
     });
 
+router.post('/', function(request, response){
+    ownership.addOwnership(request.body, function(error, dbResult) {
+        if (error) {
+            response.json(error);
+        } else {
+            response.json(dbResult.affectedRows);
+        }
+    });
+});
 module.exports=router;
