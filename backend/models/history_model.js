@@ -9,6 +9,7 @@ history={
     delete:function(id, callback) {
         return db.query('delete from history where idhistory=?', [id], callback);
     }
+
 };
 
 
