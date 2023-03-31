@@ -32,6 +32,7 @@ BEGIN
 END //
 DELIMITER ;
 
+
 DELIMITER //
 CREATE PROCEDURE credit_withdraw(IN accountID INT,IN amount float)
 BEGIN
@@ -48,5 +49,3 @@ BEGIN
   END IF;
 END //
 DELIMITER ;
-
-
