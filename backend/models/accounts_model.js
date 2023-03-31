@@ -21,6 +21,16 @@ const accounts={
           'update accounts set balance=?,creditLimit=?,card_idcard=?,idowner=? where idaccounts=?',
           [accounts.balance, accounts.creditLimit,
             accounts.card_idcard, accounts.idowner,id],callback);
+      },
+      depitWithdraw: function(id, amount, callback) {
+        return db.query
+        ('CALL debit_withdraw(?, ?)',
+         [id, amount], callback);
+      },
+      creditWithdraw: function(id, amount, callback) {
+        return db.query
+        ('CALL credit_withdraw(?, ?)',
+         [id, amount], callback);
       }
     
 };

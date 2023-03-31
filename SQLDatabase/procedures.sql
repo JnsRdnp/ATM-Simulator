@@ -18,7 +18,6 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE debit_withdraw(IN accountID INT,IN amount float)
 BEGIN
-
   DECLARE test1 INT DEFAULT 0;
   START TRANSACTION;
   call fetchName(accountID);
@@ -32,3 +31,22 @@ BEGIN
   END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE credit_withdraw(IN accountID INT,IN amount float)
+BEGIN
+  DECLARE test1 INT DEFAULT 0;
+  START TRANSACTION;
+  call fetchName(accountID);
+  UPDATE accounts SET balance=balance-amount WHERE idaccounts=accountID AND(creditLimit*-1)<=(balance-amount) AND (balance+creditLimit)>=amount;
+  SET test1=ROW_COUNT();
+    IF (test1 > 0) THEN COMMIT;
+	  INSERT INTO history(accounts_idaccounts,wholeName,withdrawal,date)
+	  VALUES(accountID,@wholeName,amount,NOW());
+    ELSE
+      ROLLBACK;
+  END IF;
+END //
+DELIMITER ;
+
+
