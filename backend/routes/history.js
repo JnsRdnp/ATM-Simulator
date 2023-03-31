@@ -14,6 +14,17 @@ router.get('/',
         });
     });
 
+router.get('/:page',
+    function(request, response) {
+      history.getPage(request.params.page, function(error, dbResult) {
+        if(error){
+          response.json(error);
+        } else {
+          response.json(dbResult);
+        }
+      });
+    });
+
 router.delete('/:id', 
     function(request, response) {
       history.delete(request.params.id, function(err, dbResult) {
