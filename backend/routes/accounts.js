@@ -47,7 +47,7 @@ function(request, response) {
   });
 });
 
-router.put('/:id', 
+router.put('/update/:id', 
 function(request, response) {
   accounts.update(request.params.id, request.body, function(err, dbResult) {
     if (err) {
@@ -57,5 +57,26 @@ function(request, response) {
     }
   });
 });
+
+router.put('/debitWithdraw', function(request, response) {
+  accounts.depitWithdraw(request.body.accountID,request.body.amount, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json(dbResult);
+    }
+  });
+});
+
+router.put('/creditWithdraw', function(request, response) {
+  accounts.creditWithdraw(request.body.accountID,request.body.amount, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json(dbResult);
+    }
+  });
+});
+
 
 module.exports=router;
