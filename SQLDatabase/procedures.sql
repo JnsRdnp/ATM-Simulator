@@ -49,3 +49,12 @@ BEGIN
   END IF;
 END //
 DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE get_history(IN accountID INT, IN pageNumber INT)
+BEGIN
+  SELECT * FROM history WHERE accounts_idaccounts = accountID
+  LIMIT 5*pageNumber, 5;
+END //
+DELIMITER ;
