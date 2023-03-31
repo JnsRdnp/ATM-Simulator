@@ -27,9 +27,9 @@ router.get('/:page',
 
 router.delete('/:id', 
     function(request, response) {
-      history.delete(request.params.id, function(err, dbResult) {
-        if (err) {
-          response.json(err);
+      history.delete(request.params.id, function(error, dbResult) {
+        if (error) {
+          response.json(error);
         } else {
           response.json(dbResult);
         }
