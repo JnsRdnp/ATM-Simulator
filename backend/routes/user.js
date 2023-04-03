@@ -37,6 +37,10 @@ function(request, response) {
   });
 });
 
+/*router.post('/login',
+function()
+)*/
+
 
 router.delete('/:id', 
 function(request, response) {

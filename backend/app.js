@@ -24,9 +24,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/user', usersRouter); //works as our authetication
-app.use(authenticateToken);
-app.use('/cards',cardsRouter);
+app.use('/cards',cardsRouter); //works as our authetication
+//app.use(authenticateToken);
+app.use('/user', usersRouter);
 app.use('/accounts',accountsRouter);
 app.use('/history',historyRouter);
 app.use('/ownership', ownershipRouter);
