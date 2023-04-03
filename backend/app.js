@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/cards',cardsRouter); //works as our authetication
-//app.use(authenticateToken);
+app.use(authenticateToken);
 app.use('/user', usersRouter);
 app.use('/accounts',accountsRouter);
 app.use('/history',historyRouter);
@@ -53,7 +53,7 @@ function authenticateToken(request, response, next) {
         if (error){
             return res.sendStatus(403);
         }
-        req.user = user;
+        request.user = user;
         next();
     });
   }
