@@ -31,6 +31,10 @@ const accounts={
         return db.query
         ('CALL credit_withdraw(?, ?)',
          [id, amount], callback);
+      },
+      getBalance: function(id,callback){
+        return db.query
+        ('select balance from accounts where idaccounts=?',[id],callback);
       }
     
 };
