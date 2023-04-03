@@ -78,5 +78,16 @@ router.put('/creditWithdraw', function(request, response) {
   });
 });
 
+router.get('/getBalance/:id',
+function (request, response) {
+    accounts.getBalance(request.params.id, function (err, dbResult) {
+        if (err) {
+            response.json(err);
+        } else {
+            response.json(dbResult);
+        }
+    })
+});
+
 
 module.exports=router;
