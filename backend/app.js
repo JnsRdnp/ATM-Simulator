@@ -51,7 +51,7 @@ function authenticateToken(request, response, next) {
         console.log(error);
   
         if (error){
-            return res.sendStatus(403);
+            return response.sendStatus(403);
         }
         request.user = user;
         next();
