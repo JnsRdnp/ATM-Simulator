@@ -6,7 +6,7 @@ history={
     getAll:function(callback) {
         return db.query('select * from history;', callback);
     },
-    getPage: function(id, age, callback){
+    getPage: function(id, page, callback){
         return db.query('CALL get_history(?, ?)',
          [id, page], callback);
     },

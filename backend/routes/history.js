@@ -14,7 +14,7 @@ router.get('/',
         });
     });
 
-router.get('/:page',
+router.get('/getPage',
     function(request, response) {
       history.getPage(request.body.accountID, request.body.page, function(error, dbResult) {
         if(error){
