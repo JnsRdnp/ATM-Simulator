@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jtw = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const bcrypt = require('bcryptjs');
 const cards = require("../models/cards_model");
 
 router.get('/',
@@ -63,34 +64,36 @@ function(request, response) {
 
 router.post('/login',
 function(request, response) {
-    if (request.body.id && request.body.PINcode) {
-        const id = request.body.id;
-        const PINcode = request.body.PINcode;
-
-        cards.checkPIN(user, function(dbError, dbResult) {
-            if(dbError) {
-                response.json(dbError);
+    if(request.body.cardID && request.body.PINcode){
+        const user = request.body.cardID;
+        const pass = request.body.PINcode;
+        
+        cards.checkPin(user, function(dbError, dbResult) {
+            if(dbError){
+              response.json(dbError);
             } else {
-                if (dbResult > 0) {
-                    bcrypt.compare(givenPIN, dbResult[0].PINcode, function(error, compareResult) {
-                        if (compareResult){
+                if (dbResult.length > 0) {
+                    bcrypt.compare(pass,dbResult[0].PINcode, function(error,compareResult) {
+                        if(compareResult) {
                             console.log("succes");
-                            const token = generateAccessToken({ id: user});
+                            const token = generateAccessToken({ cardID: user });
                             response.send(token);
-                        } else {
+                        }
+                        else {
                             console.log("wrong password");
                             response.send(false);
-                        }
+                        }			
                     });
-                } else {
-                    console.log("Card does not exist");
+                }
+                else{
+                    console.log("user does not exists");
                     response.send(false);
                 }
             }
         });
     }
-    else {
-        console.log("Card number or PIN code missing");
+    else{
+        console.log("username or password missing");
         response.send(false);
     }
 });
