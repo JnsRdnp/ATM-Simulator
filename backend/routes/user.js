@@ -37,11 +37,6 @@ function(request, response) {
   });
 });
 
-/*router.post('/login',
-function()
-)*/
-
-
 router.delete('/:id', 
 function(request, response) {
   user.delete(request.params.id, function(error, dbResult) {
