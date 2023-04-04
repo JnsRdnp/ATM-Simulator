@@ -28,10 +28,6 @@ const cards={
             return db.query("update cards set PINcode = ?, user_iduser = ?, credit = b?, debit = b? where idcard = ?",
             [hash, cards.idUser, cards.credit, cards.debit, id], callback);
         });
-    },
-
-    checkPin: function(cardID, callback) {
-        return db.query("select PINcode from cards where idcard = ?", [cardID], callback);
     }
 }
 
