@@ -16,7 +16,7 @@ router.get('/',
 
 router.get('/getPage',
     function(request, response) {
-      history.getPage(request.body.accountID, request.body.page, function(error, dbResult) {
+      history.getPage(request.body.accountID, request.body.amount, request.body.page, function(error, dbResult) {
         if(error){
           response.json(error);
         } else {

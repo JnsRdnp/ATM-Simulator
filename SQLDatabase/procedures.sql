@@ -52,11 +52,11 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE get_history(IN accountID INT, IN pageNumber INT)
+CREATE PROCEDURE get_history(IN accountID INT, IN showNumber INT, IN pageNumber INT)
 BEGIN
   DECLARE pageOffset INT;
   SET pageOffset = pageNumber * 5;
   SELECT * FROM history WHERE accounts_idaccounts = accountID
-  LIMIT pageOffset, 5;
+  LIMIT pageOffset, showNumber;
 END //
 DELIMITER ;
