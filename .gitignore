@@ -1,6 +1,7 @@
 backend/node_modules
 frontend/build/
 frontend/*.user
+build/
 
 # Bak-file
 *.bak
