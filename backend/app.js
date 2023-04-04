@@ -14,6 +14,7 @@ const accountsRouter = require('./routes/accounts');
 const historyRouter = require('./routes/history');
 const cardsRouter = require('./routes/cards');
 const ownershipRouter = require('./routes/ownership');
+const loginRouter = require('./routes/login')
 
 const app = express();
 
@@ -24,7 +25,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/cards',cardsRouter); //works as our authetication
+app.use('/login', loginRouter); //works as our authetication
+app.use('/cards',cardsRouter);
 app.use(authenticateToken);
 app.use('/user', usersRouter);
 app.use('/accounts',accountsRouter);
