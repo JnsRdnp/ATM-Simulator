@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QtSerialPort/QSerialPort>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,12 +16,17 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void openSerialPort();
 
 private slots:
-    void on_CardSignal_clicked();
+    void ReadSignal_clicked();
+    void StopSignal_clicked();
 
 private:
     Ui::MainWindow *ui;
     QString cardID;
+    QSerialPort *serial;
+    void closeSerialPort();
+    void readSerialPort();
 };
 #endif // MAINWINDOW_H

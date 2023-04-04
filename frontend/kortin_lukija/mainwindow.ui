@@ -14,30 +14,31 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="gridLayoutWidget">
+   <widget class="QPushButton" name="Read">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>180</y>
-      <width>311</width>
-      <height>191</height>
+      <x>140</x>
+      <y>150</y>
+      <width>75</width>
+      <height>24</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLineEdit" name="WelcomeText"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLineEdit" name="CardText"/>
-     </item>
-     <item row="2" column="0">
-      <widget class="QPushButton" name="CardSignal">
-       <property name="text">
-        <string>Simulate card</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="text">
+     <string>Read</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Stop">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>150</y>
+      <width>75</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
