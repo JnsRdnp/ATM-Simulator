@@ -20,13 +20,11 @@ public:
 
 private slots:
     void ReadSignal_clicked();
-    void StopSignal_clicked();
 
 private:
     Ui::MainWindow *ui;
     QString cardID;
     QSerialPort *serial;
-    void closeSerialPort();
     void readSerialPort();
 };
 #endif // MAINWINDOW_H

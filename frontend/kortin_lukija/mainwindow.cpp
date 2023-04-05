@@ -13,9 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << "Connecting Read Button";
     connect(ui->Read,SIGNAL(clicked()),
             this, SLOT(ReadSignal_clicked()));
-    qDebug() << "Connecting Stop Button";
-    connect(ui->Stop, SIGNAL(clicked()),
-            this, SLOT(StopSignal_clicked()));
     qDebug() << "Opening Serial Port";
     openSerialPort();
 }
@@ -23,20 +20,21 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    if (serial->isOpen()){
+        serial->close();
+    };
+    free(serial);
+    serial = nullptr;
 }
 
 
 void MainWindow::ReadSignal_clicked()
 {
     readSerialPort();
-    //cardID="1234";
-    //if cardID != 0 || cardID != NULL{
-    //PINInterface *PINUserInterface = new PINInterface(this, cardID);
-}
-
-void MainWindow::StopSignal_clicked()
-{
-    closeSerialPort();
+    if (cardID.length() > 0 && cardID != NULL){
+        qDebug() << "Create PINinterface";
+        this->hide();
+       }
 }
 
 void MainWindow::openSerialPort()
@@ -54,21 +52,12 @@ void MainWindow::openSerialPort()
         };
 }
 
-void MainWindow::closeSerialPort()
-{
-    if (serial->isOpen()){
-        serial->close();
-    };
-    free(serial);
-    serial = nullptr;
-}
-
 void MainWindow::readSerialPort()
 {
     QByteArray data = serial->readAll();
     qDebug()<<data;
     cardID = QString(data);
-    cardID.remove(0, 3).chop(3);
+    cardID.remove(0, 3).remove(10, cardID.length()-10);
     qDebug()<<cardID;
 
 }
