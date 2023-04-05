@@ -12,3 +12,13 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    PINInterface();
+    postManager = new QNetworkAccessManager(this);
+    connect(postManager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(postCredentials(QNetworkReply*)));
+}
+
