@@ -2,20 +2,24 @@
 #define PININTERFACE_H
 
 #include "PINInterface_global.h"
-#include <QtNetwork>
-#include <QNetworkAccessManager>
-#include <QJsonDocument>
+#include "pinwindow.h"
 
-class PININTERFACE_EXPORT PINInterface
+class PININTERFACE_EXPORT PINInterface : public QObject
 {
+    Q_OBJECT
 public:
     PINInterface();
-    ~PINInterface();
+    QString getLoginResponse() const;
+    void setLoginResponse(const QString &newLoginResponse);
+    void openLogin();
+
+private slots:
+    void loginReadySlot();
+signals:
+    void loginReady();
 private:
-    void postCredentials(QNetworkReply *reply);
-    QNetworkAccessManager *postManager;
-    QNetworkReply *reply;
-    QByteArray response_data;
+    QString loginResponse;
+    PINWindow *objectPINWindow;
 };
 
 #endif // PININTERFACE_H

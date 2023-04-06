@@ -1,4 +1,5 @@
-QT -= gui
+QT += gui
+QT += widgets
 QT += network
 
 TEMPLATE = lib
@@ -11,14 +12,19 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    pininterface.cpp
+    pininterface.cpp \
+    pinwindow.cpp
 
 HEADERS += \
     PINInterface_global.h \
-    pininterface.h
+    pininterface.h \
+    pinwindow.h
 
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+    pinwindow.ui
