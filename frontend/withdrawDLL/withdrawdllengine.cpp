@@ -17,6 +17,7 @@ WithdrawDLLEngine::~WithdrawDLLEngine()
 void WithdrawDLLEngine::withdraw(float num)
 {
     //Original source: https://peatutor.com/qt/http_post.php, edited by Saku Roininen
+    qDebug() << "Engine Withdraw method";
     const QString SERVER_URL = "http://localhost:3000";
 
     QJsonObject withdrawObj;

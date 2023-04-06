@@ -27,13 +27,13 @@ withdrawdll::~withdrawdll()
 void withdrawdll::tenEuroClickHandler()
 {
     Engine->withdraw(10);
-    qDebug()<<"Withdrew 50 €";
+    qDebug()<<"Withdrew 10 €";
 }
 
 void withdrawdll::twentyEuroClickHandler()
 {
     Engine->withdraw(20);
-    qDebug()<<"Withdrew 50 €";
+    qDebug()<<"Withdrew 20 €";
 }
 
 void withdrawdll::fiftyEuroClickHandler()
@@ -45,6 +45,6 @@ void withdrawdll::fiftyEuroClickHandler()
 void withdrawdll::hundredEuroClickHandler()
 {
     Engine->withdraw(100);
-    qDebug()<<"Withdrew 50 €";
+    qDebug()<<"Withdrew 100 €";
 }
 
