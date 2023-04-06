@@ -14,9 +14,9 @@ router.get('/',
         });
     });
 
-router.get('/getPage',
+router.get('/getPage/:accountID/:amount/:page',
     function(request, response) {
-      history.getPage(request.body.accountID, request.body.amount, request.body.page, function(error, dbResult) {
+      history.getPage(request.params.accountID, request.params.amount, request.params.page, function(error, dbResult) {
         if(error){
           response.json(error);
         } else {
