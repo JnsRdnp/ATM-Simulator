@@ -3,7 +3,7 @@ QT += widgets
 QT +=network
 
 TEMPLATE = lib
-DEFINES += ACCOUNTDLL_LIBRARY
+DEFINES += ACCOUNT_LIBRARY
 
 CONFIG += c++17
 
@@ -12,11 +12,11 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    account.cpp
+    accountdialog.cpp
 
 HEADERS += \
-    account.h \
-    accountDLL_global.h
+    account_global.h \
+    accountdialog.h
 
 # Default rules for deployment.
 unix {
@@ -25,4 +25,4 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
-    account.ui
+    accountdialog.ui

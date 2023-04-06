@@ -1,35 +1,37 @@
-#ifndef ACCOUNT_H
-#define ACCOUNT_H
+#ifndef BALANCEDIALOG_H
+#define BALANCEDIALOG_H
 
+#include "balance_global.h"
 #include <QDialog>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
-#include "accountDLL_global.h"
 #include <QDebug>
 
 namespace Ui {
-class account;
+class balanceDialog;
 }
 
-class ACCOUNTDLL_EXPORT account : public QDialog
+class BALANCE_EXPORT balanceDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit account(QWidget *parent = nullptr,int id=0);
-    ~account();
+    explicit balanceDialog(QWidget *parent = nullptr, int id=0);
+    ~balanceDialog();
+
 
 private:
-    Ui::account *ui;
+    Ui::balanceDialog *ui;
     QNetworkAccessManager *getManager;
     QNetworkReply *reply;
     QByteArray response_data;
-    void accountOpen();
+    void balanceNetwork();
     int accountID;
 
 private slots:
     void getBalanceSlot (QNetworkReply *reply);
+    void backHandler();
 };
 
-#endif // ACCOUNT_H
+#endif // BALANCEDIALOG_H
