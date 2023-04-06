@@ -23,8 +23,8 @@ accountDialog::~accountDialog()
 
 void accountDialog::historyNetwork()
 {
-
-    QString site_url="http://localhost:4000/history/getPage/2/5/1";
+    QString accountIDStr = QString::number(accountID);
+    QString site_url="http://localhost:4000/history/getPage/"+accountIDStr+"/15/0";
     //qDebug()<<site_url;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
@@ -49,8 +49,8 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
     QString history;
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
-        history+=json_obj["wholeName"].toString()+"|"+json_obj["date"].toString()+"| "+
-                   QString::number(json_obj["withdrawal"].toDouble())+" €"+"\r";
+        history+=json_obj["wholeName"].toString()+" | "+json_obj["date"].toString()+" | "+
+                   QString::number(json_obj["withdrawal"].toDouble())+" €"+"\r\r";
     }
 
     ui->teHistory->setText(history);

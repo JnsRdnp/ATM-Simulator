@@ -29,11 +29,17 @@
   <widget class="QTextEdit" name="teHistory">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>381</width>
-     <height>231</height>
+     <x>3</x>
+     <y>43</y>
+     <width>391</width>
+     <height>251</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <underline>true</underline>
+    </font>
    </property>
   </widget>
  </widget>

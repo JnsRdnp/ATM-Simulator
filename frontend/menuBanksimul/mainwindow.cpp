@@ -52,7 +52,7 @@ void MainWindow::nostoClickHandler()
 
 void MainWindow::tiliClickHandler()
 {
-    pAccountDialog = new accountDialog(this);
+    pAccountDialog = new accountDialog(this,2);
     pAccountDialog->show();
 }
 
