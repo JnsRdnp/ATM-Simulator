@@ -47,7 +47,8 @@ void MainWindow::saldoClickHandler()
 
 void MainWindow::nostoClickHandler()
 {
-    pnostoUI->open();
+    pWithdraw = new withdrawdll(this,2,true);
+    pWithdraw->show();
 }
 
 void MainWindow::tiliClickHandler()
