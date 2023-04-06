@@ -1,0 +1,12 @@
+#ifndef WITHDRAWDLL_GLOBAL_H
+#define WITHDRAWDLL_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(WITHDRAWDLL_LIBRARY)
+#  define WITHDRAWDLL_EXPORT Q_DECL_EXPORT
+#else
+#  define WITHDRAWDLL_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // WITHDRAWDLL_GLOBAL_H
