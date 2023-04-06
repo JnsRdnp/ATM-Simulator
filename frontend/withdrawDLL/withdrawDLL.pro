@@ -1,4 +1,5 @@
 QT += core gui
+QT +=network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = lib
@@ -11,11 +12,13 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    withdrawdll.cpp
+    withdrawdll.cpp \
+    withdrawdllengine.cpp
 
 HEADERS += \
     withdrawDLL_global.h \
-    withdrawdll.h
+    withdrawdll.h \
+    withdrawdllengine.h
 
 # Default rules for deployment.
 unix {

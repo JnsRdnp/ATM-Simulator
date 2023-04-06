@@ -2,6 +2,8 @@
 #define WITHDRAWDLL_H
 
 #include "WithdrawDLL_global.h"
+#include "withdrawdllengine.h"
+
 #include <QDialog>
 #include <QDebug>
 
