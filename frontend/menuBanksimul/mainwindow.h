@@ -5,7 +5,7 @@
 #include "tiliui.h"
 #include "kirjauduulosui.h"
 #include <QMainWindow>
-#include "account.h"
+#include "balancedialog.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -31,7 +31,7 @@ private:
     saldoUI * pSaldoUI;
     nostoUI * pnostoUI;
     tiliUI * ptiliUI;
-    account *pAccount;
+    balanceDialog *pBalanceDialog;
 
 };
 #endif // MAINWINDOW_H

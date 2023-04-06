@@ -31,15 +31,15 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete pAccount;
-    pAccount = nullptr;
+    delete pBalanceDialog;
+    pBalanceDialog = nullptr;
 }
 
 void MainWindow::saldoClickHandler()
 {
     //second parameter is the accountID
-    pAccount = new account(this,3);
-    pAccount->show();
+    pBalanceDialog = new balanceDialog(this,2);
+    pBalanceDialog->show();
 }
 
 void MainWindow::nostoClickHandler()

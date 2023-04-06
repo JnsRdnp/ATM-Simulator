@@ -39,9 +39,16 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../accountDLL/build/release/ -laccountDLL
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../accountDLL/build/debug/ -laccountDLL
-else:unix:!macx: LIBS += -L$$PWD/../accountDLL/build/ -laccountDLL
+#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../accountDLL/build/release/ -laccountDLL
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../accountDLL/build/debug/ -laccountDLL
+#else:unix:!macx: LIBS += -L$$PWD/../accountDLL/build/ -laccountDLL
 
-INCLUDEPATH += $$PWD/../accountDLL
-DEPENDPATH += $$PWD/../accountDLL
+#INCLUDEPATH += $$PWD/../accountDLL
+#DEPENDPATH += $$PWD/../accountDLL
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../balance/build/release/ -lbalance
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../balance/build/debug/ -lbalance
+else:unix:!macx: LIBS += -L$$PWD/../balance/build/ -lbalance
+
+INCLUDEPATH += $$PWD/../balance
+DEPENDPATH += $$PWD/../balance
