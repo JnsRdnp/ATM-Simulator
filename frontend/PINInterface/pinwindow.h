@@ -23,7 +23,7 @@ public:
 
 private slots:
     void on_btnPin_clicked();
-    void httpRequestSlot();
+    void httpRequestSlot(QNetworkReply * reply);
 
 private:
     Ui::PINWindow *ui;

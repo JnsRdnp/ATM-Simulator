@@ -25,12 +25,12 @@ void PINWindow::on_btnPin_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     postManager=new QNetworkAccessManager(this);
     connect(postManager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(postCredentials(QNetworkReply*)));
+            this, SLOT(httpRequestSlot(QNetworkReply*)));
     reply=postManager->post(request, QJsonDocument(jsonObj).toJson());
 
 }
 
-void PINWindow::httpRequestSlot(){
+void PINWindow::httpRequestSlot(QNetworkReply * reply){
     response_data=reply->readAll();
     qDebug()<<response_data;
     httpResponse=response_data;
@@ -48,4 +48,3 @@ void PINWindow::setHttpResponse(const QString &newHttpResponse)
 {
     httpResponse = newHttpResponse;
 }
-

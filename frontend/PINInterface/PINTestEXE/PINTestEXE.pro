@@ -24,8 +24,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build/release/ -lPINInterface
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build/debug/ -lPINInterface
+
+unix:!macx: LIBS += -L$$PWD/../build/ -lPINInterface
 
 INCLUDEPATH += $$PWD/../
 DEPENDPATH += $$PWD/../

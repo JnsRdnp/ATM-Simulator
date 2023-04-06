@@ -14,63 +14,17 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnPinLogin">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>230</y>
-      <width>111</width>
-      <height>24</height>
+      <x>240</x>
+      <y>330</y>
+      <width>98</width>
+      <height>28</height>
      </rect>
     </property>
     <property name="text">
-     <string>Log In</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="textCard">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>150</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="textPin">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>190</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>150</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Card ID</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>190</y>
-      <width>49</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PIN</string>
+     <string>pinlogin</string>
     </property>
    </widget>
   </widget>
@@ -80,7 +34,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

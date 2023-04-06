@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "pininterface.h"
+#include "pinwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,9 +18,10 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
-
+    void on_btnPinLogin_clicked();
+    void loginReadySlot();
 private:
     Ui::MainWindow *ui;
+    PINInterface *objPINInterface;
 };
 #endif // MAINWINDOW_H

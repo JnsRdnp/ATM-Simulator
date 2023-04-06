@@ -6,19 +6,26 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    objPINInterface=new PINInterface;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete objPINInterface;
+    objPINInterface=nullptr;
 }
 
-
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_btnPinLogin_clicked()
 {
-    PINInterface();
-    postManager = new QNetworkAccessManager(this);
-    connect(postManager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(postCredentials(QNetworkReply*)));
+    connect(objPINInterface, SIGNAL(loginReady()),
+            this, SLOT(loginReadySlot()));
+    objPINInterface->openLogin();
+}
+
+void MainWindow::loginReadySlot()
+{
+    QString response = objPINInterface->getLoginResponse();
+    qDebug()<<response;
 }
 
