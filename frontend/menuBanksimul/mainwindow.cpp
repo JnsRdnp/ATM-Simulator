@@ -33,6 +33,9 @@ MainWindow::~MainWindow()
     delete ui;
     delete pBalanceDialog;
     pBalanceDialog = nullptr;
+
+    delete pAccountDialog;
+    pAccountDialog = nullptr;
 }
 
 void MainWindow::saldoClickHandler()
@@ -49,7 +52,8 @@ void MainWindow::nostoClickHandler()
 
 void MainWindow::tiliClickHandler()
 {
-    ptiliUI->open();
+    pAccountDialog = new accountDialog(this);
+    pAccountDialog->show();
 }
 
 void MainWindow::kirjauduUloshandler()

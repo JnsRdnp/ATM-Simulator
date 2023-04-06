@@ -52,3 +52,10 @@ else:unix:!macx: LIBS += -L$$PWD/../balance/build/ -lbalance
 
 INCLUDEPATH += $$PWD/../balance
 DEPENDPATH += $$PWD/../balance
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../account/build/release/ -laccount
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../account/build/debug/ -laccount
+else:unix:!macx: LIBS += -L$$PWD/../account/build/ -laccount
+
+INCLUDEPATH += $$PWD/../account
+DEPENDPATH += $$PWD/../account

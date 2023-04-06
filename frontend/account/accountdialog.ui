@@ -13,16 +13,6 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="leHistory">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>60</y>
-     <width>261</width>
-     <height>181</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btnBack">
    <property name="geometry">
     <rect>
@@ -34,6 +24,16 @@
    </property>
    <property name="text">
     <string>Takaisin</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="teHistory">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>381</width>
+     <height>231</height>
+    </rect>
    </property>
   </widget>
  </widget>
