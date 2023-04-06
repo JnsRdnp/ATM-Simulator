@@ -43,7 +43,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="lblBack">
+  <widget class="QPushButton" name="btnBack">
    <property name="geometry">
     <rect>
      <x>10</x>

@@ -31,6 +31,7 @@ private:
 
 private slots:
     void getBalanceSlot (QNetworkReply *reply);
+    void backHandler();
 };
 
 #endif // BALANCEDIALOG_H

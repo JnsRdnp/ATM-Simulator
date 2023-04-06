@@ -9,6 +9,8 @@ balanceDialog::balanceDialog(QWidget *parent, int id) :
     accountID=id;
 
     this->setAttribute(Qt::WA_DeleteOnClose);
+
+    connect(ui->btnBack,SIGNAL(clicked()),this,SLOT(backHandler()));
     balanceNetwork();
 }
 
@@ -50,4 +52,9 @@ void balanceDialog::getBalanceSlot(QNetworkReply *reply)
 
     reply->deleteLater();
     getManager->deleteLater();
+}
+
+void balanceDialog::backHandler()
+{
+    this->close();
 }
