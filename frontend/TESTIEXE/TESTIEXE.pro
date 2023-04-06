@@ -25,7 +25,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 
-unix:!macx: LIBS += -L$$PWD/../build/ -lPINInterface
+unix:!macx: LIBS += -L$$PWD/../group_15/frontend/PINInterface/build/ -lPINInterface
 
-INCLUDEPATH += $$PWD/../
-DEPENDPATH += $$PWD/../
+INCLUDEPATH += $$PWD/../group_15/frontend/PINInterface
+DEPENDPATH += $$PWD/../group_15/frontend/PINInterface

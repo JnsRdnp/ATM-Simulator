@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    objPINInterface=new PINInterface;
+    objPINInterface = new PINInterface;
 }
 
 MainWindow::~MainWindow()
@@ -16,7 +16,8 @@ MainWindow::~MainWindow()
     objPINInterface=nullptr;
 }
 
-void MainWindow::on_btnPinLogin_clicked()
+
+void MainWindow::on_pushButton_clicked()
 {
     connect(objPINInterface, SIGNAL(loginReady()),
             this, SLOT(loginReadySlot()));

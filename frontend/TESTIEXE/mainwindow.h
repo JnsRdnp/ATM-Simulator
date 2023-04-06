@@ -16,10 +16,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
 private slots:
-    void on_btnPinLogin_clicked();
+    void on_pushButton_clicked();
     void loginReadySlot();
+
 private:
     Ui::MainWindow *ui;
     PINInterface *objPINInterface;
