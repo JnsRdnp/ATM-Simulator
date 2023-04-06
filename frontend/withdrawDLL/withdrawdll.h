@@ -16,7 +16,7 @@ class WITHDRAWDLL_EXPORT withdrawdll : public QDialog
     Q_OBJECT
 
 public:
-    explicit withdrawdll(QWidget *parent = nullptr, int inAccountID = 0, bool inIsCardCredit = false, QString inJwt = "");
+    explicit withdrawdll(QWidget *parent = nullptr, int inAccountID = 0, bool inIsCardCredit = false, QByteArray inJwt = "");
     ~withdrawdll();
 
 private slots:
@@ -26,10 +26,7 @@ private slots:
     void hundredEuroClickHandler();
 
 private:
-    int accountID;
-    bool isCardCredit;
-    QString jwt;
-    //WithdrawDLLEngine * Engine;
+    WithdrawDLLEngine * Engine;
     Ui::withdrawdll *ui;
 };
 
