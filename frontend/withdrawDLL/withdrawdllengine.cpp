@@ -49,8 +49,10 @@ void WithdrawDLLEngine::withdrawMoney(QNetworkReply *reply)
     //Original source: https://peatutor.com/qt/http_put.php
     response_data=reply->readAll();
     qDebug()<<response_data;
-    //if response_data == unafflicted rows: 1
+    //if response_data == "message which we get when fail"
     //emit failWithdraw()
+    //else
+    //emit successWithdraw()
     reply->deleteLater();
     putManager->deleteLater();
 }
