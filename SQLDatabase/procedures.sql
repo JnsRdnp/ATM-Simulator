@@ -57,6 +57,7 @@ BEGIN
   DECLARE pageOffset INT;
   SET pageOffset = pageNumber * 5;
   SELECT * FROM history WHERE accounts_idaccounts = accountID
+  ORDER BY idhistory DESC
   LIMIT pageOffset, showNumber;
 END //
 DELIMITER ;

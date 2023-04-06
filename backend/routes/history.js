@@ -20,7 +20,7 @@ router.get('/getPage/:accountID/:amount/:page',
         if(error){
           response.json(error);
         } else {
-          response.json(dbResult);
+          response.json(dbResult[0]);
         }
       });
     });
