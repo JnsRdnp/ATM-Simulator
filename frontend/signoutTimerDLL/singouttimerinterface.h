@@ -18,9 +18,13 @@ class SIGNOUTTIMERDLL_EXPORT SingoutTimerInterface : public QDialog
 public:
     explicit SingoutTimerInterface(QWidget *parent = nullptr);
     ~SingoutTimerInterface();
+public slots:
+    void agreeButtonHandler();
+    void disagreeButtonHandler();
 
 private:
     Ui::SingoutTimerInterface *ui;
+    SignoutTimerEngine *Engine;
 };
 
 #endif // SINGOUTTIMERINTERFACE_H
