@@ -20,10 +20,19 @@ router.get('/getPage/:accountID/:amount/:page',
         if(error){
           response.json(error);
         } else {
-          response.json(dbResult[0]);
-        }
-      });
+          //response.json(dbResult[0]);
+
+          const formattedResults = dbResult[0].map(function(result) {
+          const date = new Date(result.date);
+          
+          //with toLocaleString js does not automatically change the timezone
+          const formattedDate = date.toLocaleString();
+          return Object.assign({}, result, { date: formattedDate });
+          });
+          response.json(formattedResults);
+      }
     });
+  });
 
 router.delete('/:id', 
     function(request, response) {
