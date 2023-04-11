@@ -11,6 +11,7 @@ SignoutTimerEngine::SignoutTimerEngine(QWidget *parent) :
 
 void SignoutTimerEngine::continueSession()
 {
+    qDebug()<<"restarting timer";
     emit menuTimerRestart();
     getNewJsonWebToken();
 }

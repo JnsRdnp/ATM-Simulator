@@ -36,3 +36,8 @@ void SignoutTimerInterface::newJsonWebTokenHandler(QByteArray jwt)
 {
     emit newJsonWebToken(jwt);
 }
+
+void SignoutTimerInterface::restartMenuTimerHandler()
+{
+    emit menuTimerRestart();
+}

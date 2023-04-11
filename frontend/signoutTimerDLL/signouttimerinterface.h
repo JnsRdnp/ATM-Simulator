@@ -22,8 +22,10 @@ public slots:
     void agreeButtonHandler();
     void disagreeButtonHandler();
     void newJsonWebTokenHandler(QByteArray);
+    void restartMenuTimerHandler();
 signals:
     void newJsonWebToken(QByteArray);
+    void menuTimerRestart();
 
 private:
     Ui::SingoutTimerInterface *ui;
