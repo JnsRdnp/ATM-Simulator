@@ -8,9 +8,10 @@ balanceDialog::balanceDialog(QWidget *parent, int id) :
     ui->setupUi(this);
     accountID=id;
 
+    //dialog object gets destroyed when closed
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    connect(ui->btnBack,SIGNAL(clicked()),this,SLOT(backHandler()));
+    connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
     balanceNetwork();
 }
 
@@ -23,7 +24,7 @@ balanceDialog::~balanceDialog()
 void balanceDialog::balanceNetwork()
 {
     QString accountIDStr = QString::number(accountID);
-    QString site_url="http://localhost:4000/accounts/getBalance/"+accountIDStr;
+    QString site_url="http://localhost:3000/accounts/getBalance/"+accountIDStr;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
     QByteArray myToken="Bearer xRstgr...";
