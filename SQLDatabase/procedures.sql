@@ -55,7 +55,7 @@ DELIMITER //
 CREATE PROCEDURE get_history(IN accountID INT, IN showNumber INT, IN pageNumber INT)
 BEGIN
   DECLARE pageOffset INT;
-  SET pageOffset = pageNumber * 5;
+  SET pageOffset = pageNumber * showNumber;
   SELECT * FROM history WHERE accounts_idaccounts = accountID
   ORDER BY idhistory DESC
   LIMIT pageOffset, showNumber;
