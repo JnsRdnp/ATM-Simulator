@@ -85,7 +85,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="ReturnButton">
    <property name="geometry">
     <rect>
      <x>0</x>

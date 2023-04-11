@@ -24,6 +24,7 @@ private slots:
     void twentyEuroClickHandler();
     void fiftyEuroClickHandler();
     void hundredEuroClickHandler();
+    void returnHandler();
 
 private:
     WithdrawDLLEngine * Engine;
