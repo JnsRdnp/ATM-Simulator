@@ -35,13 +35,8 @@ private slots:
     void getHistorySlot (QNetworkReply *reply);
     void backHandler();
     void pageChange();
-
 signals:
     void localRestartTimerSignal();
-
-
-
-
 };
 
 #endif // ACCOUNTDIALOG_H

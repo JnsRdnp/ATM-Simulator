@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDialog>
 #include <QDebug>
+#include <QTimer>
 
 class SignoutTimerEngine: public QDialog
 {
@@ -15,11 +16,13 @@ signals:
     void menuTimerRestart();
     void newJsonWebToken(QByteArray);
     void eliminateMenu();
+public slots:
+    void destroyMenuCaller();
 private:
     void destroyMenu();
-    void openLogin();
+    void login();
     void getNewJsonWebToken();
-
+    QTimer *logoutTimer;
 
 };
 
