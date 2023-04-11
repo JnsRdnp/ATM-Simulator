@@ -23,7 +23,7 @@ private:
     int accountID;
     bool isCardCredit;
     QByteArray jwt;
-    QNetworkAccessManager *postManager;
+    QNetworkAccessManager *putManager;
     QNetworkReply *reply;
     QByteArray response_data;
 };

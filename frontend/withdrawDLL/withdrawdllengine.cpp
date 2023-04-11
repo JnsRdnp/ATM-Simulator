@@ -16,8 +16,9 @@ WithdrawDLLEngine::~WithdrawDLLEngine()
 
 void WithdrawDLLEngine::withdraw(float num)
 {
-    //Original source: https://peatutor.com/qt/http_post.php, edited by Saku Roininen
-    const QString SERVER_URL = "http://localhost:3000";
+    //Original source: https://peatutor.com/qt/http_put.php, edited by Saku Roininen
+    qDebug() << "Engine Withdraw method";
+    const QString SERVER_URL = "http://localhost:3000/";
 
     QJsonObject withdrawObj;
     withdrawObj.insert("accountID",accountID);
@@ -36,18 +37,22 @@ void WithdrawDLLEngine::withdraw(float num)
     QByteArray myToken="Bearer " + jwt;
     request.setRawHeader(QByteArray("Authorization"),(myToken));
 
-    postManager = new QNetworkAccessManager(this);
-    connect(postManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(withdrawMoney(QNetworkReply*)));
+    putManager = new QNetworkAccessManager(this);
+    connect(putManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(withdrawMoney(QNetworkReply*)));
 
-    reply = postManager->post(request, QJsonDocument(withdrawObj).toJson());
-    disconnect(postManager);
+    reply = putManager->put(request, QJsonDocument(withdrawObj).toJson());
+    disconnect(putManager);
 }
 
 void WithdrawDLLEngine::withdrawMoney(QNetworkReply *reply)
 {
-    //Original source: https://peatutor.com/qt/http_post.php
+    //Original source: https://peatutor.com/qt/http_put.php
     response_data=reply->readAll();
     qDebug()<<response_data;
+    //if response_data == "message which we get when fail"
+    //emit failWithdraw()
+    //else
+    //emit successWithdraw()
     reply->deleteLater();
-    postManager->deleteLater();
+    putManager->deleteLater();
 }
