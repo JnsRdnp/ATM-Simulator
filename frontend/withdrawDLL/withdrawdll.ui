@@ -13,56 +13,89 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="TenEuro">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>30</y>
-     <width>75</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>10 €</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="TwentyEuro">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>60</y>
-     <width>75</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>20 €</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="FiftyEuro">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
+     <x>40</x>
      <y>90</y>
-     <width>75</width>
-     <height>24</height>
+     <width>322</width>
+     <height>92</height>
     </rect>
    </property>
-   <property name="text">
-    <string>50 €</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="whatsThis">
+       <string/>
+      </property>
+      <property name="text">
+       <string>NOSTO</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Valitse nostettava määrä rahaa</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="TenEuro">
+        <property name="text">
+         <string>10 €</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="TwentyEuro">
+        <property name="text">
+         <string>20 €</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="FiftyEuro">
+        <property name="text">
+         <string>50 €</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="HundredEuro">
+        <property name="text">
+         <string>100 €</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="HundredEuro">
+  <widget class="QPushButton" name="ReturnButton">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>120</y>
+     <x>0</x>
+     <y>0</y>
      <width>75</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>100 €</string>
+    <string>Takaisin</string>
    </property>
   </widget>
  </widget>

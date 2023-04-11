@@ -7,8 +7,13 @@ withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit, 
 {
     ui->setupUi(this);
 
+    //sets the object to destroy itself when the window is closed
+    this->setAttribute(Qt::WA_DeleteOnClose);
+
     Engine = new WithdrawDLLEngine(this, inAccountID, inIsCardCredit, inJwt);
 
+    connect(ui->ReturnButton, SIGNAL(clicked()),
+            this, SLOT(returnHandler()));
     connect(ui->TenEuro, SIGNAL(clicked()),
             this, SLOT(tenEuroClickHandler()));
     connect(ui->TwentyEuro, SIGNAL(clicked()),
@@ -46,5 +51,11 @@ void withdrawdll::hundredEuroClickHandler()
 {
     Engine->withdraw(100);
     qDebug()<<"Withdrew 100 €";
+}
+
+void withdrawdll::returnHandler()
+{
+    this->close();
+    qDebug()<<"Closing and destroying withdraw window";
 }
 
