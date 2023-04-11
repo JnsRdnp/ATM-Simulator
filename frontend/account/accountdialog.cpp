@@ -9,10 +9,12 @@ accountDialog::accountDialog(QWidget *parent,int id) :
 
     accountID=id;
 
+    //dialog object gets destroyed when closed
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    connect(ui->btnBack,SIGNAL(clicked()),this,SLOT(backHandler()));
-    historyNetwork();
+    connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
+    connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
+    historyNetwork(1);
 }
 
 accountDialog::~accountDialog()
@@ -21,10 +23,13 @@ accountDialog::~accountDialog()
     qDebug()<<"Account dialog deleted";
 }
 
-void accountDialog::historyNetwork()
+void accountDialog::historyNetwork(int historyPage)
 {
+
     QString accountIDStr = QString::number(accountID);
-    QString site_url="http://localhost:4000/history/getPage/"+accountIDStr+"/15/0";
+    page=QString::number(historyPage-1);
+
+    QString site_url="http://localhost:3000/history/getPage/"+accountIDStr+"/15/"+page;
     //qDebug()<<site_url;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
@@ -62,4 +67,12 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
 void accountDialog::backHandler()
 {
     this->close();
+}
+
+void accountDialog::pageChange()
+{
+
+    historyNetwork(ui->btnPage->value());
+    qDebug()<<ui->btnPage->value();
+
 }

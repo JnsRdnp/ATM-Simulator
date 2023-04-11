@@ -1,6 +1,6 @@
 QT += core gui
 QT += widgets
-QT +=network
+QT += network
 
 TEMPLATE = lib
 DEFINES += ACCOUNT_LIBRARY

@@ -27,12 +27,14 @@ private:
     QNetworkReply *reply;
     QByteArray response_data;
 
-    void historyNetwork();
+    void historyNetwork(int);
     int accountID;
+    QString page;
 
 private slots:
     void getHistorySlot (QNetworkReply *reply);
     void backHandler();
+    void pageChange();
 
 };
 
