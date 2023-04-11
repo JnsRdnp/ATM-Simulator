@@ -59,3 +59,10 @@ else:unix:!macx: LIBS += -L$$PWD/../account/build/ -laccount
 
 INCLUDEPATH += $$PWD/../account
 DEPENDPATH += $$PWD/../account
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../withdrawDLL/build/release/ -lwithdrawDLL
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../withdrawDLL/build/debug/ -lwithdrawDLL
+else:unix:!macx: LIBS += -L$$PWD/../withdrawDLL/build/ -lwithdrawDLL
+
+INCLUDEPATH += $$PWD/../withdrawDLL
+DEPENDPATH += $$PWD/../withdrawDLL

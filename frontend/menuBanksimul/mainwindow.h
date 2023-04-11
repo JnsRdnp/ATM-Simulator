@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include "balancedialog.h"
 #include "accountdialog.h"
+#include "withdrawdll.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -34,6 +35,7 @@ private:
     tiliUI * ptiliUI;
     balanceDialog *pBalanceDialog;
     accountDialog *pAccountDialog;
+    withdrawdll *pWithdraw;
 
 };
 #endif // MAINWINDOW_H
