@@ -73,6 +73,4 @@ void accountDialog::pageChange()
 {
 
     historyNetwork(ui->btnPage->value());
-    qDebug()<<ui->btnPage->value();
-
 }
