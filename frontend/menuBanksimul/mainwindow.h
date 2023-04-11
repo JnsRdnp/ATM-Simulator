@@ -8,6 +8,8 @@
 #include "balancedialog.h"
 #include "accountdialog.h"
 #include "withdrawdll.h"
+#include <QTimer>
+
 
 
 QT_BEGIN_NAMESPACE
@@ -27,6 +29,11 @@ public slots:
     void nostoClickHandler();
     void tiliClickHandler();
     void kirjauduUloshandler();
+    void menuTimerRestart();
+    void eliminateMenu();
+
+signals:
+    void menuTimerRestartSignal();
 
 private:
     Ui::MainWindow *ui;
@@ -36,6 +43,10 @@ private:
     balanceDialog *pBalanceDialog;
     accountDialog *pAccountDialog;
     withdrawdll *pWithdraw;
+
+    QTimer *Timer;
+    int timeout = 5000;
+
 
 };
 #endif // MAINWINDOW_H

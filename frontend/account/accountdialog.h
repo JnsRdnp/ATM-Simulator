@@ -36,6 +36,12 @@ private slots:
     void backHandler();
     void pageChange();
 
+signals:
+    void localRestartTimerSignal();
+
+
+
+
 };
 
 #endif // ACCOUNTDIALOG_H

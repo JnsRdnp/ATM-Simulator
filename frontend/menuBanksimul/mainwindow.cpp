@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setAttribute(Qt::WA_DeleteOnClose);
+
+
     connect(ui->saldo,SIGNAL(clicked(bool)),
                 this, SLOT(saldoClickHandler()));
 
@@ -26,16 +29,29 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->kirjauduUlos,SIGNAL(clicked(bool)),
                 this, SLOT(kirjauduUloshandler()));
 
+
+    //main menu timer
+    Timer = new QTimer(this);
+    connect(Timer, SIGNAL(timeout()), this, SLOT(eliminateMenu()));
+    Timer->start(timeout);
+
+    connect(this,SIGNAL(menuTimerRestartSignal()),this,SLOT(menuTimerRestart()));
+
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
     delete pBalanceDialog;
     pBalanceDialog = nullptr;
 
     delete pAccountDialog;
     pAccountDialog = nullptr;
+
+    delete pWithdraw;
+    pWithdraw = nullptr;
+
+    delete ui;
+
 }
 
 void MainWindow::saldoClickHandler()
@@ -53,6 +69,8 @@ void MainWindow::nostoClickHandler()
 
 void MainWindow::tiliClickHandler()
 {
+    emit menuTimerRestartSignal();
+
     pAccountDialog = new accountDialog(this,2);
     pAccountDialog->show();
 }
@@ -61,6 +79,18 @@ void MainWindow::kirjauduUloshandler()
 {
     //login->open();
     close();
+}
+
+void MainWindow::menuTimerRestart()
+{
+    qDebug()<<"menutimer restart \r";
+
+    Timer->start(timeout);
+}
+
+void MainWindow::eliminateMenu()
+{
+    this->close();
 }
 
 
