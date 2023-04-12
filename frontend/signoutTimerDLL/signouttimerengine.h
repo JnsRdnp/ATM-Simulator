@@ -22,11 +22,12 @@ signals:
     void newJsonWebToken(QByteArray);
     void eliminateMenu();
     void closeSignout();
+
 public slots:
     void signalDestroyMenuCaller();
     void renewToken(QNetworkReply *reply);
-private:
 
+private:
     QNetworkAccessManager *postManager;
     QNetworkReply *reply;
     QByteArray responseData;

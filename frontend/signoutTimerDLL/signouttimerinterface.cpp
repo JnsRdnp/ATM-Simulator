@@ -1,5 +1,5 @@
 #include "signouttimerinterface.h"
-#include "ui_singouttimerinterface.h"
+#include "ui_signouttimerinterface.h"
 SignoutTimerInterface::SignoutTimerInterface(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SingoutTimerInterface)
@@ -9,10 +9,10 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent) :
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     Engine = new SignoutTimerEngine(this);
-    connect(ui->AgreeButton,SIGNAL(clicked(bool)),
+    connect(ui->pushButton,SIGNAL(clicked(bool)),
             this, SLOT(agreeButtonHandler()));
 
-    connect(ui->DisagreeButton,SIGNAL(clicked(bool)),
+    connect(ui->pushButton_2,SIGNAL(clicked(bool)),
             this, SLOT(disagreeButtonHandler()));
 
     connect(Engine, SIGNAL(newJsonWebToken(QByteArray)),

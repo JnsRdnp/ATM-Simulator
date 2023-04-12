@@ -17,9 +17,7 @@ SignoutTimerEngine::~SignoutTimerEngine()
 void SignoutTimerEngine::continueSession()
 {
     qDebug()<<"restarting timer";
-    emit menuTimerRestart();
     getNewJsonWebToken();
-    emit closeSignout();
 }
 
 void SignoutTimerEngine::destroyMenuCaller()
@@ -46,33 +44,38 @@ void SignoutTimerEngine::login()
 
 void SignoutTimerEngine::getNewJsonWebToken()
 {
+    qDebug() << "Get New JWT method";
+    const QString SERVER_URL = "http://localhost:3000/";
+
     QJsonObject jsonObj;
     jsonObj.insert("cardID","3");
     jsonObj.insert("PINcode","2345");
 
-    QString site_url="http://localhost:3001/login";
+    QString site_url = SERVER_URL + "login";
+    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIxMjM0IiwiaWF0IjoxNjgxMzIyODA0LCJleHAiOjE2ODEzMjMwMDR9.ZURjd2oWKSCo-LP0nfl4FZz3kfl2pumlql2hXKi0bv0";
+
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    //WEBTOKEN ALKU
-    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIzIiwiaWF0IjoxNjgxMjk4NjQwLCJleHAiOjE2ODEyOTg4NDB9.JYkk4ZGs2oJu4cTR238iTyNrSiuTANYjtEOqUwgprzA";
-    QByteArray myToken="Bearer " +jwt;
+    QByteArray myToken="Bearer " + jwt;
     request.setRawHeader(QByteArray("Authorization"),(myToken));
-    //WEBTOKEN LOPPU
 
     postManager = new QNetworkAccessManager(this);
+    connect(postManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(renewToken(QNetworkReply*)));
+
     reply = postManager->post(request, QJsonDocument(jsonObj).toJson());
-    connect(postManager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(renewToken(QNetworkReply*)), Qt::QueuedConnection);
 }
 
 void SignoutTimerEngine::renewToken(QNetworkReply *reply)
 {
-    qDebug()<<"Vittu saatana";
+    qDebug()<<"Renew Token";
     responseData = reply->readAll();
     qDebug()<<responseData;
     reply->deleteLater();
     postManager->deleteLater();
+
+    //These emits would trigger before postManager could send a signal and are thus here
+    emit menuTimerRestart();
+    emit closeSignout();
 }
 
 
