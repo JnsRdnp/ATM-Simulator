@@ -12,12 +12,12 @@ CONFIG += c++17
 
 SOURCES += \
     signouttimerengine.cpp \
-    singouttimerinterface.cpp
+    signouttimerinterface.cpp
 
 HEADERS += \
     signoutTimerDLL_global.h \
     signouttimerengine.h \
-    singouttimerinterface.h
+    signouttimerinterface.h
 
 # Default rules for deployment.
 unix {
@@ -26,4 +26,4 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
-    singouttimerinterface.ui
+    signouttimerinterface.ui
