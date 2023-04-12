@@ -11,13 +11,16 @@ class SignoutTimerEngine: public QDialog
     Q_OBJECT
 public:
     SignoutTimerEngine(QWidget *parent = nullptr);
+    ~SignoutTimerEngine();
     void continueSession();
+    void destroyMenuCaller();
 signals:
     void menuTimerRestart();
     void newJsonWebToken(QByteArray);
     void eliminateMenu();
+    void closeSignout();
 public slots:
-    void destroyMenuCaller();
+    void signalDestroyMenuCaller();
 private:
     void destroyMenu();
     void login();

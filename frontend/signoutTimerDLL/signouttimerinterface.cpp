@@ -5,6 +5,9 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent) :
     ui(new Ui::SingoutTimerInterface)
 {
     ui->setupUi(this);
+
+    this->setAttribute(Qt::WA_DeleteOnClose);
+
     Engine = new SignoutTimerEngine(this);
     connect(ui->AgreeButton,SIGNAL(clicked(bool)),
             this, SLOT(agreeButtonHandler()));
@@ -13,8 +16,16 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent) :
             this, SLOT(disagreeButtonHandler()));
 
     connect(Engine, SIGNAL(newJsonWebToken(QByteArray)),
-            this, SLOT(newJsonWebTokenHandler(QByteArray)));
+            this, SLOT(newJsonWebTokenHandler(QByteArray)),Qt::QueuedConnection	);
 
+    connect(Engine, SIGNAL(menuTimerRestart()),
+            this, SLOT(restartMenuTimerHandler()),Qt::QueuedConnection);
+
+    connect(Engine, SIGNAL(closeSignout()),
+            this, SLOT(closeSignoutHandler()),Qt::QueuedConnection);
+
+    connect(Engine, SIGNAL(eliminateMenu()),
+            this, SLOT(destroymenuHandler()),Qt::QueuedConnection);
 }
 
 SignoutTimerInterface::~SignoutTimerInterface()
@@ -29,7 +40,7 @@ void SignoutTimerInterface::agreeButtonHandler()
 
 void SignoutTimerInterface::disagreeButtonHandler()
 {
-    //Engine->destroyMenu();
+    Engine->destroyMenuCaller();
 }
 
 void SignoutTimerInterface::newJsonWebTokenHandler(QByteArray jwt)
@@ -40,4 +51,17 @@ void SignoutTimerInterface::newJsonWebTokenHandler(QByteArray jwt)
 void SignoutTimerInterface::restartMenuTimerHandler()
 {
     emit menuTimerRestart();
+}
+
+void SignoutTimerInterface::destroymenuHandler()
+{
+    this->close();
+    qDebug()<<"tuhottu";
+    //emit close signal
+}
+
+void SignoutTimerInterface::closeSignoutHandler()
+{
+    this->close();
+    qDebug()<<"suljettu";
 }
