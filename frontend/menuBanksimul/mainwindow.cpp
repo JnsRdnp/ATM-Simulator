@@ -50,6 +50,9 @@ MainWindow::~MainWindow()
     delete pWithdraw;
     pWithdraw = nullptr;
 
+    delete Timer;
+    Timer = nullptr;
+
     delete ui;
 
 }

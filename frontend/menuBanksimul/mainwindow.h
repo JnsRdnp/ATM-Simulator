@@ -45,7 +45,7 @@ private:
     withdrawdll *pWithdraw;
 
     QTimer *Timer;
-    int timeout = 5000;
+    int timeout = 10000;
 
 
 };
