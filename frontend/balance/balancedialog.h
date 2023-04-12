@@ -24,14 +24,21 @@ public:
 private:
     Ui::balanceDialog *ui;
     QNetworkAccessManager *getManager;
-    QNetworkReply *reply;
+    QNetworkReply *balanceReply;
     QByteArray response_data;
     void balanceNetwork();
     int accountID;
 
+    QNetworkReply *historyReply;
+    void historyNetwork();
+
 private slots:
-    void getBalanceSlot (QNetworkReply *reply);
     void backHandler();
+
+    void getBalanceSlot (QNetworkReply *balanceReply);
+
+    void getHistorySlot(QNetworkReply *historyReply);
+
 };
 
 #endif // BALANCEDIALOG_H
