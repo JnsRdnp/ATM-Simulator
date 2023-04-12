@@ -1,5 +1,6 @@
 #include "accountdialog.h"
 #include "ui_accountdialog.h"
+#include <QDebug>
 
 accountDialog::accountDialog(QWidget *parent,int id) :
     QDialog(parent),
@@ -14,6 +15,7 @@ accountDialog::accountDialog(QWidget *parent,int id) :
 
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
+
 
     connect(this,SIGNAL(localRestartTimerSignal()),parent,SLOT(menuTimerRestart()));
 
@@ -50,16 +52,25 @@ void accountDialog::historyNetwork(int historyPage)
 void accountDialog::getHistorySlot(QNetworkReply *reply)
 {
 
+
     response_data=reply->readAll();
+
+    //this restricts the user to increase page count if the next page would be empty
+    if (response_data.count("idhistory")<15){
+        ui->btnPage->setMaximum(ui->btnPage->value());
+    }
+
     qDebug()<<"DATA : "+response_data;
+
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonArray json_array = json_doc.array();
     QString history;
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
-        history+=json_obj["wholeName"].toString()+" | "+json_obj["date"].toString()+" | "+
+        history+=json_obj["wholeName"].toString()+"  |  "+json_obj["date"].toString()+"  |  "+
                    QString::number(json_obj["withdrawal"].toDouble())+" €"+"\r\r";
     }
+
 
     ui->teHistory->setText(history);
 
