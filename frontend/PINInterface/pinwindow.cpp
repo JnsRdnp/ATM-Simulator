@@ -1,4 +1,4 @@
-    #include "pinwindow.h"
+#include "pinwindow.h"
 #include "ui_pinwindow.h"
 
 PINWindow::PINWindow(QWidget *parent) :
@@ -15,10 +15,8 @@ PINWindow::~PINWindow()
 
 void PINWindow::on_btnPin_clicked()
 {
-    QString cardnum=ui->textCard->text();
     QString pincode=ui->textPin->text();
     QJsonObject jsonObj;
-    jsonObj.insert("cardID", cardnum);
     jsonObj.insert("PINcode", pincode);
     QString site_url="http://localhost:3000/login";
     QNetworkRequest request((site_url));
