@@ -34,7 +34,7 @@ const accounts={
       },
       getBalance: function(id,callback){
         return db.query
-        ('select balance from accounts where idaccounts=?',[id],callback);
+        ('select balance,creditLimit from accounts where idaccounts=?',[id],callback);
       }
     
 };

@@ -56,13 +56,19 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
     response_data=reply->readAll();
 
     //this restricts the user to increase page count if the next page would be empty
-    if (response_data.count("idhistory")<15){
+    if (response_data.count("idhistory")<15 ){
         ui->btnPage->setMaximum(ui->btnPage->value());
     }
 
-    qDebug()<<"DATA : "+response_data;
+    qDebug()<<page;
+
+    //qDebug()<<"DATA : "+response_data;
+    qDebug()<<response_data.count("idhistory");
+
 
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+
+
     QJsonArray json_array = json_doc.array();
     QString history;
     foreach (const QJsonValue &value, json_array) {
@@ -76,16 +82,19 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
 
     reply->deleteLater();
     getManager->deleteLater();
+
 }
 
 void accountDialog::backHandler()
 {
     emit localRestartTimerSignal();
+
     this->close();
 }
 
 void accountDialog::pageChange()
 {
     emit localRestartTimerSignal();
+
     historyNetwork(ui->btnPage->value());
 }

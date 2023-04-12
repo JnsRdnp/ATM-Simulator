@@ -13,7 +13,7 @@ balanceDialog::balanceDialog(QWidget *parent, int id) :
 
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
     balanceNetwork();
-    historyNetwork();
+    //historyNetwork();
 }
 
 balanceDialog::~balanceDialog()
@@ -45,15 +45,21 @@ void balanceDialog::getBalanceSlot(QNetworkReply *balanceReply)
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonArray json_array = json_doc.array();
     QString balance;
+    QString creditLimit;
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
         balance+=QString::number(json_obj["balance"].toDouble())+" €";
+        creditLimit+=QString::number(json_obj["creditLimit"].toDouble())+" €";
     }
 
     ui->lblBalance->setText(balance);
+    ui->lblCreditlimit->setText(creditLimit);
 
     balanceReply->deleteLater();
     getManager->deleteLater();
+
+    // start historyNetwork() to get the latest history also
+    historyNetwork();
 }
 
 void balanceDialog::historyNetwork()
@@ -64,6 +70,7 @@ void balanceDialog::historyNetwork()
     QString site_url="http://localhost:3000/history/getPage/"+accountIDStr+"/5/0";
     //qDebug()<<site_url;
     QNetworkRequest request((site_url));
+
     //WEBTOKEN ALKU
     QByteArray myToken="Bearer xRstgr...";
     request.setRawHeader(QByteArray("Authorization"),(myToken));
@@ -81,11 +88,12 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
 
     response_data=historyReply->readAll();
 
-    qDebug()<<"DATA : "+response_data;
+    //qDebug()<<"DATA : "+response_data;
 
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonArray json_array = json_doc.array();
     QString history;
+
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
         history+=json_obj["wholeName"].toString()+"    |    "+json_obj["date"].toString()+"    |    "+

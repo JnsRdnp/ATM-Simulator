@@ -27,6 +27,7 @@ private:
     QNetworkReply *reply;
     QByteArray response_data;
 
+
     void historyNetwork(int);
     int accountID;
     QString page;
