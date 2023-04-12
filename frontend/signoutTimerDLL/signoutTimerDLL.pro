@@ -1,5 +1,6 @@
 QT += core gui
 QT += widgets
+QT +=network
 
 TEMPLATE = lib
 DEFINES += SIGNOUTTIMERDLL_LIBRARY

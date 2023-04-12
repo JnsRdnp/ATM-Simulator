@@ -5,6 +5,9 @@
 #include <QDialog>
 #include <QDebug>
 #include <QTimer>
+#include <QtNetwork>
+#include <QNetworkAccessManager>
+#include <QJsonDocument>
 
 class SignoutTimerEngine: public QDialog
 {
@@ -22,11 +25,16 @@ signals:
 public slots:
     void signalDestroyMenuCaller();
 private:
+    QNetworkAccessManager *postmanager;
+    QNetworkReply *reply;
+    QByteArray responseData;
     void destroyMenu();
     void login();
     void getNewJsonWebToken();
     QTimer *logoutTimer;
-
+private slots:
+    void renewToken(QNetworkReply *reply);
+    void token();
 };
 
 #endif // SIGNOUTTIMERENGINE_H
