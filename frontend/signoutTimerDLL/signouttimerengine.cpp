@@ -46,36 +46,33 @@ void SignoutTimerEngine::login()
 
 void SignoutTimerEngine::getNewJsonWebToken()
 {
-    qDebug()<<"emit new json web token";
-    emit newJsonWebToken("1234");
-}
-
-void SignoutTimerEngine::token()
-{
     QJsonObject jsonObj;
-
-    jsonObj.insert("cardID","1");
+    jsonObj.insert("cardID","3");
     jsonObj.insert("PINcode","2345");
 
     QString site_url="http://localhost:3001/login";
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    QByteArray myToken="Bearer xRstgr...";
+    //WEBTOKEN ALKU
+    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIzIiwiaWF0IjoxNjgxMjk4NjQwLCJleHAiOjE2ODEyOTg4NDB9.JYkk4ZGs2oJu4cTR238iTyNrSiuTANYjtEOqUwgprzA";
+    QByteArray myToken="Bearer " +jwt;
     request.setRawHeader(QByteArray("Authorization"),(myToken));
+    //WEBTOKEN LOPPU
 
-    postmanager = new QNetworkAccessManager(this);
-    connect(postmanager, SIGNAL(finished (QNetworkReply*)), this, SLOT(renewToken(QNetworkReply*)));
-
-    reply = postmanager->post(request, QJsonDocument(jsonObj).toJson());
+    postManager = new QNetworkAccessManager(this);
+    reply = postManager->post(request, QJsonDocument(jsonObj).toJson());
+    connect(postManager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(renewToken(QNetworkReply*)), Qt::QueuedConnection);
 }
 
 void SignoutTimerEngine::renewToken(QNetworkReply *reply)
 {
+    qDebug()<<"Vittu saatana";
     responseData = reply->readAll();
     qDebug()<<responseData;
     reply->deleteLater();
-    postmanager->deleteLater();
+    postManager->deleteLater();
 }
 
 

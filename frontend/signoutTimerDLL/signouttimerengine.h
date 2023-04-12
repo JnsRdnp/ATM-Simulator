@@ -24,17 +24,17 @@ signals:
     void closeSignout();
 public slots:
     void signalDestroyMenuCaller();
+    void renewToken(QNetworkReply *reply);
 private:
-    QNetworkAccessManager *postmanager;
+
+    QNetworkAccessManager *postManager;
     QNetworkReply *reply;
     QByteArray responseData;
+
     void destroyMenu();
     void login();
     void getNewJsonWebToken();
-    QTimer *logoutTimer;
-private slots:
-    void renewToken(QNetworkReply *reply);
-    void token();
+    QTimer *logoutTimer;;
 };
 
 #endif // SIGNOUTTIMERENGINE_H
