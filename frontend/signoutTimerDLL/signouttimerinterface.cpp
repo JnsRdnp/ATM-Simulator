@@ -57,7 +57,7 @@ void SignoutTimerInterface::destroymenuHandler()
 {
     this->close();
     qDebug()<<"tuhottu";
-    //emit close signal
+    //emit close signal;
 }
 
 void SignoutTimerInterface::closeSignoutHandler()
