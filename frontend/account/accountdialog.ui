@@ -38,7 +38,7 @@
    <property name="font">
     <font>
      <pointsize>10</pointsize>
-     <underline>true</underline>
+     <underline>false</underline>
     </font>
    </property>
   </widget>

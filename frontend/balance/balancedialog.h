@@ -32,6 +32,8 @@ private:
     QNetworkReply *historyReply;
     void historyNetwork();
 
+    int stringIndex=0;
+
 private slots:
     void backHandler();
 
