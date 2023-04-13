@@ -93,7 +93,8 @@ void MainWindow::menuTimerRestart()
 
 void MainWindow::eliminateMenu()
 {
-    this->close();
+    //this->close();
+    qDebug()<<"Time is up";
 }
 
 
