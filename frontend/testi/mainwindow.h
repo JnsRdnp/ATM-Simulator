@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "pininterface.h"
-#include "pinwindow.h"
+#include <QTimer>
+#include <signouttimerinterface.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,12 +16,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-private slots:
-    void on_btnPinLogin_clicked();
-    void loginReadySlot();
+public slots:
+    void JWThandler(QByteArray);
+    void timerResetHandler();
 private:
     Ui::MainWindow *ui;
-    PINInterface *objPINInterface;
+    SignoutTimerInterface *signoutTimer;
+    QTimer *timer;
+
 };
 #endif // MAINWINDOW_H

@@ -1,5 +1,4 @@
 QT       += core gui
-QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +24,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 
-unix:!macx: LIBS += -L$$PWD/../build/ -lPINInterface
 
-INCLUDEPATH += $$PWD/../
-DEPENDPATH += $$PWD/../
+win32: LIBS += -L$$PWD/../pincodedll/build/debug/ -lpincodedll
+
+INCLUDEPATH += $$PWD/../pincodedll
+DEPENDPATH += $$PWD/../pincodedll

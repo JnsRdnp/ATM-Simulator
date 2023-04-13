@@ -25,7 +25,7 @@ private:
     QByteArray jwt;
     QNetworkAccessManager *putManager;
     QNetworkReply *reply;
-    QByteArray response_data;
+    QByteArray responseData;
 };
 
 #endif // WITHDRAWDLLENGINE_H

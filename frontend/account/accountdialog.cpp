@@ -16,9 +16,7 @@ accountDialog::accountDialog(QWidget *parent,int id) :
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
 
-
     connect(this,SIGNAL(localRestartTimerSignal()),parent,SLOT(menuTimerRestart()));
-
     historyNetwork(1);
 }
 

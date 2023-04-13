@@ -15,17 +15,18 @@ const cards={
         return db.query('delete from cards where idcard = ?', [id], callback);
     },
 
-    //the following tables use b? to signify conversion to bit datatype.
     add: function(cards, callback) {
         bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
-            return db.query("insert into cards (idcard, PINcode, user_iduser, credit, debit) values (?,?,?,b?,b?)",
+            //look into making a check on the credit and debit values to make sure they are either 1 or 0, making mySQL table into bit
+            //does not work.
+            return db.query("insert into cards (idcard, PINcode, user_iduser, credit, debit) values (?,?,?,?,?)",
             [cards.id, hash, cards.idUser, cards.credit, cards.debit], callback);
         });
     },
 
     update: function(id, cards, callback) {
         bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
-            return db.query("update cards set PINcode = ?, user_iduser = ?, credit = b?, debit = b? where idcard = ?",
+            return db.query("update cards set PINcode = ?, user_iduser = ?, credit = ?, debit = ? where idcard = ?",
             [hash, cards.idUser, cards.credit, cards.debit, id], callback);
         });
     }
