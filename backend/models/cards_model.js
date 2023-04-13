@@ -15,10 +15,9 @@ const cards={
         return db.query('delete from cards where idcard = ?', [id], callback);
     },
 
-    //the following tables use b? to signify conversion to bit datatype.
     add: function(cards, callback) {
         bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
-            return db.query("insert into cards (idcard, PINcode, user_iduser, credit, debit) values (?,?,?,b?,b?)",
+            return db.query("insert into cards (idcard, PINcode, user_iduser, credit, debit) values (?,?,?,?,?)",
             [cards.id, hash, cards.idUser, cards.credit, cards.debit], callback);
         });
     },
