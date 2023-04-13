@@ -1,10 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "qlistwidget.h"
-#include "saldoui.h"
-#include "nostoui.h"
-#include "tiliui.h"
-#include "kirjauduulosui.h"
 #include <QMainWindow>
 #include "balancedialog.h"
 #include "accountdialog.h"
@@ -39,9 +35,7 @@ signals:
 
 private:
     Ui::MainWindow *ui;
-    saldoUI * pSaldoUI;
-    nostoUI * pnostoUI;
-    tiliUI * ptiliUI;
+
     balanceDialog *pBalanceDialog;
     accountDialog *pAccountDialog;
     withdrawdll *pWithdraw;

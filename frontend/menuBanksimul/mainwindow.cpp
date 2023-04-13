@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "saldoui.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,20 +10,11 @@ MainWindow::MainWindow(QWidget *parent)
     this->setAttribute(Qt::WA_DeleteOnClose);
 
 
-//    connect(ui->saldo,SIGNAL(clicked(bool)),
-//                this, SLOT(saldoClickHandler()));
+
 
     connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(generalMenuListHandler(QListWidgetItem*)));
 
-//    connect(ui->nosto,SIGNAL(clicked(bool)),
-//                this, SLOT(nostoClickHandler()));
-
-//    connect(ui->tili,SIGNAL(clicked(bool)),
-//                this, SLOT(tiliClickHandler()));
-
-//    connect(ui->kirjauduUlos,SIGNAL(clicked(bool)),
-//                this, SLOT(kirjauduUloshandler()));
 
     //main menu timer
     Timer = new QTimer(this);
