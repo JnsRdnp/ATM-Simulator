@@ -27,7 +27,7 @@ function (request, response) {
 
 router.get('/card/:id',
 function (request, response) {
-    accounts.getById(request.params.id, function (err, dbResult) {
+    accounts.getByCard(request.params.id, function (err, dbResult) {
         if (err) {
             response.json(err);
         } else {
