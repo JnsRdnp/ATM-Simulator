@@ -2,6 +2,7 @@
 #define CARDCHOICE_H
 
 #include <QDialog>
+#include <QDebug>
 
 namespace Ui {
 class CardChoice;
