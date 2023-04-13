@@ -7,7 +7,7 @@ ErrorScreen::ErrorScreen(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->ok, SIGNAL(clicked()),
-            this, okClickHandler());
+            this, SLOT(okClickHandler()));
 }
 
 ErrorScreen::~ErrorScreen()
