@@ -14,7 +14,7 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QByteArray in
     request.setRawHeader(QByteArray("Authorization"),(myJWToken));
     getManager = new QNetworkAccessManager(this);
 
-    connect(getManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(getCardInfo(QNetworkReply*)));
+    connect(getManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getCardInfo(QNetworkReply*)));
 
     reply = getManager->get(request);
 }
@@ -27,21 +27,49 @@ void Choices::getCardInfo(QNetworkReply *reply)
     QString responseString = QString(responseData);
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(responseString.toUtf8());
-     qDebug() << jsonResponse.isEmpty();
     QJsonObject jsonObject = jsonResponse.object();
-    qDebug() << jsonObject.isEmpty();
-    int credit = jsonObject["credit"].toInt();
-    int debit = jsonObject["debit"].toInt();
-    qDebug() << credit;
-    qDebug() << debit;
 
+    cardIsCreditOrDebit(jsonObject["credit"].toInt(), jsonObject["debit"].toInt());
 
+    reply->deleteLater();
+    getManager->deleteLater();
+}
+
+void Choices::cardChoiceHandler(QString buttonName)
+{
+    //checks the buttons name and frees the objects memory
+    if (buttonName == "CreditButton"){
+        isCardCredit = true;
+    } else {
+        isCardCredit = false;
+    }
+    delete cardChoice;
+    cardChoice = nullptr;
+    disconnect(cardChoice, SIGNAL(cardChoice(QString)),
+               this, SLOT(cardChoiceHandler(QString)));
+}
+
+void Choices::okClickHandler()
+{
+    //emit destroyChoices();
+    delete errorHandler;
+    errorHandler = nullptr;
+    disconnect(errorHandler, SIGNAL(okClickedSignal()),
+                         this, SLOT(okClickHandler()));
+}
+
+void Choices::cardIsCreditOrDebit(int credit, int debit)
+{
     if(credit == 1 && debit == 1)
     {
         qDebug()<<"Luodaan käyttäjälle valikko";
-        //luo käyttöliittymä, jossa käyttäjä valitsee kortti-tyypin
-        CardChoice *cardChoice = new CardChoice(this);
+
+        //Creates UI for the user to choose their card type
+        cardChoice = new CardChoice(this);
         cardChoice->open();
+        connect(cardChoice, SIGNAL(cardChoice(QString)),
+                this, SLOT(cardChoiceHandler(QString)));
+
     } else if (credit == 0 && debit == 1){
         qDebug()<<"Asetetaan käyttäjälle suoraan debit";
         isCardCredit = false;
@@ -50,11 +78,10 @@ void Choices::getCardInfo(QNetworkReply *reply)
         isCardCredit = true;
     } else {
         qDebug()<<"Jotain on mennyt väärin";
-        //emit cardIsErrorSignal
+        errorHandler = new ErrorScreen(this);
+        errorHandler->open();
+        connect(errorHandler, SIGNAL(okClickedSignal()),
+                this, SLOT(okClickHandler()));
     }
 
-
-
-    reply->deleteLater();
-    getManager->deleteLater();
 }

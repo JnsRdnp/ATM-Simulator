@@ -3,6 +3,7 @@
 
 #include "choices_global.h"
 #include "cardchoice.h"
+#include "errorscreen.h"
 #include "QDialog"
 #include <QtNetwork>
 #include <QNetworkAccessManager>
@@ -16,16 +17,25 @@ public:
 
 private slots:
     void getCardInfo (QNetworkReply *reply);
+    void cardChoiceHandler(QString buttonName);
+    void okClickHandler();
 
 private:
     QString PIN = "";
     QString cardID = "";
     QByteArray JWT = "";
+
+    CardChoice *cardChoice;
+    ErrorScreen *errorHandler;
     bool isCardCredit;
+
     //for networking and getting card info
     QNetworkAccessManager *getManager;
     QNetworkReply *reply;
     QByteArray responseData;
+
+    //for logic of dealing with the card info
+    void cardIsCreditOrDebit(int, int);
 };
 
 #endif // CHOICES_H

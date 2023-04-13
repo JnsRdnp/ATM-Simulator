@@ -13,12 +13,14 @@ CONFIG += c++17
 
 SOURCES += \
     cardchoice.cpp \
-    choices.cpp
+    choices.cpp \
+    errorscreen.cpp
 
 HEADERS += \
     cardchoice.h \
     choices_global.h \
-    choices.h
+    choices.h \
+    errorscreen.h
 
 # Default rules for deployment.
 unix {
@@ -27,4 +29,5 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
-    cardchoice.ui
+    cardchoice.ui \
+    errorscreen.ui
