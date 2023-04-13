@@ -43,19 +43,19 @@ void Choices::cardChoiceHandler(QString buttonName)
     } else {
         isCardCredit = false;
     }
-    delete cardChoice;
-    cardChoice = nullptr;
     disconnect(cardChoice, SIGNAL(cardChoice(QString)),
                this, SLOT(cardChoiceHandler(QString)));
+    delete cardChoice;
+    cardChoice = nullptr;
 }
 
 void Choices::okClickHandler()
 {
     //emit destroyChoices();
-    delete errorHandler;
-    errorHandler = nullptr;
     disconnect(errorHandler, SIGNAL(okClickedSignal()),
                          this, SLOT(okClickHandler()));
+    delete errorHandler;
+    errorHandler = nullptr;
 }
 
 void Choices::cardIsCreditOrDebit(int credit, int debit)
