@@ -8,10 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
-
-
-
-
+    
     connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(generalMenuListHandler(QListWidgetItem*)));
 
