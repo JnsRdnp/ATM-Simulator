@@ -95,6 +95,8 @@ void MainWindow::menuTimerRestart()
 void MainWindow::JWThandler(QByteArray jwt)
 {
     qDebug()<<jwt;
+    //this->close();
+    qDebug()<<"Time is up";
 }
 
 void MainWindow::timerResetHandler()

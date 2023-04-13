@@ -23,7 +23,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-unix:!macx: LIBS += -L$$PWD/../Documents/group_15/frontend/pincodedll/build/ -lpincodedll
 
-INCLUDEPATH += $$PWD/../Documents/group_15/frontend/pincodedll
-DEPENDPATH += $$PWD/../Documents/group_15/frontend/pincodedll
+
+win32: LIBS += -L$$PWD/../pincodedll/build/debug/ -lpincodedll
+
+INCLUDEPATH += $$PWD/../pincodedll
+DEPENDPATH += $$PWD/../pincodedll

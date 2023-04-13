@@ -71,7 +71,7 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
     QString history;
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
-        history+=json_obj["wholeName"].toString()+"  |  "+json_obj["date"].toString()+"  |  "+
+        history+=json_obj["wholeName"].toString()+"    |    "+json_obj["date"].toString()+"    |    "+
                    QString::number(json_obj["withdrawal"].toDouble())+" €"+"\r\r";
     }
 

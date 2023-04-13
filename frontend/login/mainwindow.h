@@ -24,5 +24,7 @@ private:
     Ui::MainWindow *ui;
     pincode * pincodep;
     void updateUI();
+    short pinCode;
+    void checkNumber();
 };
 #endif // MAINWINDOW_H

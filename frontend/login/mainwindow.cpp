@@ -5,8 +5,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    pinCode = 0;
     ui->setupUi(this);
-    int pinNumber = 0;
 }
 
 MainWindow::~MainWindow()
@@ -17,21 +17,28 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    connect(pRFIDreader,SIGNAL(sendTimeoutToMainWindow()),
-                this,SLOT(handleRFIDTimeout()));
+    updateUI();
     pincodep = new pincode(this);
+    connect(pincodep, SIGNAL(sendPin(short)),
+            this,SLOT(receivePinNumber(short)));
     pincodep->open();
     updateUI();
+
 }
 
 void MainWindow::receivePinNumber(short num)
 {
-    pinNumber = num;
+    pinCode = num;
+    delete pincodep;
+    pincodep = nullptr;
 }
 
+void MainWindow::updateUI() {
+    ui->textPin->setText(QString::number(pinCode));
+}
 
-void MainWindow::updateUI()
+void MainWindow::checkNumber()
 {
-    ui->textPin->setText(QString::number(pinNumber));
+    updateUI();
 }
 
