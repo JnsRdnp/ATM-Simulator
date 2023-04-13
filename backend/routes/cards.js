@@ -62,42 +62,6 @@ function(request, response) {
     });
 });
 
-router.post('/login',
-function(request, response) {
-    if(request.body.cardID && request.body.PINcode){
-        const user = request.body.cardID;
-        const pass = request.body.PINcode;
-        
-        cards.checkPin(user, function(dbError, dbResult) {
-            if(dbError){
-              response.json(dbError);
-            } else {
-                if (dbResult.length > 0) {
-                    bcrypt.compare(pass,dbResult[0].PINcode, function(error,compareResult) {
-                        if(compareResult) {
-                            console.log("succes");
-                            const token = generateAccessToken({ cardID: user });
-                            response.send(token);
-                        }
-                        else {
-                            console.log("wrong password");
-                            response.send(false);
-                        }			
-                    });
-                }
-                else{
-                    console.log("user does not exists");
-                    response.send(false);
-                }
-            }
-        });
-    }
-    else{
-        console.log("username or password missing");
-        response.send(false);
-    }
-});
-
 function generateAccessToken(id) {
     dotenv.config();
     return jtw.sign(id, process.env.MY_TOKEN, { expiresIn: '200s'});
