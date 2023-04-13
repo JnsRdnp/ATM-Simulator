@@ -32,6 +32,8 @@ private:
     int accountID;
     QString page;
 
+    int stringIndex;
+
 private slots:
     void getHistorySlot (QNetworkReply *reply);
     void backHandler();
