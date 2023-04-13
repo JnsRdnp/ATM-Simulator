@@ -24,7 +24,7 @@ function(request, response) {
             response.json(error);
         } else {
             console.log(dbResult);
-            response.json(dbResult);
+            response.json(dbResult[0]);
         }
     });
 });
