@@ -2,6 +2,7 @@
 #define CHOICES_H
 
 #include "choices_global.h"
+#include "cardchoice.h"
 #include "QDialog"
 #include <QtNetwork>
 #include <QNetworkAccessManager>
@@ -20,6 +21,7 @@ private:
     QString PIN = "";
     QString cardID = "";
     QByteArray JWT = "";
+    bool isCardCredit;
     //for networking and getting card info
     QNetworkAccessManager *getManager;
     QNetworkReply *reply;

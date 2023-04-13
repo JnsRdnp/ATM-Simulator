@@ -40,16 +40,20 @@ void Choices::getCardInfo(QNetworkReply *reply)
     {
         qDebug()<<"Luodaan käyttäjälle valikko";
         //luo käyttöliittymä, jossa käyttäjä valitsee kortti-tyypin
+        CardChoice *cardChoice = new CardChoice(this);
+        cardChoice->open();
     } else if (credit == 0 && debit == 1){
         qDebug()<<"Asetetaan käyttäjälle suoraan debit";
-        //emit cardIsDebitSignal
+        isCardCredit = false;
     } else if (credit == 1 && debit == 0){
         qDebug()<<"Asetetaan käyttäjälle suoraan credit";
-        //emit cardIsCreditSignal
+        isCardCredit = true;
     } else {
         qDebug()<<"Jotain on mennyt väärin";
         //emit cardIsErrorSignal
     }
+
+
 
     reply->deleteLater();
     getManager->deleteLater();
