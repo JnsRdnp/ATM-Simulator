@@ -45,14 +45,14 @@ void SignoutTimerEngine::login()
 void SignoutTimerEngine::getNewJsonWebToken()
 {
     qDebug() << "Get New JWT method";
-    const QString SERVER_URL = "http://localhost:3000/";
+    const QString SERVER_URL = "http://localhost:3001/";
 
     QJsonObject jsonObj;
     jsonObj.insert("cardID","3");
     jsonObj.insert("PINcode","2345");
 
     QString site_url = SERVER_URL + "login";
-    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIxMjM0IiwiaWF0IjoxNjgxMzIyODA0LCJleHAiOjE2ODEzMjMwMDR9.ZURjd2oWKSCo-LP0nfl4FZz3kfl2pumlql2hXKi0bv0";
+    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIzIiwiaWF0IjoxNjgxMzY4MDcyLCJleHAiOjE2ODEzNjgyNzJ9.ZqclE8PNQHPasjDuixkE_tlGdNedEI1909FfWp9FiuI";
 
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
