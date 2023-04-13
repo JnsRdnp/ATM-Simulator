@@ -67,7 +67,7 @@ void MainWindow::saldoClickHandler()
 void MainWindow::nostoClickHandler()
 {
     pWithdraw = new withdrawdll(this,2,true);
-    pWithdraw->show();
+    pWithdraw->open();
 }
 
 void MainWindow::tiliClickHandler()
@@ -75,7 +75,7 @@ void MainWindow::tiliClickHandler()
     emit menuTimerRestartSignal();
 
     pAccountDialog = new accountDialog(this,2);
-    pAccountDialog->show();
+    pAccountDialog->open();
 }
 
 void MainWindow::kirjauduUloshandler()

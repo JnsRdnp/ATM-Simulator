@@ -51,7 +51,9 @@ void accountDialog::historyNetwork(int historyPage)
 
 void accountDialog::getHistorySlot(QNetworkReply *reply)
 {
+    stringIndex = 0;
 
+    ui->tblHistory->clearContents();
 
     response_data=reply->readAll();
 
@@ -73,10 +75,19 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
     QString history;
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
-        history+=json_obj["wholeName"].toString()+"    |    "+json_obj["date"].toString()+"    |    "+
-                   QString::number(json_obj["withdrawal"].toDouble())+" €"+"\r\r";
-    }
 
+        ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
+
+        ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
+        ui->tblHistory->setColumnWidth(1,140);
+
+        ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
+
+        stringIndex += 1;
+
+        qDebug()<<"stringIndex inside foreach: "<<stringIndex;
+    }
+    //qDebug()<<"stringIndex outside foreach: "<<stringIndex;
 
     ui->teHistory->setText(history);
 
@@ -96,5 +107,6 @@ void accountDialog::pageChange()
 {
     emit localRestartTimerSignal();
 
+    // changes the page which is shown by the value that is in the qSpinbox
     historyNetwork(ui->btnPage->value());
 }
