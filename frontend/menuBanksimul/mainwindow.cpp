@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "saldoui.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,23 +10,10 @@ MainWindow::MainWindow(QWidget *parent)
     this->setAttribute(Qt::WA_DeleteOnClose);
 
 
-    connect(ui->saldo,SIGNAL(clicked(bool)),
-                this, SLOT(saldoClickHandler()));
 
-    pSaldoUI = new saldoUI(this);
 
-    connect(ui->nosto,SIGNAL(clicked(bool)),
-                this, SLOT(nostoClickHandler()));
-
-    pnostoUI = new nostoUI(this);
-
-    connect(ui->tili,SIGNAL(clicked(bool)),
-                this, SLOT(tiliClickHandler()));
-
-    ptiliUI = new tiliUI(this);
-
-    connect(ui->kirjauduUlos,SIGNAL(clicked(bool)),
-                this, SLOT(kirjauduUloshandler()));
+    connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
+            this, SLOT(generalMenuListHandler(QListWidgetItem*)));
 
 
     //main menu timer;
@@ -98,6 +84,26 @@ void MainWindow::JWThandler(QByteArray jwt)
     qDebug()<<"Time is up";
 }
 
+
+void MainWindow::generalMenuListHandler(QListWidgetItem *item)
+{
+    if (ui->listMenu->item(0) == item) {
+        saldoClickHandler();
+    }
+    if (ui->listMenu->item(1) == item){
+        nostoClickHandler();
+    }
+    if (ui->listMenu->item(2) == item){
+        tiliClickHandler();
+    }
+    if (ui->listMenu->item(3) == item){
+        kirjauduUloshandler();
+    }
+
+
+}
+
+
 void MainWindow::timerResetHandler()
 {
     qDebug() << "timer before " << timer->remainingTime();
@@ -120,6 +126,7 @@ void MainWindow::timedSignout()
     timer->start(10000);
     signoutTimer->open();
 }
+
 
 
 

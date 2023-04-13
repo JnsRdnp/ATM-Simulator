@@ -63,7 +63,7 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
     qDebug()<<page;
 
     //qDebug()<<"DATA : "+response_data;
-    qDebug()<<response_data.count("idhistory");
+    //qDebug()<<response_data.count("idhistory");
 
 
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
@@ -83,7 +83,7 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
 
         stringIndex += 1;
 
-        qDebug()<<"stringIndex inside foreach: "<<stringIndex;
+        //qDebug()<<"stringIndex inside foreach: "<<stringIndex;
     }
     //qDebug()<<"stringIndex outside foreach: "<<stringIndex;
 

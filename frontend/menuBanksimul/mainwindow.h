@@ -1,16 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "saldoui.h"
-#include "nostoui.h"
-#include "tiliui.h"
-#include "kirjauduulosui.h"
-#include "signouttimerinterface.h"
+
+#include "qlistwidget.h"
 #include <QMainWindow>
 #include "balancedialog.h"
 #include "accountdialog.h"
 #include "withdrawdll.h"
+#include "signouttimerinterface.h"
 #include <QTimer>
-
 
 
 QT_BEGIN_NAMESPACE
@@ -31,17 +28,21 @@ public slots:
     void tiliClickHandler();
     void kirjauduUloshandler();
     void menuTimerRestart();
+
+    void eliminateMenu();
+    void generalMenuListHandler(QListWidgetItem*);
+
+
     void JWThandler(QByteArray);
     void timerResetHandler();
     void timedSignout();
+
 signals:
     void menuTimerRestartSignal();
 
 private:
     Ui::MainWindow *ui;
-    saldoUI * pSaldoUI;
-    nostoUI * pnostoUI;
-    tiliUI * ptiliUI;
+
     balanceDialog *pBalanceDialog;
     accountDialog *pAccountDialog;
     withdrawdll *pWithdraw;
