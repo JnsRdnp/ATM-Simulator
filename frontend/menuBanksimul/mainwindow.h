@@ -1,5 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+
 #include "qlistwidget.h"
 #include "saldoui.h"
 #include "nostoui.h"
@@ -10,8 +11,8 @@
 #include "balancedialog.h"
 #include "accountdialog.h"
 #include "withdrawdll.h"
+#include "signouttimerinterface.h"
 #include <QTimer>
-
 
 
 QT_BEGIN_NAMESPACE

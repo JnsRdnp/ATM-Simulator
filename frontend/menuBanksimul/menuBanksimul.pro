@@ -12,22 +12,13 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
-    nostoui.cpp \
-    saldoui.cpp \
-    tiliui.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h \
-    nostoui.h \
-    saldoui.h \
-    tiliui.h
+    mainwindow.h
 
 FORMS += \
-    mainwindow.ui \
-    nostoui.ui \
-    saldoui.ui \
-    tiliui.ui
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

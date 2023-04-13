@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "saldoui.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,8 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
-
-
+    
     connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(generalMenuListHandler(QListWidgetItem*)));
 
