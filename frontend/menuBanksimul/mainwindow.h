@@ -5,6 +5,7 @@
 #include "nostoui.h"
 #include "tiliui.h"
 #include "kirjauduulosui.h"
+#include "signouttimerinterface.h"
 #include <QMainWindow>
 #include "balancedialog.h"
 #include "accountdialog.h"
@@ -31,23 +32,28 @@ public slots:
     void tiliClickHandler();
     void kirjauduUloshandler();
     void menuTimerRestart();
+
     void eliminateMenu();
     void generalMenuListHandler(QListWidgetItem*);
+
+
+    void JWThandler(QByteArray);
+    void timerResetHandler();
+    void timedSignout();
 
 signals:
     void menuTimerRestartSignal();
 
 private:
     Ui::MainWindow *ui;
-    saldoUI * pSaldoUI;
-    nostoUI * pnostoUI;
-    tiliUI * ptiliUI;
+
     balanceDialog *pBalanceDialog;
     accountDialog *pAccountDialog;
     withdrawdll *pWithdraw;
-
+    SignoutTimerInterface *signoutTimer;
+    QTimer *timer;
     QTimer *Timer;
-    int timeout = 50000;
+    int timeout = 10000;
 
 
 };
