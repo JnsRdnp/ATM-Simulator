@@ -24,7 +24,7 @@ function(request, response) {
             response.json(error);
         } else {
             console.log(dbResult);
-            response.json(dbResult);
+            response.json(dbResult[0]);
         }
     });
 });
@@ -60,42 +60,6 @@ function(request, response) {
             response.json(dbResult);
         }
     });
-});
-
-router.post('/login',
-function(request, response) {
-    if(request.body.cardID && request.body.PINcode){
-        const user = request.body.cardID;
-        const pass = request.body.PINcode;
-        
-        cards.checkPin(user, function(dbError, dbResult) {
-            if(dbError){
-              response.json(dbError);
-            } else {
-                if (dbResult.length > 0) {
-                    bcrypt.compare(pass,dbResult[0].PINcode, function(error,compareResult) {
-                        if(compareResult) {
-                            console.log("succes");
-                            const token = generateAccessToken({ cardID: user });
-                            response.send(token);
-                        }
-                        else {
-                            console.log("wrong password");
-                            response.send(false);
-                        }			
-                    });
-                }
-                else{
-                    console.log("user does not exists");
-                    response.send(false);
-                }
-            }
-        });
-    }
-    else{
-        console.log("username or password missing");
-        response.send(false);
-    }
 });
 
 function generateAccessToken(id) {
