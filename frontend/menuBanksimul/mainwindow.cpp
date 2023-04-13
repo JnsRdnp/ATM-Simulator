@@ -11,24 +11,20 @@ MainWindow::MainWindow(QWidget *parent)
     this->setAttribute(Qt::WA_DeleteOnClose);
 
 
-    connect(ui->saldo,SIGNAL(clicked(bool)),
-                this, SLOT(saldoClickHandler()));
+//    connect(ui->saldo,SIGNAL(clicked(bool)),
+//                this, SLOT(saldoClickHandler()));
 
-    pSaldoUI = new saldoUI(this);
+    connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
+            this, SLOT(generalMenuListHandler(QListWidgetItem*)));
 
-    connect(ui->nosto,SIGNAL(clicked(bool)),
-                this, SLOT(nostoClickHandler()));
+//    connect(ui->nosto,SIGNAL(clicked(bool)),
+//                this, SLOT(nostoClickHandler()));
 
-    pnostoUI = new nostoUI(this);
+//    connect(ui->tili,SIGNAL(clicked(bool)),
+//                this, SLOT(tiliClickHandler()));
 
-    connect(ui->tili,SIGNAL(clicked(bool)),
-                this, SLOT(tiliClickHandler()));
-
-    ptiliUI = new tiliUI(this);
-
-    connect(ui->kirjauduUlos,SIGNAL(clicked(bool)),
-                this, SLOT(kirjauduUloshandler()));
-
+//    connect(ui->kirjauduUlos,SIGNAL(clicked(bool)),
+//                this, SLOT(kirjauduUloshandler()));
 
     //main menu timer
     Timer = new QTimer(this);
@@ -95,6 +91,24 @@ void MainWindow::eliminateMenu()
 {
     //this->close();
     qDebug()<<"Time is up";
+}
+
+void MainWindow::generalMenuListHandler(QListWidgetItem *item)
+{
+    if (ui->listMenu->item(0) == item) {
+        saldoClickHandler();
+    }
+    if (ui->listMenu->item(1) == item){
+        nostoClickHandler();
+    }
+    if (ui->listMenu->item(2) == item){
+        tiliClickHandler();
+    }
+    if (ui->listMenu->item(3) == item){
+        kirjauduUloshandler();
+    }
+
+
 }
 
 

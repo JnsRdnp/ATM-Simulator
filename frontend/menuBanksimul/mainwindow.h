@@ -1,5 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include "qlistwidget.h"
 #include "saldoui.h"
 #include "nostoui.h"
 #include "tiliui.h"
@@ -31,6 +32,7 @@ public slots:
     void kirjauduUloshandler();
     void menuTimerRestart();
     void eliminateMenu();
+    void generalMenuListHandler(QListWidgetItem*);
 
 signals:
     void menuTimerRestartSignal();
