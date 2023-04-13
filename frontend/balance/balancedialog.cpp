@@ -96,8 +96,6 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
 
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
-        history+=json_obj["wholeName"].toString()+"    |    "+json_obj["date"].toString()+"    |    "+
-                   QString::number(json_obj["withdrawal"].toDouble())+" €"+"\r\r";
 
         ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
 
@@ -108,8 +106,6 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
 
         stringIndex+=1;
     }
-
-    //ui->txtLatestHistory->setText(history);
 
     qDebug()<<history;
 
