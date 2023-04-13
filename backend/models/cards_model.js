@@ -17,6 +17,8 @@ const cards={
 
     add: function(cards, callback) {
         bcrypt.hash(cards.PINcode, saltRounds, function(error, hash){
+            //look into making a check on the credit and debit values to make sure they are either 1 or 0, making mySQL table into bit
+            //does not work.
             return db.query("insert into cards (idcard, PINcode, user_iduser, credit, debit) values (?,?,?,?,?)",
             [cards.id, hash, cards.idUser, cards.credit, cards.debit], callback);
         });
