@@ -22,32 +22,35 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QByteArray in
 void Choices::getCardInfo(QNetworkReply *reply)
 {
     //original source: https://peatutor.com/qt/http_get.php, refactored by Saku Roininen
-    //response_data=reply->readAll();
-    //qDebug()<<"DATA : "+response_data;
+    responseData=reply->readAll();
+    qDebug()<<"DATA : "+responseData;
+    QString responseString = QString(responseData);
 
-    QString test = "{\"bookHeavyInfo\":{\"Qty\":100},\"bookLightInfo\":{\"Qty\":2}}";
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(responseString.toUtf8());
+     qDebug() << jsonResponse.isEmpty();
+    QJsonObject jsonObject = jsonResponse.object();
+    qDebug() << jsonObject.isEmpty();
+    int credit = jsonObject["credit"].toInt();
+    int debit = jsonObject["debit"].toInt();
+    qDebug() << credit;
+    qDebug() << debit;
 
-    //QJsonDocument jsonResponse = QJsonDocument::fromJson(test.toUtf8());
-    //QJsonObject jsonObject = jsonResponse.object();
-    //QJsonObject bookHeavyInfo = jsonObject["bookHeavyInfo"].toObject();
-    //int qty = bookHeavyInfo["Qty"].toInt();
-    //QJsonObject = jsonObject["credit"].toObject();
-    //QJsonArray card = jsonCredit["data"].toArray();
-    //qDebug()<< qty;
-    //bool credit = card[0].toBool();
-    /*if(card[0]==1)
+
+    if(credit == 1 && debit == 1)
     {
-        qDebug()<<"Toimii";
+        qDebug()<<"Luodaan käyttäjälle valikko";
+        //luo käyttöliittymä, jossa käyttäjä valitsee kortti-tyypin
+    } else if (credit == 0 && debit == 1){
+        qDebug()<<"Asetetaan käyttäjälle suoraan debit";
+        //emit cardIsDebitSignal
+    } else if (credit == 1 && debit == 0){
+        qDebug()<<"Asetetaan käyttäjälle suoraan credit";
+        //emit cardIsCreditSignal
+    } else {
+        qDebug()<<"Jotain on mennyt väärin";
+        //emit cardIsErrorSignal
     }
-    else
-    {
-        qDebug()<<"Ei Toimi";
-    }for (int i = 0; i < json_array.size(); i++)
-    {
-        QJsonObject object = json_array[i].toObject();
 
-    }*/
-    //qDebug() << card;
     reply->deleteLater();
     getManager->deleteLater();
 }

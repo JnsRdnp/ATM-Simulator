@@ -23,7 +23,7 @@ private:
     //for networking and getting card info
     QNetworkAccessManager *getManager;
     QNetworkReply *reply;
-    QByteArray response_data;
+    QByteArray responseData;
 };
 
 #endif // CHOICES_H
