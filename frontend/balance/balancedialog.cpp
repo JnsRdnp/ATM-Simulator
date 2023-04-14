@@ -12,8 +12,10 @@ balanceDialog::balanceDialog(QWidget *parent, int id) :
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
+    connect(this,SIGNAL(localRestartTimerSignal()),parent,SLOT(menuTimerRestart()));
+
+
     balanceNetwork();
-    //historyNetwork();
 }
 
 balanceDialog::~balanceDialog()
@@ -115,5 +117,6 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
 
 void balanceDialog::backHandler()
 {
+    emit localRestartTimerSignal();
     this->close();
 }
