@@ -18,8 +18,6 @@ accountDialog::accountDialog(QWidget *parent,int id) :
 
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),parent,SLOT(menuTimerRestart()));
-
-
     historyNetwork(1);
 }
 

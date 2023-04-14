@@ -117,5 +117,6 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
 
 void balanceDialog::backHandler()
 {
+    emit localRestartTimerSignal();
     this->close();
 }
