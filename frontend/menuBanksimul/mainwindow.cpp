@@ -68,16 +68,15 @@ void MainWindow::saldoClickHandler()
 void MainWindow::nostoClickHandler()
 {
     pWithdraw = new withdrawdll(this,2,true);
-    pWithdraw->show();
+    pWithdraw->open();
     emit menuTimerRestartSignal();
 }
 
 void MainWindow::tiliClickHandler()
 {
     pAccountDialog = new accountDialog(this,2);
-    pAccountDialog->show();
+    pAccountDialog->open();
     emit menuTimerRestartSignal();
-
 }
 
 void MainWindow::kirjauduUloshandler()
@@ -95,6 +94,8 @@ void MainWindow::menuTimerRestart()
 void MainWindow::JWThandler(QByteArray jwt)
 {
     qDebug()<<jwt;
+    //this->close();
+    qDebug()<<"Time is up";
 }
 
 void MainWindow::timerResetHandler()
