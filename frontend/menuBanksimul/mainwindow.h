@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include "qlistwidget.h"
+#include "saldoui.h"
+#include "nostoui.h"
+#include "tiliui.h"
+#include "kirjauduulosui.h"
+#include "signouttimerinterface.h"
 #include <QMainWindow>
 #include "balancedialog.h"
 #include "accountdialog.h"

@@ -17,6 +17,7 @@ public:
 
 private slots:
     void getCardInfo (QNetworkReply *reply);
+    void getAccInfo (QNetworkReply *reply);
     void cardChoiceHandler(QString buttonName);
     void okClickHandler();
 
@@ -29,13 +30,19 @@ private:
     ErrorScreen *errorHandler;
     bool isCardCredit;
 
-    //for networking and getting card info
-    QNetworkAccessManager *getManager;
-    QNetworkReply *reply;
-    QByteArray responseData;
+    //for getting card info
+    QNetworkAccessManager *cardGetManager;
+    QNetworkReply *cardReply;
+    QByteArray cardResponseData;
+    //for getting account info
+    QNetworkAccessManager *accGetManager;
+    QNetworkReply *accReply;
+    QByteArray accResponseData;
 
     //for logic of dealing with the card info
     void cardIsCreditOrDebit(int, int);
+    void getCardsAccounts();
+    void startAccountGet();
 };
 
 #endif // CHOICES_H

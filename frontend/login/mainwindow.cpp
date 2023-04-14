@@ -18,6 +18,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     updateUI();
+    qDebug()<<"clicked button";
     pincodep = new pincode(this);
     connect(pincodep, SIGNAL(sendPin(short)),
             this,SLOT(receivePinNumber(short)));
@@ -28,6 +29,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::receivePinNumber(short num)
 {
+    qDebug()<<"received pin";
     pinCode = num;
     pincodep->deleteLater();
     //pincodep = nullptr;
@@ -58,7 +60,7 @@ void MainWindow::on_btnCredentials_clicked()
     QJsonObject jsonObj;
     jsonObj.insert("cardID", cardID);
     jsonObj.insert("PINcode", PINcode);
-    QString site_url="localhost:3000/login";
+    QString site_url="http://localhost:3000/login";
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
@@ -76,6 +78,16 @@ void MainWindow::on_btnCredentials_clicked()
 
 void MainWindow::addLoginSlot(QNetworkReply *reply) {
     response_data=reply->readAll();
+    qDebug()<<response_data;
+
+    if(QString::compare(response_data, "false")==0){
+        ui->loginConfirm->setText("Vitun paska");
+        token="Bearer "+response_data;
+    } else {
+        ui->textCard->clear();
+        ui->textPin->clear();
+    }
+
     reply->deleteLater();
     postManager->deleteLater();
 }

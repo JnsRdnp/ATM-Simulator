@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDebug>
 #include "pincode.h"
 #include <QtNetwork>
 #include <QNetworkAccessManager>
