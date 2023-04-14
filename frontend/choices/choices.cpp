@@ -9,30 +9,45 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QByteArray in
 
     //networking code
     QString site_url="http://localhost:3000/cards/" + cardID;
-    QNetworkRequest request((site_url));
+    QNetworkRequest cardRequest((site_url));
     QByteArray myJWToken="Bearer "+ JWT;
-    request.setRawHeader(QByteArray("Authorization"),(myJWToken));
-    getManager = new QNetworkAccessManager(this);
+    cardRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));
+    cardGetManager = new QNetworkAccessManager(this);
 
-    connect(getManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getCardInfo(QNetworkReply*)));
+    connect(cardGetManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getCardInfo(QNetworkReply*)));
 
-    reply = getManager->get(request);
+    cardReply = cardGetManager->get(cardRequest);
 }
 
-void Choices::getCardInfo(QNetworkReply *reply)
+void Choices::getCardInfo(QNetworkReply *cardReply)
 {
     //original source: https://peatutor.com/qt/http_get.php, refactored by Saku Roininen
-    responseData=reply->readAll();
-    qDebug()<<"DATA : "+responseData;
-    QString responseString = QString(responseData);
+    cardResponseData=cardReply->readAll();
+    qDebug()<<"DATA : "+cardResponseData;
+    QString responseString = QString(cardResponseData);
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(responseString.toUtf8());
     QJsonObject jsonObject = jsonResponse.object();
 
     cardIsCreditOrDebit(jsonObject["credit"].toInt(), jsonObject["debit"].toInt());
 
-    reply->deleteLater();
-    getManager->deleteLater();
+    cardReply->deleteLater();
+    cardGetManager->deleteLater();
+
+}
+
+void Choices::getAccInfo(QNetworkReply *accReply)
+{
+    //original source: https://peatutor.com/qt/http_get.php, refactored by Saku Roininen
+    accResponseData=accReply->readAll();
+    qDebug()<<"DATA : "+accResponseData;
+
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(accResponseData);
+    QJsonArray jsonArray = jsonResponse.array();
+    qDebug()<<jsonArray;
+
+    accReply->deleteLater();
+    accGetManager->deleteLater();
 }
 
 void Choices::cardChoiceHandler(QString buttonName)
@@ -83,5 +98,28 @@ void Choices::cardIsCreditOrDebit(int credit, int debit)
         connect(errorHandler, SIGNAL(okClickedSignal()),
                 this, SLOT(okClickHandler()));
     }
+    qDebug()<<"Ollaan tääl";
+    startAccountGet();
 
 }
+
+void Choices::startAccountGet()
+{
+    QString site_url="http://localhost:3000/accounts/card/" + cardID;
+    qDebug()<<"Ollaan tääl";
+    QNetworkRequest accRequest((site_url));
+    qDebug()<<"Ollaan tääl";
+    QByteArray myJWToken="Bearer "+ JWT;
+    qDebug()<<"Ollaan tääl";
+    accRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));
+    qDebug()<<"Ollaan tääl";
+    accGetManager = new QNetworkAccessManager(this);
+    qDebug()<<"Ollaan tääl";
+
+    connect(accGetManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getAccInfo(QNetworkReply*)));
+    qDebug()<<"Ollaan tääl";
+    accReply = accGetManager->get(accRequest);
+    qDebug()<<"Ollaan tääl";
+}
+
+
