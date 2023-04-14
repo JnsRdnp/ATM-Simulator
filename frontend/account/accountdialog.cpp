@@ -14,9 +14,10 @@ accountDialog::accountDialog(QWidget *parent,int id) :
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
-    connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
+    connect(ui->btnReturn,SIGNAL(clicked()),parent,SLOT(menuTimerRestart()));
 
-    connect(this,SIGNAL(localRestartTimerSignal()),parent,SLOT(menuTimerRestart()));
+    connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
+    connect(ui->btnPage,SIGNAL(valueChanged(int)),parent,SLOT(menuTimerRestart()));
 
 
     historyNetwork(1);
@@ -98,14 +99,12 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
 
 void accountDialog::backHandler()
 {
-    emit localRestartTimerSignal();
 
     this->close();
 }
 
 void accountDialog::pageChange()
 {
-    emit localRestartTimerSignal();
 
     // changes the page which is shown by the value that is in the qSpinbox
     historyNetwork(ui->btnPage->value());

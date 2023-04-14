@@ -41,9 +41,6 @@ private slots:
 
     void getHistorySlot(QNetworkReply *historyReply);
 
-signals:
-    void localRestartTimerSignal();
-
 };
 
 #endif // BALANCEDIALOG_H
