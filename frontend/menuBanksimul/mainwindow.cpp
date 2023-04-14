@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
-    
+
     connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(generalMenuListHandler(QListWidgetItem*)));
 
@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(Timer, SIGNAL(timeout()), this, SLOT(timedSignout()));
     Timer->start(timeout);
 
-    connect(this,SIGNAL(menuTimerRestartSignal()),this,SLOT(menuTimerRestart()));
 
 }
 
@@ -36,6 +35,9 @@ MainWindow::~MainWindow()
     delete timer;
     timer = nullptr;
 
+    delete signoutTimer;
+    signoutTimer = nullptr;
+
     delete ui;
 
 }
@@ -45,21 +47,24 @@ void MainWindow::saldoClickHandler()
     //second parameter is the accountID
     pBalanceDialog = new balanceDialog(this,2);
     pBalanceDialog->show();
-    emit menuTimerRestartSignal();
+
+    menuTimerRestart();
 }
 
 void MainWindow::nostoClickHandler()
 {
     pWithdraw = new withdrawdll(this,2,true);
     pWithdraw->open();
-    emit menuTimerRestartSignal();
+
+    menuTimerRestart();
 }
 
 void MainWindow::tiliClickHandler()
 {
     pAccountDialog = new accountDialog(this,2);
     pAccountDialog->open();
-    emit menuTimerRestartSignal();
+
+    menuTimerRestart();
 }
 
 void MainWindow::kirjauduUloshandler()
@@ -87,19 +92,16 @@ void MainWindow::generalMenuListHandler(QListWidgetItem *item)
     if (ui->listMenu->item(0) == item) {
         saldoClickHandler();
     }
-    if (ui->listMenu->item(1) == item){
+    else if (ui->listMenu->item(1) == item){
         nostoClickHandler();
     }
-    if (ui->listMenu->item(2) == item){
+    else if (ui->listMenu->item(2) == item){
         tiliClickHandler();
     }
-    if (ui->listMenu->item(3) == item){
+    else if (ui->listMenu->item(3) == item){
         kirjauduUloshandler();
     }
-
-
 }
-
 
 void MainWindow::timerResetHandler()
 {
@@ -112,6 +114,7 @@ void MainWindow::timedSignout()
 {
     //timed signout
     signoutTimer = new SignoutTimerInterface(this);
+
     timer = new QTimer(this);
 
     connect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),

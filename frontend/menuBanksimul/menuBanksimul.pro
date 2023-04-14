@@ -58,6 +58,8 @@ else:unix:!macx: LIBS += -L$$PWD/../withdrawDLL/build/ -lwithdrawDLL
 INCLUDEPATH += $$PWD/../withdrawDLL
 DEPENDPATH += $$PWD/../withdrawDLL
 
+
+
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/release/ -lsignoutTimerDLL
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/debug/ -lsignoutTimerDLL
 else:unix:!macx: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL

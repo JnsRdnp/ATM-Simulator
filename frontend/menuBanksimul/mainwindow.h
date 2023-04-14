@@ -34,7 +34,6 @@ public slots:
     void kirjauduUloshandler();
     void menuTimerRestart();
 
-    void eliminateMenu();
     void generalMenuListHandler(QListWidgetItem*);
 
 
@@ -42,8 +41,6 @@ public slots:
     void timerResetHandler();
     void timedSignout();
 
-signals:
-    void menuTimerRestartSignal();
 
 private:
     Ui::MainWindow *ui;
