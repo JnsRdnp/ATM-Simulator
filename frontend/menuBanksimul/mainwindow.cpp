@@ -46,7 +46,7 @@ MainWindow::~MainWindow()
 void MainWindow::saldoClickHandler()
 {
     //second parameter is the accountID
-    pBalanceDialog = new balanceDialog(this,3);
+    pBalanceDialog = new balanceDialog(this,2);
     pBalanceDialog->show();
 
     menuTimerRestart();
@@ -62,7 +62,7 @@ void MainWindow::nostoClickHandler()
 
 void MainWindow::tiliClickHandler()
 {
-    pAccountDialog = new accountDialog(this,3);
+    pAccountDialog = new accountDialog(this,2);
     pAccountDialog->open();
 
     menuTimerRestart();
@@ -102,6 +102,8 @@ void MainWindow::generalMenuListHandler(QListWidgetItem *item)
     else if (ui->listMenu->item(3) == item){
         kirjauduUloshandler();
     }
+
+
 }
 
 void MainWindow::timerResetHandler()
