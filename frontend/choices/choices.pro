@@ -12,11 +12,13 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    accountchoice.cpp \
     cardchoice.cpp \
     choices.cpp \
     errorscreen.cpp
 
 HEADERS += \
+    accountchoice.h \
     cardchoice.h \
     choices_global.h \
     choices.h \
@@ -29,5 +31,6 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
+    accountchoice.ui \
     cardchoice.ui \
     errorscreen.ui

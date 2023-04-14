@@ -7,7 +7,7 @@ accountDialog::accountDialog(QWidget *parent,int id) :
     ui(new Ui::accountDialog)
 {
     ui->setupUi(this);
-
+    this->setAttribute(Qt::WA_DeleteOnClose);
     accountID=id;
 
     //dialog object gets destroyed when closed
