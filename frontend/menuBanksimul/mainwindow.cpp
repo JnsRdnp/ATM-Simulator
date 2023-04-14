@@ -46,7 +46,7 @@ MainWindow::~MainWindow()
 void MainWindow::saldoClickHandler()
 {
     //second parameter is the accountID
-    pBalanceDialog = new balanceDialog(this,2);
+    pBalanceDialog = new balanceDialog(this,3);
     pBalanceDialog->show();
 
     menuTimerRestart();
@@ -62,7 +62,7 @@ void MainWindow::nostoClickHandler()
 
 void MainWindow::tiliClickHandler()
 {
-    pAccountDialog = new accountDialog(this,2);
+    pAccountDialog = new accountDialog(this,3);
     pAccountDialog->open();
 
     menuTimerRestart();
@@ -113,6 +113,7 @@ void MainWindow::timerResetHandler()
 
 void MainWindow::timedSignout()
 {
+    qDebug()<<"MainMenu timer is up";
     //timed signout
     signoutTimer = new SignoutTimerInterface(this);
 
@@ -124,7 +125,7 @@ void MainWindow::timedSignout()
     connect(signoutTimer, SIGNAL(menuTimerRestart()),
             this, SLOT(timerResetHandler()));
 
-    timer->start(10000);
+    timer->start();
     signoutTimer->open();
 }
 
