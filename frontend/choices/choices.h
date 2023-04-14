@@ -34,6 +34,7 @@ private:
     QNetworkAccessManager *cardGetManager;
     QNetworkReply *cardReply;
     QByteArray cardResponseData;
+
     //for getting account info
     QNetworkAccessManager *accGetManager;
     QNetworkReply *accReply;
@@ -43,6 +44,9 @@ private:
     void cardIsCreditOrDebit(int, int);
     void getCardsAccounts();
     void startAccountGet();
+
+    //error handling
+    void jsonError();
 };
 
 #endif // CHOICES_H
