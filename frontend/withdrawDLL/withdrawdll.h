@@ -29,6 +29,9 @@ private slots:
 private:
     WithdrawDLLEngine * Engine;
     Ui::withdrawdll *ui;
+
+signals:
+    void localMenuTimerResetSignal();
 };
 
 #endif // WITHDRAWDLL_H
