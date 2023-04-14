@@ -100,9 +100,10 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
         QJsonObject json_obj = value.toObject();
 
         ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
+        ui->tblHistory->setColumnWidth(0,130);
 
         ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
-        ui->tblHistory->setColumnWidth(1,140);
+        ui->tblHistory->setColumnWidth(1,130);
 
         ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
 

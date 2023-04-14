@@ -51,7 +51,7 @@ private:
     SignoutTimerInterface *signoutTimer;
     QTimer *timer;
     QTimer *Timer;
-    int timeout = 10000;
+    int timeout = 30000;
 
 
 };

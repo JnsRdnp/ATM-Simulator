@@ -15,7 +15,6 @@ accountDialog::accountDialog(QWidget *parent,int id) :
 
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
     connect(ui->btnReturn,SIGNAL(clicked()),parent,SLOT(menuTimerRestart()));
-
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),parent,SLOT(menuTimerRestart()));
     historyNetwork(1);
@@ -76,14 +75,15 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
         QJsonObject json_obj = value.toObject();
 
         ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
+        ui->tblHistory->setColumnWidth(0,130);
 
         ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
-        ui->tblHistory->setColumnWidth(1,140);
+        ui->tblHistory->setColumnWidth(1,130);
 
         ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
+        ui->tblHistory->setColumnWidth(1,130);
 
         stringIndex += 1;
-
         //qDebug()<<"stringIndex inside foreach: "<<stringIndex;
     }
     //qDebug()<<"stringIndex outside foreach: "<<stringIndex;

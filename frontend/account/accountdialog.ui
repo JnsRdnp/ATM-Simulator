@@ -67,6 +67,9 @@
      <height>231</height>
     </rect>
    </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
    <property name="rowCount">
     <number>15</number>
    </property>
