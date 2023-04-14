@@ -46,15 +46,30 @@ void balanceDialog::getBalanceSlot(QNetworkReply *balanceReply)
     qDebug()<<"DATA : "+response_data;
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonArray json_array = json_doc.array();
+
     QString balance;
+
     QString creditLimit;
+
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
-        balance+=QString::number(json_obj["balance"].toDouble())+" €";
+
+        //Avoid qt changing balance to scientifc notation
+        double balance_value = json_obj["balance"].toDouble();
+        balance = QString::number(balance_value, 'f', 2);
+        balance.replace(".",",");
+
         creditLimit+=QString::number(json_obj["creditLimit"].toDouble())+" €";
     }
 
-    ui->lblBalance->setText(balance);
+    qDebug()<<balance;
+
+    int w_size = balance.size();
+    if (w_size > 6) {
+        balance.insert(balance.size() - 6, " ");
+    }
+
+    ui->lblBalance->setText(balance+" €");
     ui->lblCreditlimit->setText(creditLimit);
 
     balanceReply->deleteLater();
@@ -95,6 +110,7 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonArray json_array = json_doc.array();
     QString history;
+
 
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
