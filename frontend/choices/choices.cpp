@@ -76,7 +76,6 @@ void Choices::cardChoiceHandler(QString buttonName)
     cardChoice = nullptr;
 }
 
-
 void Choices::startAccountGet()
 {
     QString site_url="http://localhost:3000/accounts/card/" + cardID;
@@ -87,15 +86,6 @@ void Choices::startAccountGet()
 
     connect(accGetManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getAccInfo(QNetworkReply*)));
     accReply = accGetManager->get(accRequest);
-}
-
-void Choices::jsonError()
-{
-    qDebug()<<"Jotain on mennyt väärin";
-    errorHandler = new ErrorScreen(this);
-    errorHandler->open();
-    connect(errorHandler, SIGNAL(okClickedSignal()),
-            this, SLOT(okClickHandler()));
 }
 
 void Choices::getAccInfo(QNetworkReply *accReply)
@@ -118,6 +108,8 @@ void Choices::getAccInfo(QNetworkReply *accReply)
     } else {
         //luo accountchoice menu ja laita käyttäjä valitsemaan.
         accountChoice = new AccountChoice(this);
+        connect(accountChoice, SIGNAL(selectedAccountSender(QString)),
+                this, SLOT(selectedAccountHandler(QString)));
         accountChoice->setQJsonArray(jsonAccArray);
         accountChoice->show();
         qDebug()<<"Arrayn koko on isompi kuin 1";
@@ -126,11 +118,43 @@ void Choices::getAccInfo(QNetworkReply *accReply)
     qDebug()<<jsonAccArray;
     accReply->deleteLater();
     accGetManager->deleteLater();
+
+    //checks if there have been no errors before creating main window, could be made prettier by making a boolean
+    if (noErrors){
+        createMainMenu();
+    } else {
+        qDebug()<<"Error";
+    }
+}
+
+void Choices::selectedAccountHandler(QString accID)
+{
+    accountID = accID.toInt();
+    disconnect(accountChoice, SIGNAL(selectedAccountSender(QString)),
+            this, SLOT(selectedAccountHandler(QString)));
+    delete accountChoice;
+    accountChoice = nullptr;
+}
+
+void Choices::jsonError()
+{
+    qDebug()<<"Jotain on mennyt väärin";
+    noErrors = false;
+    errorHandler = new ErrorScreen(this);
+    errorHandler->open();
+    connect(errorHandler, SIGNAL(okClickedSignal()),
+            this, SLOT(okClickHandler()));
+}
+
+void Choices::createMainMenu()
+{
+    qDebug() << "create the main menu";
+    //mainMenu = new MainMenu(this, PIN, cardID, JWT, isCardCredit, accountID)
 }
 
 void Choices::okClickHandler()
 {
-    //emit destroyChoices();
+    this->close();
     disconnect(errorHandler, SIGNAL(okClickedSignal()),
                          this, SLOT(okClickHandler()));
     delete errorHandler;
