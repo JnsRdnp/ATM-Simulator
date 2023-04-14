@@ -106,15 +106,24 @@ void Choices::getAccInfo(QNetworkReply *accReply)
 
     QJsonDocument jsonAccResponse = QJsonDocument::fromJson(accResponseData);
     QJsonArray jsonAccArray = jsonAccResponse.array();
+    QJsonObject jsonAccObject;
+
     if (!(jsonAccArray.size() > 0)){
         jsonError();
+        qDebug()<<"Arrayn koko on 0";
     } else if (jsonAccArray.size() == 1){
-        //saa arrayn arvo ja laita se accountID:ksi
+        jsonAccObject = jsonAccArray[0].toObject();
+        accountID = jsonAccObject["idaccounts"].toInt();
+        qDebug()<<"Arrayn koko on 1";
     } else {
         //luo accountchoice menu ja laita käyttäjä valitsemaan.
+        accountChoice = new AccountChoice(this);
+        accountChoice->setQJsonArray(jsonAccArray);
+        accountChoice->show();
+        qDebug()<<"Arrayn koko on isompi kuin 1";
     }
-    qDebug()<<jsonAccArray;
 
+    qDebug()<<jsonAccArray;
     accReply->deleteLater();
     accGetManager->deleteLater();
 }

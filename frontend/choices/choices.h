@@ -4,6 +4,7 @@
 #include "choices_global.h"
 #include "cardchoice.h"
 #include "errorscreen.h"
+#include "accountchoice.h"
 #include "QDialog"
 #include <QtNetwork>
 #include <QNetworkAccessManager>
@@ -28,7 +29,10 @@ private:
 
     CardChoice *cardChoice;
     ErrorScreen *errorHandler;
+    AccountChoice *accountChoice;
+
     bool isCardCredit;
+    int accountID;
 
     //for getting card info
     QNetworkAccessManager *cardGetManager;
