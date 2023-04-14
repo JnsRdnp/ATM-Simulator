@@ -40,7 +40,7 @@ void SignoutTimerInterface::agreeButtonHandler()
 
 void SignoutTimerInterface::disagreeButtonHandler()
 {
-    Engine->destroyMenuCaller();
+    Engine->destroyMenu();
 }
 
 void SignoutTimerInterface::newJsonWebTokenHandler(QByteArray jwt)
