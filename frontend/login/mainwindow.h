@@ -31,7 +31,8 @@ private:
     Ui::MainWindow *ui;
     pincode * pincodep;
     void updateUI();
-    short pinCode;
+    void checkCredentials();
+    short pinCode, attempts;
     void checkNumber();
     QNetworkAccessManager *postManager;
     QNetworkAccessManager *loginManager;
