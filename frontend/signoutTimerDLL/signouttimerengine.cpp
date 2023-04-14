@@ -6,7 +6,7 @@ SignoutTimerEngine::SignoutTimerEngine(QWidget *parent) :
 {
     logoutTimer = new QTimer(this);
     logoutTimer->start(30000);
-    connect(logoutTimer, &QTimer::timeout, this, &SignoutTimerEngine::signalDestroyMenuCaller);
+    connect(logoutTimer, &QTimer::timeout, this, &SignoutTimerEngine::destroyMenu);
 }
 
 SignoutTimerEngine::~SignoutTimerEngine()
@@ -18,17 +18,6 @@ void SignoutTimerEngine::continueSession()
 {
     qDebug()<<"restarting timer";
     getNewJsonWebToken();
-}
-
-void SignoutTimerEngine::destroyMenuCaller()
-{
-    destroyMenu();
-}
-
-
-void SignoutTimerEngine::signalDestroyMenuCaller()
-{
-    destroyMenu();
 }
 
 void SignoutTimerEngine::destroyMenu()
