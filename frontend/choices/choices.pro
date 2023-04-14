@@ -34,3 +34,10 @@ FORMS += \
     accountchoice.ui \
     cardchoice.ui \
     errorscreen.ui
+
+
+
+unix|win32: LIBS += -L$$PWD/../menu/build/debug/ -lmenu
+
+INCLUDEPATH += $$PWD/../menu
+DEPENDPATH += $$PWD/../menu
