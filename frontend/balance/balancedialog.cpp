@@ -12,7 +12,7 @@ balanceDialog::balanceDialog(QWidget *parent, int id) :
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
-    connect(this,SIGNAL(localRestartTimerSignal()),parent,SLOT(menuTimerRestart()));
+    connect(ui->btnReturn,SIGNAL(clicked()),parent,SLOT(menuTimerRestart()));
 
 
     balanceNetwork();
