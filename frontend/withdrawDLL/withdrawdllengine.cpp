@@ -41,7 +41,10 @@ void WithdrawDLLEngine::withdraw(float num)
     connect(putManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(withdrawMoney(QNetworkReply*)));
 
     reply = putManager->put(request, QJsonDocument(withdrawObj).toJson());
+
+
     disconnect(putManager);
+
 }
 
 void WithdrawDLLEngine::withdrawMoney(QNetworkReply *reply)
@@ -55,4 +58,7 @@ void WithdrawDLLEngine::withdrawMoney(QNetworkReply *reply)
     //emit successWithdraw()
     reply->deleteLater();
     putManager->deleteLater();
+
+    emit responseReady();
+
 }

@@ -19,6 +19,9 @@ public:
 private slots:
     void withdrawMoney (QNetworkReply *reply);
 
+signals:
+    void responseReady();
+
 private:
     int accountID;
     bool isCardCredit;
@@ -26,6 +29,7 @@ private:
     QNetworkAccessManager *putManager;
     QNetworkReply *reply;
     QByteArray responseData;
+
 };
 
 #endif // WITHDRAWDLLENGINE_H
