@@ -149,7 +149,9 @@ void Choices::jsonError()
 void Choices::createMainMenu()
 {
     qDebug() << "create the main menu";
-    //mainMenu = new MainMenu(this, PIN, cardID, JWT, isCardCredit, accountID)
+    mainWindow = new Menu(this);
+    mainWindow->open();
+    //PIN, cardID, JWT, isCardCredit, accountID)
 }
 
 void Choices::okClickHandler()

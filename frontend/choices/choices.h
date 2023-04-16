@@ -5,6 +5,7 @@
 #include "cardchoice.h"
 #include "errorscreen.h"
 #include "accountchoice.h"
+#include "menu.h"
 #include "QDialog"
 #include <QtNetwork>
 #include <QNetworkAccessManager>
@@ -31,7 +32,7 @@ private:
     CardChoice *cardChoice;
     ErrorScreen *errorHandler;
     AccountChoice *accountChoice;
-    //MainWindow *mainWindow;
+    Menu *mainWindow;
     bool noErrors = true;
     bool isCardCredit;
     int accountID;
