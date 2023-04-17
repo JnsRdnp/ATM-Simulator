@@ -1,8 +1,11 @@
 #include "signouttimerengine.h"
 
-SignoutTimerEngine::SignoutTimerEngine(QWidget *parent) :
+SignoutTimerEngine::SignoutTimerEngine(QWidget *parent, QString inCardID, QString inPIN, QString IN_BASE_URL) :
     QDialog(parent)
 {
+    cardID = inCardID;
+    PIN = inPIN;
+    BASE_URL = IN_BASE_URL;
     logoutTimer = new QTimer(this);
     logoutTimer->start(30000);
     connect(logoutTimer, &QTimer::timeout, this, &SignoutTimerEngine::destroyMenu);
@@ -22,6 +25,7 @@ void SignoutTimerEngine::continueSession()
 void SignoutTimerEngine::destroyMenu()
 {
     //login->open();
+    qDebug()<<"Tää laittaa kaikki paskaks";
     emit eliminateMenu();
 }
 
@@ -33,19 +37,15 @@ void SignoutTimerEngine::login()
 void SignoutTimerEngine::getNewJsonWebToken()
 {
     qDebug() << "Get New JWT method";
-    const QString SERVER_URL = "http://localhost:3001/";
 
     QJsonObject jsonObj;
-    jsonObj.insert("cardID","3");
-    jsonObj.insert("PINcode","2345");
+    jsonObj.insert("cardID",cardID);
+    jsonObj.insert("PINcode",PIN);
 
-    QString site_url = SERVER_URL + "login";
-    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIzIiwiaWF0IjoxNjgxMzY4MDcyLCJleHAiOjE2ODEzNjgyNzJ9.ZqclE8PNQHPasjDuixkE_tlGdNedEI1909FfWp9FiuI";
+    QString site_url = BASE_URL + "login";
 
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    QByteArray myToken="Bearer " + jwt;
-    request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     postManager = new QNetworkAccessManager(this);
     connect(postManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(renewToken(QNetworkReply*)));

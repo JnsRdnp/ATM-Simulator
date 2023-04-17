@@ -43,9 +43,10 @@ private:
     accountDialog *pAccountDialog;
     withdrawdll *pWithdraw;
     SignoutTimerInterface *signoutTimer;
-    QTimer *timer;
-    QTimer *Timer;
+    QTimer *SignoutMenuTimer;
+    QTimer *MainMenuTimer;
     int timeout = 10000;
+
     //card info
     QString PIN = "";
     QString cardID = "";

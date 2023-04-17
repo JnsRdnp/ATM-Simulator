@@ -13,9 +13,12 @@ class SignoutTimerEngine: public QDialog
 {
     Q_OBJECT
 public:
-    SignoutTimerEngine(QWidget *parent = nullptr);
+    SignoutTimerEngine(QWidget *parent = nullptr, QString inCardID = "", QString inPIN = "", QString IN_BASE_URL = "");
     ~SignoutTimerEngine();
     void continueSession();
+    QString cardID;
+    QString PIN;
+    QString BASE_URL;
 
 signals:
     void menuTimerRestart();

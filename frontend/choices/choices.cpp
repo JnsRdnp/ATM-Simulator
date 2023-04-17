@@ -8,7 +8,7 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
     BASE_URL = IN_BASE_URL;
     JWT = inJWT;
     //networking code
-    QString site_url= BASE_URL + "/cards/" + cardID;
+    QString site_url= BASE_URL + "cards/" + cardID;
     QNetworkRequest cardRequest((site_url));
     QByteArray myJWToken="Bearer "+ JWT;
     cardRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));

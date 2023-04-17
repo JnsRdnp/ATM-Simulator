@@ -9,6 +9,7 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
+    qDebug()<<"Alustetaan muuttujat";
     PIN = inPIN;
     cardID = inCardID;
     isCardCredit = inIsCardCredit;
@@ -16,31 +17,36 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
     BASE_URL = IN_BASE_URL;
     JWT = inJWT;
 
+
+    qDebug()<<"Yhdistetään widget";
     connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(generalMenuListHandler(QListWidgetItem*)));
 
     //main menu timer;
-    Timer = new QTimer(this);
-    connect(Timer, SIGNAL(timeout()), this, SLOT(timedSignout()));
-    Timer->start(timeout);
+    qDebug()<<"Luodaan ajastin";
+    MainMenuTimer = new QTimer(this);
+    MainMenuTimer->start(timeout);
 
-    connect(this,SIGNAL(menuTimerRestartSignal()),this,SLOT(menuTimerRestart()));
+    connect(MainMenuTimer, SIGNAL(timeout()), this, SLOT(timedSignout()));
+    connect(this, SIGNAL(menuTimerRestartSignal()), this, SLOT(menuTimerRestart()));
+    qDebug()<<"Ajastimet luotu";
 
 }
 
 Menu::~Menu()
 {
-    delete pBalanceDialog;
+//    delete pBalanceDialog;
     pBalanceDialog = nullptr;
 
-    delete pAccountDialog;
+//    delete pAccountDialog;
     pAccountDialog = nullptr;
 
-    delete pWithdraw;
+//    delete pWithdraw;
     pWithdraw = nullptr;
 
-    delete timer;
-    timer = nullptr;
+//    delete timers;
+    SignoutMenuTimer = nullptr;
+    MainMenuTimer = nullptr;
 
     delete ui;
 
@@ -77,14 +83,16 @@ void Menu::kirjauduUloshandler()
 void Menu::menuTimerRestart()
 {
     qDebug()<<"menutimer restart \r";
-    Timer->start(timeout);
+    MainMenuTimer->start(timeout);
 }
 
 void Menu::JWThandler(QByteArray jwt)
 {
     qDebug()<<jwt;
-    //this->close();
+    JWT = jwt;
     qDebug()<<"Time is up";
+    disconnect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),
+                   this, SLOT(JWThandler(QByteArray)));
 }
 
 
@@ -109,16 +117,18 @@ void Menu::generalMenuListHandler(QListWidgetItem *item)
 
 void Menu::timerResetHandler()
 {
-    qDebug() << "timer before " << timer->remainingTime();
-    timer->start();         //timer restarts
-    qDebug() << "timer after " << timer->remainingTime();
+    SignoutMenuTimer->stop();
+    MainMenuTimer->start();
+    disconnect(signoutTimer, SIGNAL(menuTimerRestart()),
+                   this, SLOT(timerResetHandler()));
 }
 
 void Menu::timedSignout()
 {
     //timed signout
-    signoutTimer = SignoutTimerInterface::getInstance(this);
-    timer = new QTimer(this);
+    qDebug()<<"Tää menee jostakin syystä täällä rikki";
+    signoutTimer = SignoutTimerInterface::getInstance(this, cardID, PIN, BASE_URL);
+    SignoutMenuTimer = new QTimer(this);
 
     connect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),
             this, SLOT(JWThandler(QByteArray)));
@@ -126,6 +136,6 @@ void Menu::timedSignout()
     connect(signoutTimer, SIGNAL(menuTimerRestart()),
             this, SLOT(timerResetHandler()));
 
-    timer->start(10000);
+    SignoutMenuTimer->start();
     signoutTimer->open();
 }
