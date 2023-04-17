@@ -22,9 +22,9 @@ public:
     ~Menu();
 
 public slots:
-    void saldoClickHandler();
-    void nostoClickHandler();
-    void tiliClickHandler();
+    void balanceClickHandler();
+    void withdrawClickHandler();
+    void accountClickHandler();
     void signOutHandler();
     void menuTimerRestart();
 

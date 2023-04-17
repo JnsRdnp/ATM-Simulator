@@ -25,7 +25,6 @@ void SignoutTimerEngine::continueSession()
 void SignoutTimerEngine::destroyMenu()
 {
     //login->open();
-    qDebug()<<"Tää laittaa kaikki paskaks";
     emit eliminateMenu();
 }
 

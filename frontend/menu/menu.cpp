@@ -49,21 +49,21 @@ Menu::~Menu()
 
 }
 
-void Menu::saldoClickHandler()
+void Menu::balanceClickHandler()
 {
     pBalanceDialog = new balanceDialog(this, accountID, BASE_URL, JWT);
     pBalanceDialog->show();
     emit menuTimerRestartSignal();
 }
 
-void Menu::nostoClickHandler()
+void Menu::withdrawClickHandler()
 {
     pWithdraw = new withdrawdll(this,accountID, isCardCredit, BASE_URL, JWT);
     pWithdraw->open();
     emit menuTimerRestartSignal();
 }
 
-void Menu::tiliClickHandler()
+void Menu::accountClickHandler()
 {
     pAccountDialog = new accountDialog(this, accountID, BASE_URL, JWT);
     pAccountDialog->open();
@@ -93,13 +93,13 @@ void Menu::JWThandler(QByteArray jwt)
 void Menu::generalMenuListHandler(QListWidgetItem *item)
 {
     if (ui->listMenu->item(0) == item) {
-        saldoClickHandler();
+        balanceClickHandler();
     }
     if (ui->listMenu->item(1) == item){
-        nostoClickHandler();
+        withdrawClickHandler();
     }
     if (ui->listMenu->item(2) == item){
-        tiliClickHandler();
+        accountClickHandler();
     }
     if (ui->listMenu->item(3) == item){
         signOutHandler();
@@ -115,14 +115,13 @@ void Menu::timerResetHandler()
 void Menu::timedSignout()
 {
     //timed signout
-    qDebug()<<"Tää menee jostakin syystä täällä rikki";
     signoutTimer = SignoutTimerInterface::getInstance(this, cardID, PIN, BASE_URL);
 
     connect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),
            this, SLOT(JWThandler(QByteArray)));
     connect(signoutTimer, SIGNAL(menuTimerRestart()),
            this, SLOT(timerResetHandler()));
-    connect(signoutTimer, SIGNAL(destroyMenu()),
+    connect(signoutTimer, SIGNAL(eliminateMenu()),
            this, SLOT(signOutHandler()));
 
 
