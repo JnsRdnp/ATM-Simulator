@@ -17,7 +17,7 @@ class BALANCE_EXPORT balanceDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit balanceDialog(QWidget *parent = nullptr, int id=0);
+    explicit balanceDialog(QWidget *parent = nullptr, int id=0,QString inBaseUrl="",QByteArray inJwt = "");
     ~balanceDialog();
 
 
@@ -26,6 +26,7 @@ private:
     QNetworkAccessManager *getManager;
     QNetworkReply *balanceReply;
     QByteArray response_data;
+
     void balanceNetwork();
     int accountID;
 
@@ -33,6 +34,9 @@ private:
     void historyNetwork();
 
     int stringIndex=0;
+
+    QByteArray jwt;
+    QString baseUrl;
 
 private slots:
     void backHandler();

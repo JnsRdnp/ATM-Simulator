@@ -1,12 +1,22 @@
 #include "balancedialog.h"
 #include "ui_balancedialog.h"
 
-balanceDialog::balanceDialog(QWidget *parent, int id) :
+//PIN
+//cardID
+//isCardCredit
+//accountid
+//jwt
+
+balanceDialog::balanceDialog(QWidget *parent, int id,QString inBaseUrl,QByteArray inJwt) :
     QDialog(parent),
     ui(new Ui::balanceDialog)
 {
     ui->setupUi(this);
+
     accountID=id;
+    baseUrl=inBaseUrl;
+    jwt = inJwt;
+
 
     //dialog object gets destroyed when closed
     this->setAttribute(Qt::WA_DeleteOnClose);
@@ -27,10 +37,10 @@ balanceDialog::~balanceDialog()
 void balanceDialog::balanceNetwork()
 {
     QString accountIDStr = QString::number(accountID);
-    QString site_url="http://localhost:3000/accounts/getBalance/"+accountIDStr;
+    QString site_url=baseUrl+"accounts/getBalance/"+accountIDStr;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
-    QByteArray myToken="Bearer xRstgr...";
+    QByteArray myToken="Bearer " + jwt;
     request.setRawHeader(QByteArray("Authorization"),(myToken));
     //WEBTOKEN LOPPU
     getManager = new QNetworkAccessManager(this);
@@ -84,12 +94,12 @@ void balanceDialog::historyNetwork()
 
     QString accountIDStr = QString::number(accountID);
 
-    QString site_url="http://localhost:3000/history/getPage/"+accountIDStr+"/5/0";
+    QString site_url=baseUrl+"history/getPage/"+accountIDStr+"/5/0";
     //qDebug()<<site_url;
     QNetworkRequest request((site_url));
 
     //WEBTOKEN ALKU
-    QByteArray myToken="Bearer xRstgr...";
+    QByteArray myToken="Bearer " + jwt;
     request.setRawHeader(QByteArray("Authorization"),(myToken));
     //WEBTOKEN LOPPU
 

@@ -46,7 +46,7 @@ MainWindow::~MainWindow()
 void MainWindow::saldoClickHandler()
 {
     //second parameter is the accountID
-    pBalanceDialog = new balanceDialog(this,2);
+    pBalanceDialog = new balanceDialog(this,2,baseUrl,jwt);
     pBalanceDialog->show();
 
     menuTimerRestart();
