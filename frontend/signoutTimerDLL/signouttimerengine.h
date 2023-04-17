@@ -16,7 +16,6 @@ public:
     SignoutTimerEngine(QWidget *parent = nullptr);
     ~SignoutTimerEngine();
     void continueSession();
-    void destroyMenuCaller();
 signals:
     void menuTimerRestart();
     void newJsonWebToken(QByteArray);
@@ -24,7 +23,7 @@ signals:
     void closeSignout();
 
 public slots:
-    void signalDestroyMenuCaller();
+    void destroyMenu();
     void renewToken(QNetworkReply *reply);
 
 private:
@@ -32,7 +31,6 @@ private:
     QNetworkReply *reply;
     QByteArray responseData;
 
-    void destroyMenu();
     void login();
     void getNewJsonWebToken();
     QTimer *logoutTimer;;

@@ -7,7 +7,7 @@ accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray
     ui(new Ui::accountDialog)
 {
     ui->setupUi(this);
-
+    this->setAttribute(Qt::WA_DeleteOnClose);
     accountID=id;
     baseUrl = inBaseUrl;
     jwt = inJwt;
@@ -17,12 +17,9 @@ accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray
 
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
     connect(ui->btnReturn,SIGNAL(clicked()),parent,SLOT(menuTimerRestart()));
-
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),parent,SLOT(menuTimerRestart()));
-
     qDebug()<<jwt<<"and"<<baseUrl;
-
     historyNetwork(1);
 }
 

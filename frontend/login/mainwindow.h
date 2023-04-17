@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDebug>
 #include "pincode.h"
 #include <QtNetwork>
 #include <QNetworkAccessManager>
@@ -30,7 +31,8 @@ private:
     Ui::MainWindow *ui;
     pincode * pincodep;
     void updateUI();
-    short pinCode;
+    void checkCredentials();
+    short pinCode, attempts;
     void checkNumber();
     QNetworkAccessManager *postManager;
     QNetworkAccessManager *loginManager;
