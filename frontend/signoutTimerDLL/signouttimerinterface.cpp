@@ -1,5 +1,18 @@
 #include "signouttimerinterface.h"
 #include "ui_signouttimerinterface.h"
+
+SignoutTimerInterface* SignoutTimerInterface::instance = nullptr;
+
+SignoutTimerInterface* SignoutTimerInterface::getInstance(QWidget *parent)
+{
+    if (instance == nullptr)
+    {
+        instance = new SignoutTimerInterface(parent);
+    }
+
+    return instance;
+}
+
 SignoutTimerInterface::SignoutTimerInterface(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SingoutTimerInterface)

@@ -8,9 +8,23 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
+    connect(ui->saldo,SIGNAL(clicked(bool)),
+                this, SLOT(saldoClickHandler()));
 
-    connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
-            this, SLOT(generalMenuListHandler(QListWidgetItem*)));
+    pSaldoUI = new saldoUI(this);
+
+    connect(ui->nosto,SIGNAL(clicked(bool)),
+                this, SLOT(nostoClickHandler()));
+
+    pnostoUI = new nostoUI(this);
+
+    connect(ui->tili,SIGNAL(clicked(bool)),
+                this, SLOT(tiliClickHandler()));
+
+    ptiliUI = new tiliUI(this);
+
+    connect(ui->kirjauduUlos,SIGNAL(clicked(bool)),
+                this, SLOT(kirjauduUloshandler()));
 
 
     //main menu timer;
@@ -116,8 +130,7 @@ void MainWindow::timedSignout()
 {
     qDebug()<<"MainMenu timer is up";
     //timed signout
-    signoutTimer = new SignoutTimerInterface(this);
-
+    signoutTimer = SignoutTimerInterface::getInstance(this);
     timer = new QTimer(this);
 
     connect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),

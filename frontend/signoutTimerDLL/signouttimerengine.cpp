@@ -1,6 +1,5 @@
 #include "signouttimerengine.h"
 
-
 SignoutTimerEngine::SignoutTimerEngine(QWidget *parent) :
     QDialog(parent)
 {
