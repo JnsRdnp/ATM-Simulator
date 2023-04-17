@@ -16,6 +16,7 @@ public:
     SignoutTimerEngine(QWidget *parent = nullptr);
     ~SignoutTimerEngine();
     void continueSession();
+
 signals:
     void menuTimerRestart();
     void newJsonWebToken(QByteArray);
@@ -34,6 +35,7 @@ private:
     void login();
     void getNewJsonWebToken();
     QTimer *logoutTimer;;
+
 };
 
 #endif // SIGNOUTTIMERENGINE_H

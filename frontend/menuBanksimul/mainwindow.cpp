@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-
     connect(ui->saldo,SIGNAL(clicked(bool)),
                 this, SLOT(saldoClickHandler()));
 
@@ -108,7 +107,7 @@ void MainWindow::timerResetHandler()
 void MainWindow::timedSignout()
 {
     //timed signout
-    signoutTimer = new SignoutTimerInterface(this);
+    signoutTimer = SignoutTimerInterface::getInstance(this);
     timer = new QTimer(this);
 
     connect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),
