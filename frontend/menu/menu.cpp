@@ -9,7 +9,6 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    qDebug()<<"Alustetaan muuttujat";
     PIN = inPIN;
     cardID = inCardID;
     isCardCredit = inIsCardCredit;
@@ -30,6 +29,7 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
     connect(MainMenuTimer, SIGNAL(timeout()), this, SLOT(timedSignout()));
     connect(this, SIGNAL(menuTimerRestartSignal()), this, SLOT(menuTimerRestart()));
     qDebug()<<"Ajastimet luotu";
+    //kaatuu tämän viestin jälkeen
 
 }
 
@@ -110,8 +110,6 @@ void Menu::generalMenuListHandler(QListWidgetItem *item)
     if (ui->listMenu->item(3) == item){
         kirjauduUloshandler();
     }
-
-
 }
 
 
