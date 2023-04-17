@@ -18,7 +18,7 @@ class MENU_EXPORT Menu : public QDialog
 {
     Q_OBJECT
 public:
-    Menu(QWidget * parent = nullptr, QString inPIN = "", QString inCardID = "", bool inIsCardCredit = false, int accountID = 0, QByteArray JWT = "");
+    Menu(QWidget * parent = nullptr, QString inPIN = "", QString inCardID = "", bool inIsCardCredit = false, int inAccountID = 0, QString IN_BASE_URL = "", QByteArray inJWT = "");
     ~Menu();
 
 public slots:
@@ -52,6 +52,7 @@ private:
     bool isCardCredit;
     int accountID;
     QByteArray JWT = "";
+    QString BASE_URL = "";
 };
 
 #endif // MENU_H

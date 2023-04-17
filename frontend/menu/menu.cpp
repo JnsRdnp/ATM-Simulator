@@ -1,7 +1,7 @@
 #include "menu.h"
 #include "ui_menu.h"
 
-Menu::Menu((QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit, int accountID, QByteArray JWT))
+Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit, int inAccountID, QString IN_BASE_URL, QByteArray inJWT)
     : QDialog(parent)
     , ui(new Ui::Menu)
 {
@@ -9,9 +9,15 @@ Menu::Menu((QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredi
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
+    PIN = inPIN;
+    cardID = inCardID;
+    isCardCredit = inIsCardCredit;
+    accountID = inAccountID;
+    BASE_URL = IN_BASE_URL;
+    JWT = inJWT;
+
     connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(generalMenuListHandler(QListWidgetItem*)));
-
 
     //main menu timer;
     Timer = new QTimer(this);
@@ -43,21 +49,21 @@ Menu::~Menu()
 void Menu::saldoClickHandler()
 {
     //second parameter is the accountID
-    pBalanceDialog = new balanceDialog(this,2);
+    pBalanceDialog = new balanceDialog(this, accountID, BASE_URL, JWT);
     pBalanceDialog->show();
     emit menuTimerRestartSignal();
 }
 
 void Menu::nostoClickHandler()
 {
-    pWithdraw = new withdrawdll(this,2,true);
+    pWithdraw = new withdrawdll(this,accountID, isCardCredit, BASE_URL, JWT);
     pWithdraw->open();
     emit menuTimerRestartSignal();
 }
 
 void Menu::tiliClickHandler()
 {
-    pAccountDialog = new accountDialog(this,2);
+    pAccountDialog = new accountDialog(this, accountID, BASE_URL, JWT);
     pAccountDialog->open();
     emit menuTimerRestartSignal();
 }
