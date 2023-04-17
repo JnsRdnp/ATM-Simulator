@@ -2,13 +2,15 @@
 #include "ui_accountdialog.h"
 #include <QDebug>
 
-accountDialog::accountDialog(QWidget *parent,int id) :
+accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray inJwt) :
     QDialog(parent),
     ui(new Ui::accountDialog)
 {
     ui->setupUi(this);
 
     accountID=id;
+    baseUrl = inBaseUrl;
+    jwt = inJwt;
 
     //dialog object gets destroyed when closed
     this->setAttribute(Qt::WA_DeleteOnClose);
@@ -19,6 +21,7 @@ accountDialog::accountDialog(QWidget *parent,int id) :
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),parent,SLOT(menuTimerRestart()));
 
+    qDebug()<<jwt<<"and"<<baseUrl;
 
     historyNetwork(1);
 }
@@ -35,11 +38,11 @@ void accountDialog::historyNetwork(int historyPage)
     QString accountIDStr = QString::number(accountID);
     page=QString::number(historyPage-1);
 
-    QString site_url="http://localhost:3000/history/getPage/"+accountIDStr+"/15/"+page;
+    QString site_url=baseUrl+"history/getPage/"+accountIDStr+"/15/"+page;
     //qDebug()<<site_url;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
-    QByteArray myToken="Bearer xRstgr...";
+    QByteArray myToken="Bearer " + jwt;
     request.setRawHeader(QByteArray("Authorization"),(myToken));
     //WEBTOKEN LOPPU
 

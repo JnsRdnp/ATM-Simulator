@@ -62,7 +62,7 @@ void MainWindow::nostoClickHandler()
 
 void MainWindow::tiliClickHandler()
 {
-    pAccountDialog = new accountDialog(this,2);
+    pAccountDialog = new accountDialog(this,2,baseUrl,jwt);
     pAccountDialog->open();
 
     menuTimerRestart();

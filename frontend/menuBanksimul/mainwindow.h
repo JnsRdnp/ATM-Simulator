@@ -49,7 +49,7 @@ private:
     int timeout = 30000;
 
     QString baseUrl = "http://localhost:3000/";
-    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIyMzQ1IiwiaWF0IjoxNjgxNzE0MjM2LCJleHAiOjE2ODE3MTQ0MzZ9.5wiqE-58XZnBgr_aSBfEXKpthqSe3AAdg-jwUNqZ_6s";
+    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIyMzQ1IiwiaWF0IjoxNjgxNzE1NTY1LCJleHAiOjE2ODE3MTU3NjV9.qbSN1yWU0tdzXQlmPJ6JyIOoc0KcgqltKt-zGdiyb4A";
 
 
 };
