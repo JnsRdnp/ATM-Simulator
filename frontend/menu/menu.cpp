@@ -111,7 +111,7 @@ void Menu::timerResetHandler()
 void Menu::timedSignout()
 {
     //timed signout
-    signoutTimer = new SignoutTimerInterface(this);
+    signoutTimer = SignoutTimerInterface::getInstance(this);
     timer = new QTimer(this);
 
     connect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),
