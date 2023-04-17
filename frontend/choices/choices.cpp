@@ -105,6 +105,7 @@ void Choices::getAccInfo(QNetworkReply *accReply)
         jsonAccObject = jsonAccArray[0].toObject();
         accountID = jsonAccObject["idaccounts"].toInt();
         qDebug()<<"Arrayn koko on 1";
+        createMainMenu();
     } else {
         //luo accountchoice menu ja laita käyttäjä valitsemaan.
         accountChoice = new AccountChoice(this);
@@ -118,13 +119,6 @@ void Choices::getAccInfo(QNetworkReply *accReply)
     qDebug()<<jsonAccArray;
     accReply->deleteLater();
     accGetManager->deleteLater();
-
-    //checks if there have been no errors before creating main window, could be made prettier by making a boolean
-    if (noErrors){
-        createMainMenu();
-    } else {
-        qDebug()<<"Error";
-    }
 }
 
 void Choices::selectedAccountHandler(QString accID)
@@ -134,6 +128,7 @@ void Choices::selectedAccountHandler(QString accID)
             this, SLOT(selectedAccountHandler(QString)));
     delete accountChoice;
     accountChoice = nullptr;
+    createMainMenu();
 }
 
 void Choices::jsonError()

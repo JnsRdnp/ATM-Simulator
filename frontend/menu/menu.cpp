@@ -1,7 +1,7 @@
 #include "menu.h"
 #include "ui_menu.h"
 
-Menu::Menu(QWidget *parent)
+Menu::Menu((QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit, int accountID, QByteArray JWT))
     : QDialog(parent)
     , ui(new Ui::Menu)
 {
