@@ -26,11 +26,12 @@ public slots:
     void disagreeButtonHandler();
     void newJsonWebTokenHandler(QByteArray);
     void restartMenuTimerHandler();
-    void destroymenuHandler();
+    void destroyMenuHandler();
     void closeSignoutHandler();
 
 signals:
     void newJsonWebToken(QByteArray);
+    void eliminateMenu();
     void menuTimerRestart();
 
 private:

@@ -29,8 +29,6 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
     connect(MainMenuTimer, SIGNAL(timeout()), this, SLOT(timedSignout()));
     connect(this, SIGNAL(menuTimerRestartSignal()), this, SLOT(menuTimerRestart()));
     qDebug()<<"Ajastimet luotu";
-    //kaatuu tämän viestin jälkeen
-
 }
 
 Menu::~Menu()
@@ -45,7 +43,6 @@ Menu::~Menu()
     pWithdraw = nullptr;
 
 //    delete timers;
-    SignoutMenuTimer = nullptr;
     MainMenuTimer = nullptr;
 
     delete ui;
@@ -54,7 +51,6 @@ Menu::~Menu()
 
 void Menu::saldoClickHandler()
 {
-    //second parameter is the accountID
     pBalanceDialog = new balanceDialog(this, accountID, BASE_URL, JWT);
     pBalanceDialog->show();
     emit menuTimerRestartSignal();
@@ -74,7 +70,7 @@ void Menu::tiliClickHandler()
     emit menuTimerRestartSignal();
 }
 
-void Menu::kirjauduUloshandler()
+void Menu::signOutHandler()
 {
     //login->open();
     this->close();
@@ -91,8 +87,6 @@ void Menu::JWThandler(QByteArray jwt)
     qDebug()<<jwt;
     JWT = jwt;
     qDebug()<<"Time is up";
-    disconnect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),
-                   this, SLOT(JWThandler(QByteArray)));
 }
 
 
@@ -108,17 +102,14 @@ void Menu::generalMenuListHandler(QListWidgetItem *item)
         tiliClickHandler();
     }
     if (ui->listMenu->item(3) == item){
-        kirjauduUloshandler();
+        signOutHandler();
     }
 }
 
 
 void Menu::timerResetHandler()
 {
-    SignoutMenuTimer->stop();
     MainMenuTimer->start();
-    disconnect(signoutTimer, SIGNAL(menuTimerRestart()),
-                   this, SLOT(timerResetHandler()));
 }
 
 void Menu::timedSignout()
@@ -126,14 +117,14 @@ void Menu::timedSignout()
     //timed signout
     qDebug()<<"Tää menee jostakin syystä täällä rikki";
     signoutTimer = SignoutTimerInterface::getInstance(this, cardID, PIN, BASE_URL);
-    SignoutMenuTimer = new QTimer(this);
 
     connect(signoutTimer, SIGNAL(newJsonWebToken(QByteArray)),
-            this, SLOT(JWThandler(QByteArray)));
-
+           this, SLOT(JWThandler(QByteArray)));
     connect(signoutTimer, SIGNAL(menuTimerRestart()),
-            this, SLOT(timerResetHandler()));
+           this, SLOT(timerResetHandler()));
+    connect(signoutTimer, SIGNAL(destroyMenu()),
+           this, SLOT(signOutHandler()));
 
-    SignoutMenuTimer->start();
+
     signoutTimer->open();
 }

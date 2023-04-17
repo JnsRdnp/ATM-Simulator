@@ -38,7 +38,7 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent, QString inCardID, 
             this, SLOT(closeSignoutHandler()),Qt::QueuedConnection);
 
     connect(Engine, SIGNAL(eliminateMenu()),
-            this, SLOT(destroymenuHandler()),Qt::QueuedConnection);
+            this, SLOT(destroyMenuHandler()),Qt::QueuedConnection);
 }
 
 SignoutTimerInterface::~SignoutTimerInterface()
@@ -67,11 +67,11 @@ void SignoutTimerInterface::restartMenuTimerHandler()
     emit menuTimerRestart();
 }
 
-void SignoutTimerInterface::destroymenuHandler()
+void SignoutTimerInterface::destroyMenuHandler()
 {
     this->close();
     qDebug()<<"tuhottu";
-    //emit close signal;
+    emit eliminateMenu();
 }
 
 void SignoutTimerInterface::closeSignoutHandler()

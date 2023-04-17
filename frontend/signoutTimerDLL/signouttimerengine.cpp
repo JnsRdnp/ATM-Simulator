@@ -7,7 +7,7 @@ SignoutTimerEngine::SignoutTimerEngine(QWidget *parent, QString inCardID, QStrin
     PIN = inPIN;
     BASE_URL = IN_BASE_URL;
     logoutTimer = new QTimer(this);
-    logoutTimer->start(30000);
+    logoutTimer->start(10000);
     connect(logoutTimer, &QTimer::timeout, this, &SignoutTimerEngine::destroyMenu);
 }
 

@@ -19,6 +19,25 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
     cardReply = cardGetManager->get(cardRequest);
 }
 
+Choices::~Choices()
+{
+    disconnect(cardChoice, SIGNAL(cardChoice(QString)),
+               this, SLOT(cardChoiceHandler(QString)));
+    delete cardChoice;
+    cardChoice = nullptr;
+
+    disconnect(errorHandler, SIGNAL(okClickedSignal()),
+                         this, SLOT(okClickHandler()));
+    delete errorHandler;
+    errorHandler = nullptr;
+
+    disconnect(accountChoice, SIGNAL(selectedAccountSender(QString)),
+            this, SLOT(selectedAccountHandler(QString)));
+    accountChoice -> close();
+    delete accountChoice;
+    accountChoice = nullptr;
+}
+
 void Choices::getCardInfo(QNetworkReply *cardReply)
 {
     //original source: https://peatutor.com/qt/http_get.php, refactored by Saku Roininen
@@ -64,16 +83,13 @@ void Choices::cardIsCreditOrDebit(int credit, int debit)
 
 void Choices::cardChoiceHandler(QString buttonName)
 {
-    //checks the buttons name and frees the objects memory
+    //checks the buttons name and closes the objects ui
     if (buttonName == "CreditButton"){
         isCardCredit = true;
     } else {
         isCardCredit = false;
     }
-    disconnect(cardChoice, SIGNAL(cardChoice(QString)),
-               this, SLOT(cardChoiceHandler(QString)));
-    delete cardChoice;
-    cardChoice = nullptr;
+    this->cardChoice->close();
 }
 
 void Choices::startAccountGet()
@@ -123,17 +139,15 @@ void Choices::getAccInfo(QNetworkReply *accReply)
 
 void Choices::selectedAccountHandler(QString accID)
 {
+    //sets the fetched item name as Account ID
     accountID = accID.toInt();
-    disconnect(accountChoice, SIGNAL(selectedAccountSender(QString)),
-            this, SLOT(selectedAccountHandler(QString)));
-    delete accountChoice;
-    accountChoice = nullptr;
+    this->accountChoice->close();
     createMainMenu();
 }
 
 void Choices::jsonError()
 {
-    qDebug()<<"Jotain on mennyt väärin";
+    qDebug()<<"Something has gone wrong";
     noErrors = false;
     errorHandler = new ErrorScreen(this);
     errorHandler->open();
@@ -144,17 +158,15 @@ void Choices::jsonError()
 void Choices::createMainMenu()
 {
     qDebug() << "create the main menu";
+    qDebug() << PIN << cardID << isCardCredit << accountID << BASE_URL << JWT;
     mainWindow = new Menu(this, PIN, cardID, isCardCredit, accountID, BASE_URL, JWT);
+    qDebug() << "aukaistaan ikkuna";
     mainWindow->open();
     //PIN, cardID, JWT, isCardCredit, accountID)
 }
 
 void Choices::okClickHandler()
 {
-    this->close();
-    disconnect(errorHandler, SIGNAL(okClickedSignal()),
-                         this, SLOT(okClickHandler()));
-    delete errorHandler;
-    errorHandler = nullptr;
+    this->cardChoice->close();
 }
 

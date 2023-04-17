@@ -37,7 +37,7 @@ private:
 
     void login();
     void getNewJsonWebToken();
-    QTimer *logoutTimer;;
+    QTimer *logoutTimer;
 
 };
 

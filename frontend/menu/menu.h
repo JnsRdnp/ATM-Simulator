@@ -25,7 +25,7 @@ public slots:
     void saldoClickHandler();
     void nostoClickHandler();
     void tiliClickHandler();
-    void kirjauduUloshandler();
+    void signOutHandler();
     void menuTimerRestart();
 
     void generalMenuListHandler(QListWidgetItem*);
@@ -43,7 +43,7 @@ private:
     accountDialog *pAccountDialog;
     withdrawdll *pWithdraw;
     SignoutTimerInterface *signoutTimer;
-    QTimer *SignoutMenuTimer;
+    //QTimer *SignoutMenuTimer;
     QTimer *MainMenuTimer;
     int timeout = 10000;
 
