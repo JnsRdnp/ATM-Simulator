@@ -1,7 +1,7 @@
 #include "withdrawdll.h"
 #include "ui_withdrawdll.h"
 
-withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit, QByteArray inJwt) :
+withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit,QString inBaseUrl,QByteArray inJwt) :
     QDialog(parent),
     ui(new Ui::withdrawdll)
 {
@@ -10,7 +10,7 @@ withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit, 
     //sets the object to destroy itself when the window is closed
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    Engine = new WithdrawDLLEngine(this, inAccountID, inIsCardCredit, inJwt);
+    Engine = new WithdrawDLLEngine(this, inAccountID, inIsCardCredit,inBaseUrl,inJwt);
 
     connect(ui->ReturnButton, SIGNAL(clicked()),
             this, SLOT(returnHandler()));

@@ -54,7 +54,7 @@ void MainWindow::saldoClickHandler()
 
 void MainWindow::nostoClickHandler()
 {
-    pWithdraw = new withdrawdll(this,2,true);
+    pWithdraw = new withdrawdll(this,2,true,baseUrl,jwt);
     pWithdraw->open();
 
     menuTimerRestart();
