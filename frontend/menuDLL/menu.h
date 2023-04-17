@@ -43,7 +43,6 @@ private:
     accountDialog *pAccountDialog;
     withdrawdll *pWithdraw;
     SignoutTimerInterface *signoutTimer;
-    //QTimer *SignoutMenuTimer;
     QTimer *MainMenuTimer;
     int timeout = 10000;
 
