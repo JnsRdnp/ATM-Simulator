@@ -2,7 +2,8 @@ QT       += core gui
 QT +=network
 QT += widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TEMPLATE = lib
+DEFINES += MENU_LIBRARY
 
 CONFIG += c++17
 
@@ -11,23 +12,21 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    menu.cpp
 
 HEADERS += \
-    mainwindow.h
+    menu_global.h \
+    menu.h
+
 
 FORMS += \
-    mainwindow.ui
+    menu.ui
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+unix {
+    target.path = /usr/lib
+}
 !isEmpty(target.path): INSTALLS += target
-
-
-
-
 
 
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../accountDLL/build/release/ -laccountDLL
@@ -58,11 +57,9 @@ else:unix:!macx: LIBS += -L$$PWD/../withdrawDLL/build/ -lwithdrawDLL
 INCLUDEPATH += $$PWD/../withdrawDLL
 DEPENDPATH += $$PWD/../withdrawDLL
 
-
-
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/release/ -lsignoutTimerDLL
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/debug/ -lsignoutTimerDLL
-else:unix:!macx: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
+else:unix: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
 
 INCLUDEPATH += $$PWD/../signoutTimerDLL
 DEPENDPATH += $$PWD/../signoutTimerDLL

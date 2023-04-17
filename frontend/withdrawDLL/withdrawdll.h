@@ -16,7 +16,7 @@ class WITHDRAWDLL_EXPORT withdrawdll : public QDialog
     Q_OBJECT
 
 public:
-    explicit withdrawdll(QWidget *parent = nullptr, int inAccountID = 0, bool inIsCardCredit = false, QByteArray inJwt = "");
+    explicit withdrawdll(QWidget *parent = nullptr, int inAccountID = 0, bool inIsCardCredit = false, QString inBaseUrl="",QByteArray inJwt = "");
     ~withdrawdll();
 
 private slots:
@@ -29,6 +29,9 @@ private slots:
 private:
     WithdrawDLLEngine * Engine;
     Ui::withdrawdll *ui;
+
+signals:
+    void localMenuTimerResetSignal();
 };
 
 #endif // WITHDRAWDLL_H

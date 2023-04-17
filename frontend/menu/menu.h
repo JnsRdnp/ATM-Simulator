@@ -1,31 +1,25 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MENU_H
+#define MENU_H
 
+#include "menu_global.h"
 #include "qlistwidget.h"
-#include "saldoui.h"
-#include "nostoui.h"
-#include "tiliui.h"
-#include "kirjauduulosui.h"
 #include "signouttimerinterface.h"
-#include <QMainWindow>
 #include "balancedialog.h"
 #include "accountdialog.h"
 #include "withdrawdll.h"
-#include "signouttimerinterface.h"
+#include <QDialog>
 #include <QTimer>
 
-
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class Menu; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class MENU_EXPORT Menu : public QDialog
 {
     Q_OBJECT
-
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    Menu(QWidget * parent = nullptr);
+    ~Menu();
 
 public slots:
     void saldoClickHandler();
@@ -41,9 +35,11 @@ public slots:
     void timerResetHandler();
     void timedSignout();
 
+signals:
+    void menuTimerRestartSignal();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::Menu *ui;
 
     balanceDialog *pBalanceDialog;
     accountDialog *pAccountDialog;
@@ -51,11 +47,7 @@ private:
     SignoutTimerInterface *signoutTimer;
     QTimer *timer;
     QTimer *Timer;
-    int timeout = 30000;
-
-    QString baseUrl = "http://localhost:3000/";
-    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIyMzQ1IiwiaWF0IjoxNjgxNzE2MDIzLCJleHAiOjE2ODE3MTYyMjN9.VqODXtB1U8rIV3TINJgKQEAzLTqmmT246OYWxy0gKlA";
-
-
+    int timeout = 10000;
 };
-#endif // MAINWINDOW_H
+
+#endif // MENU_H

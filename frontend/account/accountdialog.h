@@ -17,7 +17,7 @@ class ACCOUNT_EXPORT accountDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit accountDialog(QWidget *parent = nullptr,int id=0);
+    explicit accountDialog(QWidget *parent = nullptr,int id=0,QString inBaseUrl="",QByteArray inJwt = "");
     ~accountDialog();
 
 
@@ -32,14 +32,16 @@ private:
     int accountID;
     QString page;
 
+    QString baseUrl;
+    QByteArray jwt;
+
     int stringIndex;
 
 private slots:
     void getHistorySlot (QNetworkReply *reply);
     void backHandler();
     void pageChange();
-signals:
-    void localRestartTimerSignal();
+
 };
 
 #endif // ACCOUNTDIALOG_H

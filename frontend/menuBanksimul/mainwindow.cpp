@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "saldoui.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
-
     connect(ui->saldo,SIGNAL(clicked(bool)),
                 this, SLOT(saldoClickHandler()));
 
@@ -34,7 +32,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(Timer, SIGNAL(timeout()), this, SLOT(timedSignout()));
     Timer->start(timeout);
 
-    connect(this,SIGNAL(menuTimerRestartSignal()),this,SLOT(menuTimerRestart()));
 
 }
 
@@ -52,6 +49,9 @@ MainWindow::~MainWindow()
     delete timer;
     timer = nullptr;
 
+    delete signoutTimer;
+    signoutTimer = nullptr;
+
     delete ui;
 
 }
@@ -59,23 +59,26 @@ MainWindow::~MainWindow()
 void MainWindow::saldoClickHandler()
 {
     //second parameter is the accountID
-    pBalanceDialog = new balanceDialog(this,2);
+    pBalanceDialog = new balanceDialog(this,2,baseUrl,jwt);
     pBalanceDialog->show();
-    emit menuTimerRestartSignal();
+
+    menuTimerRestart();
 }
 
 void MainWindow::nostoClickHandler()
 {
-    pWithdraw = new withdrawdll(this,2,true);
+    pWithdraw = new withdrawdll(this,2,true,baseUrl,jwt);
     pWithdraw->open();
-    emit menuTimerRestartSignal();
+
+    menuTimerRestart();
 }
 
 void MainWindow::tiliClickHandler()
 {
-    pAccountDialog = new accountDialog(this,2);
+    pAccountDialog = new accountDialog(this,2,baseUrl,jwt);
     pAccountDialog->open();
-    emit menuTimerRestartSignal();
+
+    menuTimerRestart();
 }
 
 void MainWindow::kirjauduUloshandler()
@@ -97,6 +100,25 @@ void MainWindow::JWThandler(QByteArray jwt)
     qDebug()<<"Time is up";
 }
 
+
+void MainWindow::generalMenuListHandler(QListWidgetItem *item)
+{
+    if (ui->listMenu->item(0) == item) {
+        saldoClickHandler();
+    }
+    else if (ui->listMenu->item(1) == item){
+        nostoClickHandler();
+    }
+    else if (ui->listMenu->item(2) == item){
+        tiliClickHandler();
+    }
+    else if (ui->listMenu->item(3) == item){
+        kirjauduUloshandler();
+    }
+
+
+}
+
 void MainWindow::timerResetHandler()
 {
     qDebug() << "timer before " << timer->remainingTime();
@@ -106,6 +128,7 @@ void MainWindow::timerResetHandler()
 
 void MainWindow::timedSignout()
 {
+    qDebug()<<"MainMenu timer is up";
     //timed signout
     signoutTimer = SignoutTimerInterface::getInstance(this);
     timer = new QTimer(this);
@@ -116,9 +139,10 @@ void MainWindow::timedSignout()
     connect(signoutTimer, SIGNAL(menuTimerRestart()),
             this, SLOT(timerResetHandler()));
 
-    timer->start(10000);
+    timer->start();
     signoutTimer->open();
 }
+
 
 
 

@@ -2,21 +2,24 @@
 #include "ui_accountdialog.h"
 #include <QDebug>
 
-accountDialog::accountDialog(QWidget *parent,int id) :
+accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray inJwt) :
     QDialog(parent),
     ui(new Ui::accountDialog)
 {
     ui->setupUi(this);
-
+    this->setAttribute(Qt::WA_DeleteOnClose);
     accountID=id;
+    baseUrl = inBaseUrl;
+    jwt = inJwt;
 
     //dialog object gets destroyed when closed
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
+    connect(ui->btnReturn,SIGNAL(clicked()),parent,SLOT(menuTimerRestart()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
-
-    connect(this,SIGNAL(localRestartTimerSignal()),parent,SLOT(menuTimerRestart()));
+    connect(ui->btnPage,SIGNAL(valueChanged(int)),parent,SLOT(menuTimerRestart()));
+    qDebug()<<jwt<<"and"<<baseUrl;
     historyNetwork(1);
 }
 
@@ -32,11 +35,11 @@ void accountDialog::historyNetwork(int historyPage)
     QString accountIDStr = QString::number(accountID);
     page=QString::number(historyPage-1);
 
-    QString site_url="http://localhost:3000/history/getPage/"+accountIDStr+"/15/"+page;
+    QString site_url=baseUrl+"history/getPage/"+accountIDStr+"/15/"+page;
     //qDebug()<<site_url;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
-    QByteArray myToken="Bearer xRstgr...";
+    QByteArray myToken="Bearer " + jwt;
     request.setRawHeader(QByteArray("Authorization"),(myToken));
     //WEBTOKEN LOPPU
 
@@ -63,7 +66,7 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
     qDebug()<<page;
 
     //qDebug()<<"DATA : "+response_data;
-    qDebug()<<response_data.count("idhistory");
+    //qDebug()<<response_data.count("idhistory");
 
 
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
@@ -75,15 +78,16 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
         QJsonObject json_obj = value.toObject();
 
         ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
+        ui->tblHistory->setColumnWidth(0,130);
 
         ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
-        ui->tblHistory->setColumnWidth(1,140);
+        ui->tblHistory->setColumnWidth(1,130);
 
         ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
+        ui->tblHistory->setColumnWidth(1,130);
 
         stringIndex += 1;
-
-        qDebug()<<"stringIndex inside foreach: "<<stringIndex;
+        //qDebug()<<"stringIndex inside foreach: "<<stringIndex;
     }
     //qDebug()<<"stringIndex outside foreach: "<<stringIndex;
 
@@ -96,14 +100,12 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
 
 void accountDialog::backHandler()
 {
-    emit localRestartTimerSignal();
 
     this->close();
 }
 
 void accountDialog::pageChange()
 {
-    emit localRestartTimerSignal();
 
     // changes the page which is shown by the value that is in the qSpinbox
     historyNetwork(ui->btnPage->value());

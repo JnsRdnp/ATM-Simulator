@@ -18,7 +18,7 @@
     <rect>
      <x>40</x>
      <y>90</y>
-     <width>322</width>
+     <width>336</width>
      <height>92</height>
     </rect>
    </property>
@@ -35,16 +35,6 @@
       </property>
       <property name="text">
        <string>NOSTO</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Valitse nostettava määrä rahaa</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>

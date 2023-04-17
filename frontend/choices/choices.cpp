@@ -9,53 +9,33 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QByteArray in
 
     //networking code
     QString site_url="http://localhost:3000/cards/" + cardID;
-    QNetworkRequest request((site_url));
+    QNetworkRequest cardRequest((site_url));
     QByteArray myJWToken="Bearer "+ JWT;
-    request.setRawHeader(QByteArray("Authorization"),(myJWToken));
-    getManager = new QNetworkAccessManager(this);
+    cardRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));
+    cardGetManager = new QNetworkAccessManager(this);
 
-    connect(getManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getCardInfo(QNetworkReply*)));
+    connect(cardGetManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getCardInfo(QNetworkReply*)));
 
-    reply = getManager->get(request);
+    cardReply = cardGetManager->get(cardRequest);
 }
 
-void Choices::getCardInfo(QNetworkReply *reply)
+void Choices::getCardInfo(QNetworkReply *cardReply)
 {
     //original source: https://peatutor.com/qt/http_get.php, refactored by Saku Roininen
-    responseData=reply->readAll();
-    qDebug()<<"DATA : "+responseData;
-    QString responseString = QString(responseData);
+    cardResponseData=cardReply->readAll();
+    qDebug()<<"DATA : "+cardResponseData;
+    QString responseString = QString(cardResponseData);
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(responseString.toUtf8());
     QJsonObject jsonObject = jsonResponse.object();
 
     cardIsCreditOrDebit(jsonObject["credit"].toInt(), jsonObject["debit"].toInt());
 
-    reply->deleteLater();
-    getManager->deleteLater();
-}
+    cardReply->deleteLater();
+    cardGetManager->deleteLater();
+    //starts the next network request
+    startAccountGet();
 
-void Choices::cardChoiceHandler(QString buttonName)
-{
-    //checks the buttons name and frees the objects memory
-    if (buttonName == "CreditButton"){
-        isCardCredit = true;
-    } else {
-        isCardCredit = false;
-    }
-    disconnect(cardChoice, SIGNAL(cardChoice(QString)),
-               this, SLOT(cardChoiceHandler(QString)));
-    delete cardChoice;
-    cardChoice = nullptr;
-}
-
-void Choices::okClickHandler()
-{
-    //emit destroyChoices();
-    disconnect(errorHandler, SIGNAL(okClickedSignal()),
-                         this, SLOT(okClickHandler()));
-    delete errorHandler;
-    errorHandler = nullptr;
 }
 
 void Choices::cardIsCreditOrDebit(int credit, int debit)
@@ -77,11 +57,109 @@ void Choices::cardIsCreditOrDebit(int credit, int debit)
         qDebug()<<"Asetetaan käyttäjälle suoraan credit";
         isCardCredit = true;
     } else {
-        qDebug()<<"Jotain on mennyt väärin";
-        errorHandler = new ErrorScreen(this);
-        errorHandler->open();
-        connect(errorHandler, SIGNAL(okClickedSignal()),
-                this, SLOT(okClickHandler()));
+        jsonError();
     }
 
 }
+
+void Choices::cardChoiceHandler(QString buttonName)
+{
+    //checks the buttons name and frees the objects memory
+    if (buttonName == "CreditButton"){
+        isCardCredit = true;
+    } else {
+        isCardCredit = false;
+    }
+    disconnect(cardChoice, SIGNAL(cardChoice(QString)),
+               this, SLOT(cardChoiceHandler(QString)));
+    delete cardChoice;
+    cardChoice = nullptr;
+}
+
+void Choices::startAccountGet()
+{
+    QString site_url="http://localhost:3000/accounts/card/" + cardID;
+    QNetworkRequest accRequest((site_url));
+    QByteArray myJWToken="Bearer "+ JWT;
+    accRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));
+    accGetManager = new QNetworkAccessManager(this);
+
+    connect(accGetManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getAccInfo(QNetworkReply*)));
+    accReply = accGetManager->get(accRequest);
+}
+
+void Choices::getAccInfo(QNetworkReply *accReply)
+{
+    //original source: https://peatutor.com/qt/http_get.php, refactored by Saku Roininen
+    accResponseData=accReply->readAll();
+    qDebug()<<"DATA : "+accResponseData;
+
+    QJsonDocument jsonAccResponse = QJsonDocument::fromJson(accResponseData);
+    QJsonArray jsonAccArray = jsonAccResponse.array();
+    QJsonObject jsonAccObject;
+
+    if (!(jsonAccArray.size() > 0)){
+        jsonError();
+        qDebug()<<"Arrayn koko on 0";
+    } else if (jsonAccArray.size() == 1){
+        jsonAccObject = jsonAccArray[0].toObject();
+        accountID = jsonAccObject["idaccounts"].toInt();
+        qDebug()<<"Arrayn koko on 1";
+    } else {
+        //luo accountchoice menu ja laita käyttäjä valitsemaan.
+        accountChoice = new AccountChoice(this);
+        connect(accountChoice, SIGNAL(selectedAccountSender(QString)),
+                this, SLOT(selectedAccountHandler(QString)));
+        accountChoice->setQJsonArray(jsonAccArray);
+        accountChoice->show();
+        qDebug()<<"Arrayn koko on isompi kuin 1";
+    }
+
+    qDebug()<<jsonAccArray;
+    accReply->deleteLater();
+    accGetManager->deleteLater();
+
+    //checks if there have been no errors before creating main window, could be made prettier by making a boolean
+    if (noErrors){
+        createMainMenu();
+    } else {
+        qDebug()<<"Error";
+    }
+}
+
+void Choices::selectedAccountHandler(QString accID)
+{
+    accountID = accID.toInt();
+    disconnect(accountChoice, SIGNAL(selectedAccountSender(QString)),
+            this, SLOT(selectedAccountHandler(QString)));
+    delete accountChoice;
+    accountChoice = nullptr;
+}
+
+void Choices::jsonError()
+{
+    qDebug()<<"Jotain on mennyt väärin";
+    noErrors = false;
+    errorHandler = new ErrorScreen(this);
+    errorHandler->open();
+    connect(errorHandler, SIGNAL(okClickedSignal()),
+            this, SLOT(okClickHandler()));
+}
+
+void Choices::createMainMenu()
+{
+    qDebug() << "create the main menu";
+    mainWindow = new Menu(this);
+    mainWindow->open();
+    //PIN, cardID, JWT, isCardCredit, accountID)
+}
+
+void Choices::okClickHandler()
+{
+    this->close();
+    disconnect(errorHandler, SIGNAL(okClickedSignal()),
+                         this, SLOT(okClickHandler()));
+    delete errorHandler;
+    errorHandler = nullptr;
+}
+

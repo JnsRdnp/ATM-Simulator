@@ -25,6 +25,17 @@ function (request, response) {
     })
 });
 
+router.get('/card/:id',
+function (request, response) {
+    accounts.getByCard(request.params.id, function (err, dbResult) {
+        if (err) {
+            response.json(err);
+        } else {
+            response.json(dbResult);
+        }
+    })
+});
+
 router.post('/', 
 function(request, response) {
     accounts.add(request.body, function(err, dbResult) {

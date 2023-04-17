@@ -46,9 +46,9 @@
    <widget class="QLabel" name="lblBalance">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>30</y>
-      <width>331</width>
+      <width>381</width>
       <height>39</height>
      </rect>
     </property>
@@ -133,6 +133,12 @@
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
     </property>
     <property name="textElideMode">
      <enum>Qt::ElideMiddle</enum>
