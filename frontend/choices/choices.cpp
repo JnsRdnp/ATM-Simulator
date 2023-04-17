@@ -1,14 +1,14 @@
 #include "choices.h"
 
-Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QByteArray inJWT) :
+Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BASE_URL, QByteArray inJWT) :
     QDialog(parent)
 {
     PIN = inPIN;
     cardID = inCardID;
+    BASE_URL = IN_BASE_URL;
     JWT = inJWT;
-
     //networking code
-    QString site_url="http://localhost:3000/cards/" + cardID;
+    QString site_url= BASE_URL + "/cards/" + cardID;
     QNetworkRequest cardRequest((site_url));
     QByteArray myJWToken="Bearer "+ JWT;
     cardRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));
@@ -78,7 +78,7 @@ void Choices::cardChoiceHandler(QString buttonName)
 
 void Choices::startAccountGet()
 {
-    QString site_url="http://localhost:3000/accounts/card/" + cardID;
+    QString site_url= BASE_URL + "accounts/card/" + cardID;
     QNetworkRequest accRequest((site_url));
     QByteArray myJWToken="Bearer "+ JWT;
     accRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));
@@ -105,6 +105,7 @@ void Choices::getAccInfo(QNetworkReply *accReply)
         jsonAccObject = jsonAccArray[0].toObject();
         accountID = jsonAccObject["idaccounts"].toInt();
         qDebug()<<"Arrayn koko on 1";
+        createMainMenu();
     } else {
         //luo accountchoice menu ja laita käyttäjä valitsemaan.
         accountChoice = new AccountChoice(this);
@@ -118,13 +119,6 @@ void Choices::getAccInfo(QNetworkReply *accReply)
     qDebug()<<jsonAccArray;
     accReply->deleteLater();
     accGetManager->deleteLater();
-
-    //checks if there have been no errors before creating main window, could be made prettier by making a boolean
-    if (noErrors){
-        createMainMenu();
-    } else {
-        qDebug()<<"Error";
-    }
 }
 
 void Choices::selectedAccountHandler(QString accID)
@@ -134,6 +128,7 @@ void Choices::selectedAccountHandler(QString accID)
             this, SLOT(selectedAccountHandler(QString)));
     delete accountChoice;
     accountChoice = nullptr;
+    createMainMenu();
 }
 
 void Choices::jsonError()
@@ -149,7 +144,7 @@ void Choices::jsonError()
 void Choices::createMainMenu()
 {
     qDebug() << "create the main menu";
-    mainWindow = new Menu(this);
+    mainWindow = new Menu(this, PIN, cardID, isCardCredit, accountID, BASE_URL, JWT);
     mainWindow->open();
     //PIN, cardID, JWT, isCardCredit, accountID)
 }

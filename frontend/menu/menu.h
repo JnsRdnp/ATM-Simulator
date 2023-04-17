@@ -18,7 +18,7 @@ class MENU_EXPORT Menu : public QDialog
 {
     Q_OBJECT
 public:
-    Menu(QWidget * parent = nullptr);
+    Menu(QWidget * parent = nullptr, QString inPIN = "", QString inCardID = "", bool inIsCardCredit = false, int inAccountID = 0, QString IN_BASE_URL = "", QByteArray inJWT = "");
     ~Menu();
 
 public slots:
@@ -29,8 +29,6 @@ public slots:
     void menuTimerRestart();
 
     void generalMenuListHandler(QListWidgetItem*);
-
-
     void JWThandler(QByteArray);
     void timerResetHandler();
     void timedSignout();
@@ -48,6 +46,13 @@ private:
     QTimer *timer;
     QTimer *Timer;
     int timeout = 10000;
+    //card info
+    QString PIN = "";
+    QString cardID = "";
+    bool isCardCredit;
+    int accountID;
+    QByteArray JWT = "";
+    QString BASE_URL = "";
 };
 
 #endif // MENU_H

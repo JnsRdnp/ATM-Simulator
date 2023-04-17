@@ -15,7 +15,7 @@ class CHOICES_EXPORT Choices : public QDialog
 {
     Q_OBJECT
 public:
-    Choices(QWidget *parent = nullptr, QString inPIN = "", QString inCardID = "", QByteArray inJWT = "");
+    Choices(QWidget *parent = nullptr, QString inPIN = "", QString inCardID = "", QString IN_BASE_URL = "", QByteArray inJWT = "");
 
 private slots:
     void getCardInfo (QNetworkReply *reply);
@@ -28,6 +28,7 @@ private:
     QString PIN = "";
     QString cardID = "";
     QByteArray JWT = "";
+    QString BASE_URL = "";
 
     CardChoice *cardChoice;
     ErrorScreen *errorHandler;
