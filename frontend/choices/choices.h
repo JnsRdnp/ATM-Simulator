@@ -28,7 +28,7 @@ private:
     QString PIN = "";
     QString cardID = "";
     QByteArray JWT = "";
-    QString BASE_URL = ""
+    QString BASE_URL = "";
 
     CardChoice *cardChoice;
     ErrorScreen *errorHandler;
