@@ -45,7 +45,7 @@ MainWindow::~MainWindow()
 void MainWindow::saldoClickHandler()
 {
     //second parameter is the accountID
-    pBalanceDialog = new balanceDialog(this,2);
+    pBalanceDialog = new balanceDialog(this,2,baseUrl,jwt);
     pBalanceDialog->show();
 
     menuTimerRestart();
@@ -53,7 +53,7 @@ void MainWindow::saldoClickHandler()
 
 void MainWindow::nostoClickHandler()
 {
-    pWithdraw = new withdrawdll(this,2,true);
+    pWithdraw = new withdrawdll(this,2,true,baseUrl,jwt);
     pWithdraw->open();
 
     menuTimerRestart();
@@ -61,7 +61,7 @@ void MainWindow::nostoClickHandler()
 
 void MainWindow::tiliClickHandler()
 {
-    pAccountDialog = new accountDialog(this,2);
+    pAccountDialog = new accountDialog(this,2,baseUrl,jwt);
     pAccountDialog->open();
 
     menuTimerRestart();

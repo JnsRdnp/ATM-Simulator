@@ -12,7 +12,7 @@ class WithdrawDLLEngine : public QDialog
 {
     Q_OBJECT
 public:
-    WithdrawDLLEngine(QWidget *parent = nullptr, int inAccountID = 0, bool inIsCardCredit = false, QByteArray inJwt = "");
+    WithdrawDLLEngine(QWidget *parent = nullptr, int inAccountID = 0, bool inIsCardCredit = false,QString inBaseUrl="",QByteArray inJwt = "");
     ~WithdrawDLLEngine();
     void withdraw(float);
 
@@ -26,6 +26,7 @@ private:
     int accountID;
     bool isCardCredit;
     QByteArray jwt;
+    QString baseUrl;
     QNetworkAccessManager *putManager;
     QNetworkReply *reply;
     QByteArray responseData;

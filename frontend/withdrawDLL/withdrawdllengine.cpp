@@ -1,11 +1,13 @@
 #include "withdrawdllengine.h"
 
-WithdrawDLLEngine::WithdrawDLLEngine(QWidget *parent, int inAccountID, bool inIsCardCredit, QByteArray inJwt) : QDialog(parent)
+WithdrawDLLEngine::WithdrawDLLEngine(QWidget *parent, int inAccountID, bool inIsCardCredit,QString inBaseUrl,QByteArray inJwt) : QDialog(parent)
 {
     qDebug() << "Create DLL Engine";
     accountID = inAccountID;
     isCardCredit = inIsCardCredit;
+    baseUrl = inBaseUrl;
     jwt = inJwt;
+
 }
 
 
@@ -18,7 +20,6 @@ void WithdrawDLLEngine::withdraw(float num)
 {
     //Original source: https://peatutor.com/qt/http_put.php, edited by Saku Roininen
     qDebug() << "Engine Withdraw method";
-    const QString SERVER_URL = "http://localhost:3000/";
 
     QJsonObject withdrawObj;
     withdrawObj.insert("accountID",accountID);
@@ -27,9 +28,9 @@ void WithdrawDLLEngine::withdraw(float num)
     QString site_url = "";
 
     if (isCardCredit == true){
-       site_url = SERVER_URL + "accounts/creditWithdraw";
+       site_url = baseUrl + "accounts/creditWithdraw";
     } else {
-       site_url = SERVER_URL + "accounts/debitWithdraw";
+       site_url = baseUrl + "accounts/debitWithdraw";
     }
 
     QNetworkRequest request((site_url));

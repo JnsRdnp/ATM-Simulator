@@ -53,6 +53,9 @@ private:
     QTimer *Timer;
     int timeout = 30000;
 
+    QString baseUrl = "http://localhost:3000/";
+    QByteArray jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYXJkSUQiOiIyMzQ1IiwiaWF0IjoxNjgxNzE2MDIzLCJleHAiOjE2ODE3MTYyMjN9.VqODXtB1U8rIV3TINJgKQEAzLTqmmT246OYWxy0gKlA";
+
 
 };
 #endif // MAINWINDOW_H
