@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "environment.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -8,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     pinCode = 0;
     attempts = 3;
     ui->setupUi(this);
+    updateUI();
 }
 
 MainWindow::~MainWindow()
@@ -39,6 +41,7 @@ void MainWindow::receivePinNumber(short num)
 
 void MainWindow::updateUI() {
     ui->textPin->setText(QString::number(pinCode));
+    ui->textAttempts->setText("Attempts = " + QString::number(attempts));
 }
 
 void MainWindow::checkNumber()
@@ -61,7 +64,7 @@ void MainWindow::on_btnCredentials_clicked()
     QJsonObject jsonObj;
     jsonObj.insert("cardID", cardID);
     jsonObj.insert("PINcode", PINcode);
-    QString site_url="http://localhost:3000/login";
+    QString site_url= Environment::getBaseUrl() + "/login";
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
@@ -81,7 +84,7 @@ void MainWindow::on_btnCredentials_clicked()
 void MainWindow::addLoginSlot(QNetworkReply *reply) {
     response_data=reply->readAll();
     qDebug()<<response_data;
-
+    ui->loginConfirm->setText(response_data);
     /*)
     if(QString::compare(response_data, "false")!=0){
         ui->loginConfirm->setText(response_data);
@@ -103,11 +106,14 @@ void MainWindow::checkCredentials()
     if(QString::compare(response_data, "false")!=0){
         ui->loginConfirm->setText(response_data);
         token="Bearer "+response_data;
+        updateUI();
     }
     else {
         if (attempts == 0) {
             ui->loginConfirm->setText("3 wrong attempts, card locked");
-            qApp->exit();
+            attempts = 3;
+            updateUI();
+            // qApp->exit();
         }
         else {
 
