@@ -1,8 +1,9 @@
-QT       += core gui
+QT += core gui
 QT +=network
-QT += widgets
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TEMPLATE = lib
+DEFINES += CHOICES_LIBRARY
 
 CONFIG += c++17
 
@@ -11,58 +12,60 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    accountchoice.cpp \
+    cardchoice.cpp \
+    choices.cpp \
+    errorscreen.cpp
 
 HEADERS += \
-    mainwindow.h
-
-FORMS += \
-    mainwindow.ui
+    accountchoice.h \
+    cardchoice.h \
+    choices_global.h \
+    choices.h \
+    errorscreen.h
 
 # Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+unix {
+    target.path = /usr/lib
+}
 !isEmpty(target.path): INSTALLS += target
 
+FORMS += \
+    accountchoice.ui \
+    cardchoice.ui \
+    errorscreen.ui
 
 
 
+unix|win32: LIBS += -L$$PWD/../menu/build/debug/ -lmenu
 
+INCLUDEPATH += $$PWD/../menu
+DEPENDPATH += $$PWD/../menu
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../accountDLL/build/release/ -laccountDLL
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../accountDLL/build/debug/ -laccountDLL
-#else:unix:!macx: LIBS += -L$$PWD/../accountDLL/build/ -laccountDLL
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/release/ -lsignoutTimerDLL
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/debug/ -lsignoutTimerDLL
+else:unix: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
 
-#INCLUDEPATH += $$PWD/../accountDLL
-#DEPENDPATH += $$PWD/../accountDLL
+INCLUDEPATH += $$PWD/../signoutTimerDLL
+DEPENDPATH += $$PWD/../signoutTimerDLL
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../balance/build/release/ -lbalance
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../balance/build/debug/ -lbalance
-else:unix:!macx: LIBS += -L$$PWD/../balance/build/ -lbalance
+else:unix: LIBS += -L$$PWD/../balance/build/ -lbalance
 
 INCLUDEPATH += $$PWD/../balance
 DEPENDPATH += $$PWD/../balance
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../account/build/release/ -laccount
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../account/build/debug/ -laccount
-else:unix:!macx: LIBS += -L$$PWD/../account/build/ -laccount
+else:unix: LIBS += -L$$PWD/../account/build/ -laccount
 
 INCLUDEPATH += $$PWD/../account
 DEPENDPATH += $$PWD/../account
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../withdrawDLL/build/release/ -lwithdrawDLL
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../withdrawDLL/build/debug/ -lwithdrawDLL
-else:unix:!macx: LIBS += -L$$PWD/../withdrawDLL/build/ -lwithdrawDLL
+else:unix: LIBS += -L$$PWD/../withdrawDLL/build/ -lwithdrawDLL
 
 INCLUDEPATH += $$PWD/../withdrawDLL
 DEPENDPATH += $$PWD/../withdrawDLL
-
-
-
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/release/ -lsignoutTimerDLL
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/debug/ -lsignoutTimerDLL
-else:unix:!macx: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
-
-INCLUDEPATH += $$PWD/../signoutTimerDLL
-DEPENDPATH += $$PWD/../signoutTimerDLL

@@ -16,20 +16,22 @@ class SIGNOUTTIMERDLL_EXPORT SignoutTimerInterface : public QDialog
     Q_OBJECT
 
 public:
-    explicit SignoutTimerInterface(QWidget *parent = nullptr);
+    explicit SignoutTimerInterface(QWidget *parent = nullptr, QString inCardID = "", QString inPIN = "", QString IN_BASE_URL = "");
     ~SignoutTimerInterface();
-    static SignoutTimerInterface* getInstance(QWidget *parent);
+    static SignoutTimerInterface* getInstance(QWidget *parent = nullptr, QString inCardID = "", QString inPIN = "", QString IN_BASE_URL = "");
+
 
 public slots:
     void agreeButtonHandler();
     void disagreeButtonHandler();
     void newJsonWebTokenHandler(QByteArray);
     void restartMenuTimerHandler();
-    void destroymenuHandler();
+    void destroyMenuHandler();
     void closeSignoutHandler();
 
 signals:
     void newJsonWebToken(QByteArray);
+    void eliminateMenu();
     void menuTimerRestart();
 
 private:

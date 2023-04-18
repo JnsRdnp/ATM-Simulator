@@ -3,17 +3,17 @@
 
 SignoutTimerInterface* SignoutTimerInterface::instance = nullptr;
 
-SignoutTimerInterface* SignoutTimerInterface::getInstance(QWidget *parent)
+SignoutTimerInterface* SignoutTimerInterface::getInstance(QWidget *parent, QString inCardID, QString inPIN, QString IN_BASE_URL)
 {
     if (instance == nullptr)
     {
-        instance = new SignoutTimerInterface(parent);
+        instance = new SignoutTimerInterface(parent, inCardID, inPIN, IN_BASE_URL);
     }
 
     return instance;
 }
 
-SignoutTimerInterface::SignoutTimerInterface(QWidget *parent) :
+SignoutTimerInterface::SignoutTimerInterface(QWidget *parent, QString inCardID, QString inPIN, QString IN_BASE_URL) :
     QDialog(parent),
     ui(new Ui::SingoutTimerInterface)
 {
@@ -21,7 +21,7 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent) :
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    Engine = new SignoutTimerEngine(this);
+    Engine = new SignoutTimerEngine(this, inCardID, inPIN, IN_BASE_URL);
     connect(ui->pushButton,SIGNAL(clicked(bool)),
             this, SLOT(agreeButtonHandler()));
 
@@ -38,12 +38,13 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent) :
             this, SLOT(closeSignoutHandler()),Qt::QueuedConnection);
 
     connect(Engine, SIGNAL(eliminateMenu()),
-            this, SLOT(destroymenuHandler()),Qt::QueuedConnection);
+            this, SLOT(destroyMenuHandler()),Qt::QueuedConnection);
 }
 
 SignoutTimerInterface::~SignoutTimerInterface()
 {
     delete ui;
+    instance = nullptr;
 }
 
 void SignoutTimerInterface::agreeButtonHandler()
@@ -66,11 +67,11 @@ void SignoutTimerInterface::restartMenuTimerHandler()
     emit menuTimerRestart();
 }
 
-void SignoutTimerInterface::destroymenuHandler()
+void SignoutTimerInterface::destroyMenuHandler()
 {
     this->close();
     qDebug()<<"tuhottu";
-    //emit close signal;
+    emit eliminateMenu();
 }
 
 void SignoutTimerInterface::closeSignoutHandler()

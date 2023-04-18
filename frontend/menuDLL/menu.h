@@ -22,10 +22,10 @@ public:
     ~Menu();
 
 public slots:
-    void saldoClickHandler();
-    void nostoClickHandler();
-    void tiliClickHandler();
-    void kirjauduUloshandler();
+    void balanceClickHandler();
+    void withdrawClickHandler();
+    void accountClickHandler();
+    void signOutHandler();
     void menuTimerRestart();
 
     void generalMenuListHandler(QListWidgetItem*);
@@ -43,9 +43,9 @@ private:
     accountDialog *pAccountDialog;
     withdrawdll *pWithdraw;
     SignoutTimerInterface *signoutTimer;
-    QTimer *timer;
-    QTimer *Timer;
+    QTimer *MainMenuTimer;
     int timeout = 10000;
+
     //card info
     QString PIN = "";
     QString cardID = "";

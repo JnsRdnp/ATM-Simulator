@@ -20,6 +20,7 @@ void WithdrawDLLEngine::withdraw(float num)
 {
     //Original source: https://peatutor.com/qt/http_put.php, edited by Saku Roininen
     qDebug() << "Engine Withdraw method";
+    qDebug() << num;
 
     QJsonObject withdrawObj;
     withdrawObj.insert("accountID",accountID);
@@ -39,7 +40,7 @@ void WithdrawDLLEngine::withdraw(float num)
     request.setRawHeader(QByteArray("Authorization"),(myToken));
 
     putManager = new QNetworkAccessManager(this);
-    connect(putManager, SIGNAL(finished (QNetworkReply*)), this, SLOT(withdrawMoney(QNetworkReply*)));
+    connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(withdrawMoney(QNetworkReply*)));
 
     reply = putManager->put(request, QJsonDocument(withdrawObj).toJson());
 
