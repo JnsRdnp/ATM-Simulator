@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include "pincode.h"
+#include "cardreader.h"
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
@@ -23,17 +24,21 @@ public:
 private slots:
     void on_pushButton_clicked();
     void receivePinNumber(QString);
-    void on_pushButton_2_clicked();
+    void on_CardButton_clicked();
+    void receiveCardID(QString);
     void on_btnCredentials_clicked();
     void addLoginSlot(QNetworkReply * reply);
 
 private:
     Ui::MainWindow *ui;
     pincode * pincodep;
+    CardReader * cardReader;
+
     void updateUI();
     void checkCredentials();
-    QString pinCode;
-    short attempts;
+    QString PINCode;
+    QString cardID;
+    int attempts;
     void checkNumber();
     QNetworkAccessManager *postManager;
     QNetworkAccessManager *loginManager;
