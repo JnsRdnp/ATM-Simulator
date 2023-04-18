@@ -1,14 +1,14 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "cardreader.h"
+#include "ui_cardreader.h"
 
 #include <QSerialPort>
 #include <QDebug>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+CardReader::CardReader(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::CardReader)
 {
-    qDebug() << "Creating MainWindow";
+    qDebug() << "Creating CardReader";
     ui->setupUi(this);
     qDebug() << "Connecting Read Button";
     connect(ui->Read,SIGNAL(clicked()),
@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     openSerialPort();
 }
 
-MainWindow::~MainWindow()
+CardReader::~CardReader()
 {
     delete ui;
     if (serial->isOpen()){
@@ -27,8 +27,7 @@ MainWindow::~MainWindow()
     serial = nullptr;
 }
 
-
-void MainWindow::ReadSignal_clicked()
+void CardReader::ReadSignal_clicked()
 {
     readSerialPort();
     if (cardID.length() > 0 && cardID != NULL){
@@ -37,7 +36,7 @@ void MainWindow::ReadSignal_clicked()
        }
 }
 
-void MainWindow::openSerialPort()
+void CardReader::openSerialPort()
 {
     serial =  new QSerialPort;
     //Setup the Serial connection
@@ -49,10 +48,10 @@ void MainWindow::openSerialPort()
     serial->setFlowControl(QSerialPort::NoFlowControl);
     if (!(serial->open(QIODevice::ReadWrite))) {
         qDebug() << "Error";
-        };
+    };
 }
 
-void MainWindow::readSerialPort()
+void CardReader::readSerialPort()
 {
     QByteArray data = serial->readAll();
     qDebug()<<data;
@@ -61,4 +60,5 @@ void MainWindow::readSerialPort()
     qDebug()<<cardID;
 
 }
+
 
