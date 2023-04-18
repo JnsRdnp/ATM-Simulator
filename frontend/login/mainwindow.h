@@ -22,7 +22,7 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-    void receivePinNumber(short);
+    void receivePinNumber(QString);
     void on_pushButton_2_clicked();
     void on_btnCredentials_clicked();
     void addLoginSlot(QNetworkReply * reply);
@@ -32,7 +32,8 @@ private:
     pincode * pincodep;
     void updateUI();
     void checkCredentials();
-    short pinCode, attempts;
+    QString pinCode;
+    short attempts;
     void checkNumber();
     QNetworkAccessManager *postManager;
     QNetworkAccessManager *loginManager;
