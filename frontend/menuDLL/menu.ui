@@ -9,93 +9,114 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>472</width>
-    <height>339</height>
+    <width>563</width>
+    <height>444</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QListWidget" name="listMenu">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>449</width>
-      <height>281</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-      <bold>true</bold>
-      <underline>false</underline>
-     </font>
-    </property>
-    <property name="movement">
-     <enum>QListView::Static</enum>
-    </property>
-    <property name="flow">
-     <enum>QListView::TopToBottom</enum>
-    </property>
-    <property name="spacing">
-     <number>15</number>
-    </property>
-    <property name="viewMode">
-     <enum>QListView::ListMode</enum>
-    </property>
-    <item>
-     <property name="text">
-      <string>SALDO</string>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QWidget" name="centralwidget" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout_2"/>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="listMenu">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="textAlignment">
-      <set>AlignCenter</set>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>NOSTO</string>
+     <property name="movement">
+      <enum>QListView::Static</enum>
      </property>
-     <property name="textAlignment">
-      <set>AlignCenter</set>
+     <property name="flow">
+      <enum>QListView::TopToBottom</enum>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>TILI</string>
+     <property name="spacing">
+      <number>25</number>
      </property>
-     <property name="textAlignment">
-      <set>AlignCenter</set>
+     <property name="viewMode">
+      <enum>QListView::ListMode</enum>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>KIRJAUDU ULOS</string>
-     </property>
-     <property name="textAlignment">
-      <set>AlignCenter</set>
-     </property>
-    </item>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>472</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menubankSimul">
-    <property name="title">
-     <string>bankSimul</string>
-    </property>
-   </widget>
-   <addaction name="menubankSimul"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+     <item>
+      <property name="text">
+       <string>SALDO</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>50</pointsize>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>NOSTO</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>50</pointsize>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>TILI</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>50</pointsize>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>KIRJAUDU ULOS</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>50</pointsize>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStatusBar" name="statusbar"/>
+   </item>
+   <item>
+    <widget class="QMenuBar" name="menubar">
+     <widget class="QMenu" name="menubankSimul">
+      <property name="title">
+       <string>bankSimul</string>
+      </property>
+     </widget>
+     <addaction name="menubankSimul"/>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

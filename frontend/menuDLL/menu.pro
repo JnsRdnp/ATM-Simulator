@@ -29,26 +29,22 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../accountDLL/build/release/ -laccountDLL
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../accountDLL/build/debug/ -laccountDLL
-#else:unix:!macx: LIBS += -L$$PWD/../accountDLL/build/ -laccountDLL
 
-#INCLUDEPATH += $$PWD/../accountDLL
-#DEPENDPATH += $$PWD/../accountDLL
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../balance/build/release/ -lbalance
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../balance/build/debug/ -lbalance
-else:unix:!macx: LIBS += -L$$PWD/../balance/build/ -lbalance
 
-INCLUDEPATH += $$PWD/../balance
-DEPENDPATH += $$PWD/../balance
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../accountDLL/build/release/ -laccount
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../accountDLL/build/debug/ -laccount
+else:unix:!macx: LIBS += -L$$PWD/../accountDLL/build/ -laccount
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../account/build/release/ -laccount
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../account/build/debug/ -laccount
-else:unix:!macx: LIBS += -L$$PWD/../account/build/ -laccount
+INCLUDEPATH += $$PWD/../accountDLL
+DEPENDPATH += $$PWD/../accountDLL
 
-INCLUDEPATH += $$PWD/../account
-DEPENDPATH += $$PWD/../account
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../balanceDLL/build/release/ -lbalance
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../balanceDLL/build/debug/ -lbalance
+else:unix:!macx: LIBS += -L$$PWD/../balanceDLL/build/ -lbalance
+
+INCLUDEPATH += $$PWD/../balanceDLL
+DEPENDPATH += $$PWD/../balanceDLL
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../withdrawDLL/build/release/ -lwithdrawDLL
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../withdrawDLL/build/debug/ -lwithdrawDLL
@@ -59,7 +55,7 @@ DEPENDPATH += $$PWD/../withdrawDLL
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/release/ -lsignoutTimerDLL
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../signoutTimerDLL/build/debug/ -lsignoutTimerDLL
-else:unix: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
+else:unix:!macx: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
 
 INCLUDEPATH += $$PWD/../signoutTimerDLL
 DEPENDPATH += $$PWD/../signoutTimerDLL
