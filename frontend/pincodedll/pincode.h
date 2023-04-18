@@ -17,12 +17,15 @@ public:
     explicit pincode(QWidget *parent = nullptr);
     ~pincode();
 signals:
-    void sendPin(short);
+    void sendPin(QString);
 private slots:
     void on_btnPin_clicked();
+    void digit_pressed();
+    void clear_pin();
 
 private:
     Ui::pincode *ui;
+    QString labelNumber;
 };
 
 #endif // PINCODE_H
