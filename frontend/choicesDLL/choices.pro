@@ -72,3 +72,28 @@ else:unix:!macx: LIBS += -L$$PWD/../menuDLL/build/ -lmenu
 
 INCLUDEPATH += $$PWD/../menuDLL
 DEPENDPATH += $$PWD/../menuDLL
+
+unix:!macx: LIBS += -L$$PWD/../accountDLL/build/ -laccount
+
+INCLUDEPATH += $$PWD/../accountDLL
+DEPENDPATH += $$PWD/../accountDLL
+
+unix:!macx: LIBS += -L$$PWD/../balanceDLL/build/ -lbalance
+
+INCLUDEPATH += $$PWD/../balanceDLL
+DEPENDPATH += $$PWD/../balanceDLL
+
+unix:!macx: LIBS += -L$$PWD/../menuDLL/build/ -lmenu
+
+INCLUDEPATH += $$PWD/../menuDLL
+DEPENDPATH += $$PWD/../menuDLL
+
+unix:!macx: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
+
+INCLUDEPATH += $$PWD/../signoutTimerDLL
+DEPENDPATH += $$PWD/../signoutTimerDLL
+
+unix:!macx: LIBS += -L$$PWD/../withdrawDLL/build/ -lwithdrawDLL
+
+INCLUDEPATH += $$PWD/../withdrawDLL
+DEPENDPATH += $$PWD/../withdrawDLL

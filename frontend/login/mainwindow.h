@@ -7,6 +7,7 @@
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
+#include "choices.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,7 +30,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    pincode * pincodep;
+    pincode * pPincode;
+    Choices * choice;
     void updateUI();
     void checkCredentials();
     QString pinCode;
