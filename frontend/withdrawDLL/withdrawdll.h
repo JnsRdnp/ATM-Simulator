@@ -1,7 +1,7 @@
 #ifndef WITHDRAWDLL_H
 #define WITHDRAWDLL_H
 
-#include "WithdrawDLL_global.h"
+#include "withdrawDLL_global.h"
 #include "withdrawdllengine.h"
 
 #include <QDialog>

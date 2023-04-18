@@ -59,3 +59,8 @@ else:unix:!macx: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
 
 INCLUDEPATH += $$PWD/../signoutTimerDLL
 DEPENDPATH += $$PWD/../signoutTimerDLL
+
+unix:!macx: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
+
+INCLUDEPATH += $$PWD/../signoutTimerDLL
+DEPENDPATH += $$PWD/../signoutTimerDLL

@@ -32,3 +32,43 @@ unix:!macx: LIBS += -L$$PWD/../pincodedll/build/ -lpincodedll
 
 INCLUDEPATH += $$PWD/../pincodedll
 DEPENDPATH += $$PWD/../pincodedll
+
+unix:!macx: LIBS += -L$$PWD/../choicesDLL/build/ -lchoices
+
+INCLUDEPATH += $$PWD/../choicesDLL
+DEPENDPATH += $$PWD/../choicesDLL
+
+unix:!macx|win32: LIBS += -L$$PWD/../withdrawDLL/build/ -lwithdrawDLL
+
+INCLUDEPATH += $$PWD/../withdrawDLL
+DEPENDPATH += $$PWD/../withdrawDLL
+
+unix:!macx|win32: LIBS += -L$$PWD/../signoutTimerDLL/build/ -lsignoutTimerDLL
+
+INCLUDEPATH += $$PWD/../signoutTimerDLL
+DEPENDPATH += $$PWD/../signoutTimerDLL
+
+unix:!macx|win32: LIBS += -L$$PWD/../menuDLL/build/ -lmenu
+
+INCLUDEPATH += $$PWD/../menuDLL
+DEPENDPATH += $$PWD/../menuDLL
+
+unix:!macx|win32: LIBS += -L$$PWD/../balanceDLL/build/ -lbalance
+
+INCLUDEPATH += $$PWD/../balanceDLL
+DEPENDPATH += $$PWD/../balanceDLL
+
+unix:!macx|win32: LIBS += -L$$PWD/../accountDLL/build/ -laccount
+
+INCLUDEPATH += $$PWD/../accountDLL
+DEPENDPATH += $$PWD/../accountDLL
+
+unix:!macx|win32: LIBS += -L$$PWD/../withdrawDLL/build/ -lwithdrawDLL
+
+INCLUDEPATH += $$PWD/../withdrawDLL
+DEPENDPATH += $$PWD/../withdrawDLL
+
+unix:!macx|win32: LIBS += -L$$PWD/../choicesDLL/build/ -lchoices
+
+INCLUDEPATH += $$PWD/../choicesDLL
+DEPENDPATH += $$PWD/../choicesDLL
