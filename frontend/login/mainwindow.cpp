@@ -73,7 +73,6 @@ void MainWindow::on_btnCredentials_clicked()
             this, SLOT(addLoginSlot(QNetworkReply*)));
     reply = postManager->post(request, QJsonDocument(jsonObj).toJson());
     qDebug()<<reply;
-    checkCredentials();
 }
 
 void MainWindow::addLoginSlot(QNetworkReply *reply) {
@@ -81,6 +80,7 @@ void MainWindow::addLoginSlot(QNetworkReply *reply) {
     qDebug()<<response_data;
     reply->deleteLater();
     postManager->deleteLater();
+    checkCredentials();
 }
 
 void MainWindow::checkCredentials()
@@ -90,6 +90,10 @@ void MainWindow::checkCredentials()
     }
     else if (QString::compare(response_data, "false")==0){
         attempts--;
+    }
+    if (attempts == 0) {
+        ui->pushButton->setEnabled(false);
+        ui->btnCredentials->setEnabled(false);
     }
     updateUI();
 }
