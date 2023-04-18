@@ -4,17 +4,18 @@
 #include <QDialog>
 #include <QString>
 #include <QtSerialPort/QSerialPort>
+#include "CardReader_global.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class CardReader; }
-QT_END_NAMESPACE
+namespace Ui {
+class CardReader;
+}
 
-class CardReader : public QDialog
+class CARDREADER_EXPORT CardReader : public QDialog
 {
     Q_OBJECT
 
 public:
-    CardReader(QWidget *parent = nullptr);
+    explicit CardReader(QWidget *parent = nullptr);
     ~CardReader();
     void openSerialPort();
 
@@ -27,4 +28,5 @@ private:
     QSerialPort *serial;
     void readSerialPort();
 };
+
 #endif // CARDREADER_H

@@ -1,12 +1,12 @@
 #include "cardreader.h"
-#include "ui_cardreader"
+#include "ui_cardreader.h"
 
 #include <QSerialPort>
 #include <QDebug>
 
-CardReader::CardReader(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::CardReader)
+CardReader::CardReader(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::CardReader)
 {
     qDebug() << "Creating CardReader";
     ui->setupUi(this);
@@ -26,7 +26,6 @@ CardReader::~CardReader()
     free(serial);
     serial = nullptr;
 }
-
 
 void CardReader::ReadSignal_clicked()
 {
@@ -49,7 +48,7 @@ void CardReader::openSerialPort()
     serial->setFlowControl(QSerialPort::NoFlowControl);
     if (!(serial->open(QIODevice::ReadWrite))) {
         qDebug() << "Error";
-        };
+    };
 }
 
 void CardReader::readSerialPort()
@@ -61,4 +60,5 @@ void CardReader::readSerialPort()
     qDebug()<<cardID;
 
 }
+
 
