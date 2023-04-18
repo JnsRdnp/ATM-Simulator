@@ -80,7 +80,7 @@ void balanceDialog::getBalanceSlot(QNetworkReply *balanceReply)
     }
 
     ui->lblBalance->setText(balance+" €");
-    ui->lblCreditlimit->setText("Luottoraja: "+creditLimit);
+    ui->lblCreditlimit->setText(creditLimit);
 
     balanceReply->deleteLater();
     getManager->deleteLater();
@@ -110,6 +110,30 @@ void balanceDialog::historyNetwork()
     historyReply = getManager->get(request);
 }
 
+void balanceDialog::scalingUI()
+{
+    int windowWidth = this->size().width();
+    int windowHeight = this->size().width();
+
+    int cellHeight = windowHeight/15;
+    ui->tblHistory->setFont(QFont("Segoe UI",cellHeight/10));
+
+    ui->tblHistory->setColumnWidth(0,windowWidth/5);
+
+    //cellHeights
+    for(int x=0;x>=4;x++){
+        ui->tblHistory->setRowHeight(x,cellHeight);
+    }
+
+//    ui->tblHistory->setFixedHeight(100*(ui->tblHistory->rowCount()));
+//    ui->tblHistory->set;
+    ui->tblHistory->setFixedWidth(windowWidth/1.62);
+
+    ui->tblHistory->setColumnWidth(0,windowWidth/5);
+    ui->tblHistory->setColumnWidth(1,windowWidth/5);
+
+}
+
 void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
 {
 
@@ -126,12 +150,14 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
         QJsonObject json_obj = value.toObject();
 
         ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
-        ui->tblHistory->setColumnWidth(0,130);
+        //ui->tblHistory->
 
         ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
-        ui->tblHistory->setColumnWidth(1,130);
+
 
         ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
+
+        scalingUI();
 
         stringIndex+=1;
     }
