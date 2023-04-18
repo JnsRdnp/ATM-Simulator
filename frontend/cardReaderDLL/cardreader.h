@@ -1,30 +1,30 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef CARDREADER_H
+#define CARDREADER_H
 
-#include <QMainWindow>
+#include <QDialog>
 #include <QString>
 #include <QtSerialPort/QSerialPort>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class CardReader; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class CardReader : public QDialog
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    CardReader(QWidget *parent = nullptr);
+    ~CardReader();
     void openSerialPort();
 
 private slots:
     void ReadSignal_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::CardReader *ui;
     QString cardID;
     QSerialPort *serial;
     void readSerialPort();
 };
-#endif // MAINWINDOW_H
+#endif // CARDREADER_H
