@@ -52,7 +52,8 @@ Menu::~Menu()
 void Menu::balanceClickHandler()
 {
     pBalanceDialog = new balanceDialog(this, accountID, BASE_URL, JWT);
-    pBalanceDialog->show();
+    pBalanceDialog->open();
+    pBalanceDialog->setWindowState(Qt::WindowFullScreen);
     emit menuTimerRestartSignal();
 }
 
@@ -60,6 +61,7 @@ void Menu::withdrawClickHandler()
 {
     pWithdraw = new withdrawdll(this,accountID, isCardCredit, BASE_URL, JWT);
     pWithdraw->open();
+    pWithdraw->setWindowState(Qt::WindowFullScreen);
     emit menuTimerRestartSignal();
 }
 
@@ -67,6 +69,7 @@ void Menu::accountClickHandler()
 {
     pAccountDialog = new accountDialog(this, accountID, BASE_URL, JWT);
     pAccountDialog->open();
+    pAccountDialog->setWindowState(Qt::WindowFullScreen);
     emit menuTimerRestartSignal();
 }
 

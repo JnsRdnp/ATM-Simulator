@@ -80,7 +80,7 @@ void balanceDialog::getBalanceSlot(QNetworkReply *balanceReply)
     }
 
     ui->lblBalance->setText(balance+" €");
-    ui->lblCreditlimit->setText(creditLimit);
+    ui->lblCreditlimit->setText("Luottoraja: "+creditLimit);
 
     balanceReply->deleteLater();
     getManager->deleteLater();
