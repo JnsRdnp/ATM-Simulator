@@ -7,11 +7,12 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
     cardID = inCardID;
     BASE_URL = IN_BASE_URL;
     JWT = inJWT;
+    qDebug()<<PIN<<cardID<<JWT<<IN_BASE_URL;
+
     //networking code
     QString site_url= BASE_URL + "cards/" + cardID;
     QNetworkRequest cardRequest((site_url));
-    QByteArray myJWToken="Bearer "+ JWT;
-    cardRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));
+    cardRequest.setRawHeader(QByteArray("Authorization"),(JWT));
     cardGetManager = new QNetworkAccessManager(this);
 
     connect(cardGetManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getCardInfo(QNetworkReply*)));
@@ -21,20 +22,8 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
 
 Choices::~Choices()
 {
-    disconnect(cardChoice, SIGNAL(cardChoice(QString)),
-               this, SLOT(cardChoiceHandler(QString)));
-    delete cardChoice;
     cardChoice = nullptr;
-
-    disconnect(errorHandler, SIGNAL(okClickedSignal()),
-                         this, SLOT(okClickHandler()));
-    delete errorHandler;
     errorHandler = nullptr;
-
-    disconnect(accountChoice, SIGNAL(selectedAccountSender(QString)),
-            this, SLOT(selectedAccountHandler(QString)));
-    accountChoice -> close();
-    delete accountChoice;
     accountChoice = nullptr;
 }
 
@@ -52,8 +41,6 @@ void Choices::getCardInfo(QNetworkReply *cardReply)
 
     cardReply->deleteLater();
     cardGetManager->deleteLater();
-    //starts the next network request
-    startAccountGet();
 
 }
 
@@ -72,9 +59,17 @@ void Choices::cardIsCreditOrDebit(int credit, int debit)
     } else if (credit == 0 && debit == 1){
         qDebug()<<"Asetetaan käyttäjälle suoraan debit";
         isCardCredit = false;
+
+        //start the next network request
+        startAccountGet();
+
     } else if (credit == 1 && debit == 0){
         qDebug()<<"Asetetaan käyttäjälle suoraan credit";
         isCardCredit = true;
+
+        //starts the next network request
+        startAccountGet();
+
     } else {
         jsonError();
     }
@@ -90,14 +85,16 @@ void Choices::cardChoiceHandler(QString buttonName)
         isCardCredit = false;
     }
     this->cardChoice->close();
+
+    //start the next network request
+    startAccountGet();
 }
 
 void Choices::startAccountGet()
 {
     QString site_url= BASE_URL + "accounts/card/" + cardID;
     QNetworkRequest accRequest((site_url));
-    QByteArray myJWToken="Bearer "+ JWT;
-    accRequest.setRawHeader(QByteArray("Authorization"),(myJWToken));
+    accRequest.setRawHeader(QByteArray("Authorization"),(JWT));
     accGetManager = new QNetworkAccessManager(this);
 
     connect(accGetManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(getAccInfo(QNetworkReply*)));
@@ -165,11 +162,10 @@ void Choices::createMainMenu()
 
     qDebug() << "aukaistaan ikkuna";
     mainWindow->open();
-    //PIN, cardID, JWT, isCardCredit, accountID)
 }
 
 void Choices::okClickHandler()
 {
-    this->cardChoice->close();
+    emit destroySignal();
 }
 

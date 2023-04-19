@@ -59,6 +59,7 @@ void SignoutTimerInterface::disagreeButtonHandler()
 
 void SignoutTimerInterface::newJsonWebTokenHandler(QByteArray jwt)
 {
+    qDebug()<<"emitting new JWT";
     emit newJsonWebToken(jwt);
 }
 

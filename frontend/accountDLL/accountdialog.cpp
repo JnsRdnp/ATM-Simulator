@@ -11,6 +11,7 @@ accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray
     accountID=id;
     baseUrl = inBaseUrl;
     jwt = inJwt;
+    qDebug()<<"JWT on"<<jwt;
 
     //dialog object gets destroyed when closed
     this->setAttribute(Qt::WA_DeleteOnClose);
@@ -39,8 +40,7 @@ void accountDialog::historyNetwork(int historyPage)
     //qDebug()<<site_url;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
-    QByteArray myToken="Bearer " + jwt;
-    request.setRawHeader(QByteArray("Authorization"),(myToken));
+    request.setRawHeader(QByteArray("Authorization"),(jwt));
     //WEBTOKEN LOPPU
 
     getManager = new QNetworkAccessManager(this);

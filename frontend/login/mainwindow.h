@@ -29,6 +29,7 @@ private slots:
     void receiveCardID(QString);
     void on_btnCredentials_clicked();
     void addLoginSlot(QNetworkReply * reply);
+    void destroySignalHandler();
 
 private:
     Ui::MainWindow *ui;

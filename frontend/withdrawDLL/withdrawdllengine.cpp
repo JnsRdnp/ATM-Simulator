@@ -7,7 +7,7 @@ WithdrawDLLEngine::WithdrawDLLEngine(QWidget *parent, int inAccountID, bool inIs
     isCardCredit = inIsCardCredit;
     baseUrl = inBaseUrl;
     jwt = inJwt;
-
+    qDebug()<<"JWT on"<<jwt;
 }
 
 
@@ -36,8 +36,7 @@ void WithdrawDLLEngine::withdraw(float num)
 
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    QByteArray myToken="Bearer " + jwt;
-    request.setRawHeader(QByteArray("Authorization"),(myToken));
+    request.setRawHeader(QByteArray("Authorization"),(jwt));
 
     putManager = new QNetworkAccessManager(this);
     connect(putManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(withdrawMoney(QNetworkReply*)));

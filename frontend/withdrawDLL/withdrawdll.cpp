@@ -32,6 +32,8 @@ withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit,Q
 withdrawdll::~withdrawdll()
 {
     delete ui;
+    delete Engine;
+    Engine = nullptr;
 }
 
 void withdrawdll::tenEuroClickHandler()

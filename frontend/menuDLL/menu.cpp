@@ -15,6 +15,7 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
     accountID = inAccountID;
     BASE_URL = IN_BASE_URL;
     JWT = inJWT;
+    qDebug()<<"JWT on"<<JWT;
 
 
     qDebug()<<"Yhdistetään widget";
@@ -88,7 +89,7 @@ void Menu::menuTimerRestart()
 void Menu::JWThandler(QByteArray jwt)
 {
     qDebug()<<jwt;
-    JWT = jwt;
+    JWT = "Bearer " + jwt;
     qDebug()<<"Time is up";
 }
 

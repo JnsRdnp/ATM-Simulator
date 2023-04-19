@@ -18,6 +18,9 @@ public:
     Choices(QWidget *parent = nullptr, QString inPIN = "", QString inCardID = "", QString IN_BASE_URL = "", QByteArray inJWT = NULL);
     ~Choices();
 
+signals:
+    void destroySignal();
+
 private slots:
     void getCardInfo (QNetworkReply *reply);
     void getAccInfo (QNetworkReply *reply);
@@ -35,9 +38,9 @@ private:
     ErrorScreen *errorHandler;
     AccountChoice *accountChoice;
     Menu *mainWindow;
-    bool noErrors = true;
     bool isCardCredit;
     int accountID;
+    bool noErrors = false;
 
     //for getting card info
     QNetworkAccessManager *cardGetManager;
