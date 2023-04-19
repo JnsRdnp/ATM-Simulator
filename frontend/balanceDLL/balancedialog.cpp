@@ -116,7 +116,7 @@ void balanceDialog::scalingUI()
     int windowHeight = this->size().width();
 
     int cellHeight = windowHeight/15;
-    ui->tblHistory->setFont(QFont("Segoe UI",cellHeight/10));
+    ui->tblHistory->setFont(QFont("Segoe UI",cellHeight/6));
 
     ui->tblHistory->setColumnWidth(0,windowWidth/5);
 
@@ -125,8 +125,6 @@ void balanceDialog::scalingUI()
         ui->tblHistory->setRowHeight(x,cellHeight);
     }
 
-//    ui->tblHistory->setFixedHeight(100*(ui->tblHistory->rowCount()));
-//    ui->tblHistory->set;
     ui->tblHistory->setFixedWidth(windowWidth/1.62);
 
     ui->tblHistory->setColumnWidth(0,windowWidth/5);
