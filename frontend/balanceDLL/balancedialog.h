@@ -38,6 +38,8 @@ private:
     QByteArray jwt;
     QString baseUrl;
 
+    void scalingUI();
+
 private slots:
     void backHandler();
 
