@@ -44,8 +44,6 @@ void Choices::getCardInfo(QNetworkReply *cardReply)
 
     cardReply->deleteLater();
     cardGetManager->deleteLater();
-    //starts the next network request
-    startAccountGet();
 
 }
 
@@ -64,9 +62,17 @@ void Choices::cardIsCreditOrDebit(int credit, int debit)
     } else if (credit == 0 && debit == 1){
         qDebug()<<"Asetetaan käyttäjälle suoraan debit";
         isCardCredit = false;
+
+        //start the next network request
+        startAccountGet();
+
     } else if (credit == 1 && debit == 0){
         qDebug()<<"Asetetaan käyttäjälle suoraan credit";
         isCardCredit = true;
+
+        //starts the next network request
+        startAccountGet();
+
     } else {
         jsonError();
     }
@@ -82,6 +88,9 @@ void Choices::cardChoiceHandler(QString buttonName)
         isCardCredit = false;
     }
     this->cardChoice->close();
+
+    //start the next network request
+    startAccountGet();
 }
 
 void Choices::startAccountGet()
@@ -160,6 +169,6 @@ void Choices::createMainMenu()
 
 void Choices::okClickHandler()
 {
-    this->close();
+    emit destroySignal();
 }
 

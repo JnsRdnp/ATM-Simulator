@@ -44,11 +44,7 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent, QString inCardID, 
 SignoutTimerInterface::~SignoutTimerInterface()
 {
     delete ui;
-    delete Engine;
-    Engine = nullptr;
-    delete instance;
     instance = nullptr;
-
 }
 
 void SignoutTimerInterface::agreeButtonHandler()
