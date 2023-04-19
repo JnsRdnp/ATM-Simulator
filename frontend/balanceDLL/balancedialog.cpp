@@ -127,8 +127,8 @@ void balanceDialog::scalingUI()
 
     ui->tblHistory->setFixedWidth(windowWidth/1.62);
 
-    ui->tblHistory->setColumnWidth(0,windowWidth/5);
-    ui->tblHistory->setColumnWidth(1,windowWidth/5);
+    ui->tblHistory->setColumnWidth(0,windowWidth/4);
+    ui->tblHistory->setColumnWidth(1,windowWidth/4);
 
 }
 
