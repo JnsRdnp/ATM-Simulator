@@ -50,6 +50,20 @@ void accountDialog::historyNetwork(int historyPage)
     reply = getManager->get(request);
 }
 
+void accountDialog::scalingUI()
+{
+    int windowWidth = this->size().width();
+    int windowHeight = this->size().width();
+
+    int cellHeight = windowHeight/15;
+    ui->tblHistory->setFont(QFont("Segoe UI",cellHeight/6));
+
+    ui->tblHistory->setColumnWidth(0,250);
+    ui->tblHistory->setColumnWidth(1,250);
+    //ui->tblHistory->setColumnWidth(1,);
+
+}
+
 void accountDialog::getHistorySlot(QNetworkReply *reply)
 {
     stringIndex = 0;
@@ -78,20 +92,19 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
         QJsonObject json_obj = value.toObject();
 
         ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
-        ui->tblHistory->setColumnWidth(0,130);
 
         ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
-        ui->tblHistory->setColumnWidth(1,130);
 
         ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
-        ui->tblHistory->setColumnWidth(1,130);
+
+        scalingUI();
 
         stringIndex += 1;
         //qDebug()<<"stringIndex inside foreach: "<<stringIndex;
     }
     //qDebug()<<"stringIndex outside foreach: "<<stringIndex;
 
-    ui->teHistory->setText(history);
+    //ui->teHistory->setText(history);
 
     reply->deleteLater();
     getManager->deleteLater();

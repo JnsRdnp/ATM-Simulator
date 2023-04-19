@@ -36,6 +36,7 @@ private:
     QByteArray jwt;
 
     int stringIndex;
+    void scalingUI();
 
 private slots:
     void getHistorySlot (QNetworkReply *reply);
