@@ -20,10 +20,11 @@ CardReader::CardReader(QWidget *parent) :
 CardReader::~CardReader()
 {
     delete ui;
+    serial->clear();
     if (serial->isOpen()){
         serial->close();
     };
-    free(serial);
+    delete serial;
     serial = nullptr;
 }
 

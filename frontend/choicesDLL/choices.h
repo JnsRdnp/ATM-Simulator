@@ -38,7 +38,6 @@ private:
     ErrorScreen *errorHandler;
     AccountChoice *accountChoice;
     Menu *mainWindow;
-    bool noErrors = true;
     bool isCardCredit;
     int accountID;
 
