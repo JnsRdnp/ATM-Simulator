@@ -56,11 +56,20 @@ void accountDialog::scalingUI()
     int windowHeight = this->size().width();
 
     int cellHeight = windowHeight/15;
-    ui->tblHistory->setFont(QFont("Segoe UI",cellHeight/6));
 
-    ui->tblHistory->setColumnWidth(0,250);
-    ui->tblHistory->setColumnWidth(1,250);
-    //ui->tblHistory->setColumnWidth(1,);
+    ui->tblHistory->setFixedHeight(windowHeight/3);
+
+    ui->tblHistory->setColumnWidth(0,windowWidth/3);
+    ui->tblHistory->setColumnWidth(1,windowWidth/3);
+    //ui->tblHistory->setRowHeight(0,cellHeight);
+
+    ui->tblHistory->setFont(QFont("Segoe UI",cellHeight/3));
+
+    for(int x=0; x<16; x++){
+        ui->tblHistory->setRowHeight(x, 2);
+        //qDebug()<<x<<"/r";
+    }
+
 
 }
 
@@ -91,20 +100,26 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
 
-        ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
+        QTableWidgetItem* wholeName = new QTableWidgetItem(json_obj["wholeName"].toString());
+        wholeName->setTextAlignment( Qt::AlignCenter );
 
-        ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
+        QTableWidgetItem* date = new QTableWidgetItem(json_obj["date"].toString());
+        date->setTextAlignment( Qt::AlignCenter );
 
-        ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
+        QTableWidgetItem* withdrawal = new QTableWidgetItem(QString::number(json_obj["withdrawal"].toDouble())+" €");
+        withdrawal->setTextAlignment( Qt::AlignCenter );
+
+        ui->tblHistory->setItem(stringIndex,0, wholeName);
+
+        ui->tblHistory->setItem(stringIndex,1, date);
+
+        ui->tblHistory->setItem(stringIndex,2, withdrawal);
 
         scalingUI();
 
         stringIndex += 1;
         //qDebug()<<"stringIndex inside foreach: "<<stringIndex;
     }
-    //qDebug()<<"stringIndex outside foreach: "<<stringIndex;
-
-    //ui->teHistory->setText(history);
 
     reply->deleteLater();
     getManager->deleteLater();
