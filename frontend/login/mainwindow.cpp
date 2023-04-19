@@ -124,4 +124,5 @@ void MainWindow::destroySignalHandler()
     attempts = 3;
     PINCode = "";
     cardID = "";
+    updateUI();
 }

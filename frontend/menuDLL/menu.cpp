@@ -76,8 +76,8 @@ void Menu::accountClickHandler()
 
 void Menu::signOutHandler()
 {
-    //login->open();
     this->close();
+    //emit destroySignal();
 }
 
 void Menu::menuTimerRestart()

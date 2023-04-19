@@ -149,7 +149,7 @@ void Choices::jsonError()
     errorHandler = new ErrorScreen(this);
     errorHandler->open();
     connect(errorHandler, SIGNAL(okClickedSignal()),
-            this, SLOT(okClickHandler()));
+            this, SLOT(destroySignalHandler()));
 }
 
 void Choices::createMainMenu()
@@ -157,6 +157,8 @@ void Choices::createMainMenu()
     qDebug() << "create the main menu";
     qDebug() << PIN << cardID << isCardCredit << accountID << BASE_URL << JWT;
     mainWindow = new Menu(this, PIN, cardID, isCardCredit, accountID, BASE_URL, JWT);
+    connect(mainWindow, SIGNAL(destroySignal()),
+            this, SLOT(destroySignalHandler()));
 
     mainWindow->setWindowState(Qt::WindowFullScreen);
 
@@ -164,7 +166,7 @@ void Choices::createMainMenu()
     mainWindow->open();
 }
 
-void Choices::okClickHandler()
+void Choices::destroySignalHandler()
 {
     emit destroySignal();
 }

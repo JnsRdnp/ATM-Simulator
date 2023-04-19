@@ -35,6 +35,7 @@ public slots:
 
 signals:
     void menuTimerRestartSignal();
+    void destroySignal();
 
 private:
     Ui::Menu *ui;

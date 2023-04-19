@@ -26,7 +26,7 @@ private slots:
     void getAccInfo (QNetworkReply *reply);
     void cardChoiceHandler(QString buttonName);
     void selectedAccountHandler(QString accID);
-    void okClickHandler();
+    void destroySignalHandler();
 
 private:
     QString PIN = "";
@@ -37,7 +37,7 @@ private:
     CardChoice *cardChoice;
     ErrorScreen *errorHandler;
     AccountChoice *accountChoice;
-    Menu *mainWindow;
+    Menu *mainWindow = nullptr;
     bool isCardCredit;
     int accountID;
     bool noErrors = false;
