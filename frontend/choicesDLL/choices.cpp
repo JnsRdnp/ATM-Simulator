@@ -22,11 +22,8 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
 
 Choices::~Choices()
 {
-    delete cardChoice;
     cardChoice = nullptr;
-    delete errorHandler;
     errorHandler = nullptr;
-    delete accountChoice;
     accountChoice = nullptr;
 }
 

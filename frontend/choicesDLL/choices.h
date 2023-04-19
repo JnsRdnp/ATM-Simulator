@@ -40,6 +40,7 @@ private:
     Menu *mainWindow;
     bool isCardCredit;
     int accountID;
+    bool noErrors = false;
 
     //for getting card info
     QNetworkAccessManager *cardGetManager;
