@@ -18,6 +18,8 @@ public:
     explicit CardReader(QWidget *parent = nullptr);
     ~CardReader();
     void openSerialPort();
+signals:
+    void RFIDSignal(QString);
 
 private slots:
     void ReadSignal_clicked();

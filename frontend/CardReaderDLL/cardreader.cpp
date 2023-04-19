@@ -30,9 +30,10 @@ CardReader::~CardReader()
 void CardReader::ReadSignal_clicked()
 {
     readSerialPort();
+    qDebug()<<"Trying to send";
     if (cardID.length() > 0 && cardID != NULL){
-        qDebug() << "Create PINinterface";
-        this->hide();
+        qDebug()<<"Sent";
+        emit RFIDSignal(cardID);
        }
 }
 

@@ -28,10 +28,19 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 
-unix:!macx: LIBS += -L$$PWD/../pincodedll/build/ -lpincodedll
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../pincodeDLL/build/release/ -lpincodedll
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../pincodeDLL/build/debug/ -lpincodedll
+else:unix: LIBS += -L$$PWD/../pincodeDLL/build/ -lpincodedll
 
 INCLUDEPATH += $$PWD/../pincodedll
 DEPENDPATH += $$PWD/../pincodedll
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../CardReaderDLL/build/release/ -lCardReader
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../CardReaderDLL/build/debug/ -lCardReader
+else:unix: LIBS += -L$$PWD/../CardReaderDLL/build/ -lCardReader
+
+INCLUDEPATH += $$PWD/../CardReaderDLL
+DEPENDPATH += $$PWD/../CardReaderDLL
 
 unix:!macx: LIBS += -L$$PWD/../choicesDLL/build/ -lchoices
 
