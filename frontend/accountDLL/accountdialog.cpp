@@ -137,4 +137,5 @@ void accountDialog::pageChange()
 
     // changes the page which is shown by the value that is in the qSpinbox
     historyNetwork(ui->btnPage->value());
+    ui->tblHistory->scrollToTop();
 }
