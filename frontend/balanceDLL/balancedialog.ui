@@ -39,7 +39,7 @@
      <property name="title">
       <string/>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,11">
       <item>
        <widget class="QPushButton" name="btnReturn">
         <property name="font">
