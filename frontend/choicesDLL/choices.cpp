@@ -160,6 +160,9 @@ void Choices::createMainMenu()
     qDebug() << "create the main menu";
     qDebug() << PIN << cardID << isCardCredit << accountID << BASE_URL << JWT;
     mainWindow = new Menu(this, PIN, cardID, isCardCredit, accountID, BASE_URL, JWT);
+
+    mainWindow->setWindowState(Qt::WindowFullScreen);
+
     qDebug() << "aukaistaan ikkuna";
     mainWindow->open();
     //PIN, cardID, JWT, isCardCredit, accountID)

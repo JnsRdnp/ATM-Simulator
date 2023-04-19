@@ -23,10 +23,10 @@ void MainWindow::on_pushButton_clicked()
 {
     updateUI();
     qDebug()<<"clicked button";
-    pincodep = new pincode(this);
-    connect(pincodep, SIGNAL(sendPin(QString)),
+    pPincode = new pincode(this);
+    connect(pPincode, SIGNAL(sendPin(QString)),
             this,SLOT(receivePinNumber(QString)));
-    pincodep->open();
+    pPincode->open();
     updateUI();
 
 }
@@ -102,6 +102,8 @@ void MainWindow::checkCredentials()
 {
     if(QString::compare(response_data, "false")!=0){
         token="Bearer "+response_data;
+        choice = new Choices(this);
+        choice->open();
     }
     else if (QString::compare(response_data, "false")==0){
         if (attempts == 3){
@@ -109,6 +111,10 @@ void MainWindow::checkCredentials()
         } else {
         attempts--;
         }
+    }
+    if (attempts == 0) {
+        ui->pushButton->setEnabled(false);
+        ui->btnCredentials->setEnabled(false);
     }
     updateUI();
 }
