@@ -115,7 +115,7 @@ void balanceDialog::scalingUI()
     int windowHeight = this->size().width();
 
     int cellHeight = windowHeight/15;
-    ui->tblHistory->setFont(QFont("Segoe UI",cellHeight/10));
+    ui->tblHistory->setFont(QFont("Segoe UI",cellHeight/6));
 
     ui->tblHistory->setColumnWidth(0,windowWidth/5);
 
@@ -124,12 +124,10 @@ void balanceDialog::scalingUI()
         ui->tblHistory->setRowHeight(x,cellHeight);
     }
 
-//    ui->tblHistory->setFixedHeight(100*(ui->tblHistory->rowCount()));
-//    ui->tblHistory->set;
     ui->tblHistory->setFixedWidth(windowWidth/1.62);
 
-    ui->tblHistory->setColumnWidth(0,windowWidth/5);
-    ui->tblHistory->setColumnWidth(1,windowWidth/5);
+    ui->tblHistory->setColumnWidth(0,windowWidth/6);
+    ui->tblHistory->setColumnWidth(1,windowWidth/6);
 
 }
 
@@ -147,14 +145,28 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
 
     foreach (const QJsonValue &value, json_array) {
         QJsonObject json_obj = value.toObject();
+        QTableWidgetItem* wholeName = new QTableWidgetItem(json_obj["wholeName"].toString());
+        wholeName->setTextAlignment( Qt::AlignCenter );
 
-        ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
-        //ui->tblHistory->
+        QTableWidgetItem* date = new QTableWidgetItem(json_obj["date"].toString());
+        date->setTextAlignment( Qt::AlignCenter );
 
-        ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
+        QTableWidgetItem* withdrawal = new QTableWidgetItem(QString::number(json_obj["withdrawal"].toDouble())+" €");
+        withdrawal->setTextAlignment( Qt::AlignCenter );
+
+        ui->tblHistory->setItem(stringIndex,0, wholeName);
+
+        ui->tblHistory->setItem(stringIndex,1, date);
+
+        ui->tblHistory->setItem(stringIndex,2, withdrawal);
+
+//        ui->tblHistory->setItem(stringIndex,0, new QTableWidgetItem(json_obj["wholeName"].toString()));
+//        //ui->tblHistory->
+
+//        ui->tblHistory->setItem(stringIndex,1, new QTableWidgetItem(json_obj["date"].toString()));
 
 
-        ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
+//        ui->tblHistory->setItem(stringIndex,2, new QTableWidgetItem( QString::number(json_obj["withdrawal"].toDouble())+" €"));
 
         scalingUI();
 

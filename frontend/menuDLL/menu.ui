@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>563</width>
-    <height>444</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,6 +37,15 @@
        <underline>false</underline>
       </font>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <property name="lineWidth">
+      <number>2</number>
+     </property>
      <property name="movement">
       <enum>QListView::Static</enum>
      </property>
@@ -44,7 +53,7 @@
       <enum>QListView::TopToBottom</enum>
      </property>
      <property name="spacing">
-      <number>25</number>
+      <number>35</number>
      </property>
      <property name="viewMode">
       <enum>QListView::ListMode</enum>
@@ -105,16 +114,6 @@
    </item>
    <item>
     <widget class="QStatusBar" name="statusbar"/>
-   </item>
-   <item>
-    <widget class="QMenuBar" name="menubar">
-     <widget class="QMenu" name="menubankSimul">
-      <property name="title">
-       <string>bankSimul</string>
-      </property>
-     </widget>
-     <addaction name="menubankSimul"/>
-    </widget>
    </item>
   </layout>
  </widget>
