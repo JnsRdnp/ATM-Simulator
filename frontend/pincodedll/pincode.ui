@@ -13,17 +13,37 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">backgroun {
+	background-color: #EBDBB2;
+}</string>
+  </property>
   <widget class="QPushButton" name="btnPin">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>160</x>
      <y>240</y>
-     <width>81</width>
+     <width>80</width>
      <height>61</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
+   </property>
    <property name="text">
-    <string>PIN CODE</string>
+    <string>ENTER</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_1">
@@ -34,6 +54,21 @@
      <width>80</width>
      <height>61</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
    </property>
    <property name="text">
     <string>1</string>
@@ -48,6 +83,21 @@
      <height>61</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
+   </property>
    <property name="text">
     <string>2</string>
    </property>
@@ -60,6 +110,21 @@
      <width>80</width>
      <height>61</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
    </property>
    <property name="text">
     <string>3</string>
@@ -74,6 +139,21 @@
      <height>61</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
+   </property>
    <property name="text">
     <string>4</string>
    </property>
@@ -86,6 +166,21 @@
      <width>80</width>
      <height>61</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
    </property>
    <property name="text">
     <string>5</string>
@@ -100,6 +195,21 @@
      <height>61</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
+   </property>
    <property name="text">
     <string>6</string>
    </property>
@@ -112,6 +222,21 @@
      <width>80</width>
      <height>61</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
    </property>
    <property name="text">
     <string>7</string>
@@ -126,6 +251,21 @@
      <height>61</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
+   </property>
    <property name="text">
     <string>8</string>
    </property>
@@ -138,6 +278,21 @@
      <width>80</width>
      <height>61</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
    </property>
    <property name="text">
     <string>9</string>
@@ -152,6 +307,21 @@
      <height>61</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
+   </property>
    <property name="text">
     <string>0</string>
    </property>
@@ -159,14 +329,29 @@
   <widget class="QPushButton" name="btnClear">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>80</x>
      <y>240</y>
      <width>80</width>
      <height>61</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+background-color: #EBDBB2;
+font-size:20px;
+color: #282828;
+
+}
+
+QPushButton:hover {
+background: qradialgradient(
+cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb
+);
+}</string>
+   </property>
    <property name="text">
-    <string>clear</string>
+    <string>C</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="textPin">
@@ -177,6 +362,12 @@
      <width>241</width>
      <height>61</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">center {
+	text-align: center;
+	background-color: #ebdbb2
+}</string>
    </property>
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
