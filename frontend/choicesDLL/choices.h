@@ -18,6 +18,9 @@ public:
     Choices(QWidget *parent = nullptr, QString inPIN = "", QString inCardID = "", QString IN_BASE_URL = "", QByteArray inJWT = NULL);
     ~Choices();
 
+signals:
+    void destroySignal();
+
 private slots:
     void getCardInfo (QNetworkReply *reply);
     void getAccInfo (QNetworkReply *reply);

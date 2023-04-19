@@ -16,6 +16,7 @@ balanceDialog::balanceDialog(QWidget *parent, int id,QString inBaseUrl,QByteArra
     accountID=id;
     baseUrl=inBaseUrl;
     jwt = inJwt;
+    qDebug()<<"JWT on"<<jwt;
 
 
     //dialog object gets destroyed when closed
@@ -40,8 +41,7 @@ void balanceDialog::balanceNetwork()
     QString site_url=baseUrl+"accounts/getBalance/"+accountIDStr;
     QNetworkRequest request((site_url));
     //WEBTOKEN ALKU
-    QByteArray myToken="Bearer " + jwt;
-    request.setRawHeader(QByteArray("Authorization"),(myToken));
+    request.setRawHeader(QByteArray("Authorization"),(jwt));
     //WEBTOKEN LOPPU
     getManager = new QNetworkAccessManager(this);
 
@@ -99,8 +99,7 @@ void balanceDialog::historyNetwork()
     QNetworkRequest request((site_url));
 
     //WEBTOKEN ALKU
-    QByteArray myToken="Bearer " + jwt;
-    request.setRawHeader(QByteArray("Authorization"),(myToken));
+    request.setRawHeader(QByteArray("Authorization"),(jwt));
     //WEBTOKEN LOPPU
 
     getManager = new QNetworkAccessManager(this);

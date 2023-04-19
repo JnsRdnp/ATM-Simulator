@@ -44,7 +44,11 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent, QString inCardID, 
 SignoutTimerInterface::~SignoutTimerInterface()
 {
     delete ui;
+    delete Engine;
+    Engine = nullptr;
+    delete instance;
     instance = nullptr;
+
 }
 
 void SignoutTimerInterface::agreeButtonHandler()
@@ -59,6 +63,7 @@ void SignoutTimerInterface::disagreeButtonHandler()
 
 void SignoutTimerInterface::newJsonWebTokenHandler(QByteArray jwt)
 {
+    qDebug()<<"emitting new JWT";
     emit newJsonWebToken(jwt);
 }
 

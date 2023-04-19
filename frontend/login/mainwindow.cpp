@@ -35,7 +35,7 @@ void MainWindow::receivePinNumber(QString num)
 {
     qDebug()<<"received pin";
     PINCode = num;
-    pincodep->deleteLater();
+    pPincode->deleteLater();
     //pincodep = nullptr;
     updateUI();
 }
@@ -79,7 +79,7 @@ void MainWindow::on_btnCredentials_clicked()
     QJsonObject jsonObj;
     jsonObj.insert("cardID", cardID);
     jsonObj.insert("PINcode", PINCode);
-    QString site_url= Environment::getBaseUrl() + "/login";
+    QString site_url= Environment::getBaseUrl() + "login";
     QNetworkRequest request((site_url));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
@@ -102,19 +102,26 @@ void MainWindow::checkCredentials()
 {
     if(QString::compare(response_data, "false")!=0){
         token="Bearer "+response_data;
-        choice = new Choices(this);
+        choice = new Choices(this, PINCode, cardID, Environment::getBaseUrl(), token);
         choice->open();
+        connect(choice, SIGNAL(destroySignal()),
+                this, SLOT(destroySignalHandler()));
     }
     else if (QString::compare(response_data, "false")==0){
-        if (attempts == 3){
-            attempts = 2;
-        } else {
         attempts--;
-        }
     }
     if (attempts == 0) {
         ui->pushButton->setEnabled(false);
         ui->btnCredentials->setEnabled(false);
     }
     updateUI();
+}
+
+void MainWindow::destroySignalHandler()
+{
+    delete choice;
+    choice = nullptr;
+    attempts = 3;
+    PINCode = "";
+    cardID = "";
 }

@@ -13,7 +13,7 @@ SignoutTimerEngine::SignoutTimerEngine(QWidget *parent, QString inCardID, QStrin
 
 SignoutTimerEngine::~SignoutTimerEngine()
 {
-
+    //QTimer is deleted and freed with it's parent, nothing is needed here
 }
 
 void SignoutTimerEngine::continueSession()
@@ -61,6 +61,7 @@ void SignoutTimerEngine::renewToken(QNetworkReply *reply)
     postManager->deleteLater();
 
     //These emits would trigger before postManager could send a signal and are thus here
+    emit newJsonWebToken(responseData);
     emit menuTimerRestart();
     emit closeSignout();
 }
