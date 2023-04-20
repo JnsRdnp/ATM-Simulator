@@ -28,9 +28,14 @@ void AccountChoice::setQJsonArray(QJsonArray accountArray)
         QListWidgetItem* currentItem = new QListWidgetItem(QString\
                             ("Tilinumero: ")+
                             QString::number(json_obj["idaccounts"].toInt())+
-                            QString("   |  Saldo: ")+
+                            QString("        Saldo: ")+
                             QString::number(json_obj["balance"].toDouble())+
+                            QString(" €")+
+                            QString("        Luotto: ")+
+                            QString::number(json_obj["creditLimit"].toDouble())+
                             QString(" €"));
+
+        currentItem->setTextAlignment( Qt::AlignCenter );
 
 
         ui->AccountList->addItem(currentItem);
@@ -49,12 +54,12 @@ void AccountChoice::selectHandler(QListWidgetItem *item)
     QStringList parsedSelectedAccount = selectedAccount.split(" "); // split the string at the spaces
     for (QString part : parsedSelectedAccount) {
         if (part.contains(QRegularExpression("\\d+"))) { // check if the part contains a number
-            qDebug()<<"part is: "<<part;
+            //qDebug()<<"part is: "<<part;
 
             emit selectedAccountSender(part);
             break;
         }
     }
     //selectedAccount.cend()->isSymbol()
-    qDebug()<<"Selected account: "<<selectedAccount;
+    //qDebug()<<"Selected account: "<<selectedAccount;
 }
