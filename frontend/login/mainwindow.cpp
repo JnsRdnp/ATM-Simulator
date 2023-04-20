@@ -119,9 +119,10 @@ void MainWindow::checkCredentials()
 
 void MainWindow::destroySignalHandler()
 {
-    delete choice;
+    qDebug()<<"tuhotaan choice";
     choice = nullptr;
     attempts = 3;
     PINCode = "";
     cardID = "";
+    updateUI();
 }

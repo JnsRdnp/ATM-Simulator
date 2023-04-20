@@ -3,6 +3,7 @@
 Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BASE_URL, QByteArray inJWT) :
     QDialog(parent)
 {
+    this->setAttribute(Qt::WA_DeleteOnClose);
     PIN = inPIN;
     cardID = inCardID;
     BASE_URL = IN_BASE_URL;
@@ -22,9 +23,8 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
 
 Choices::~Choices()
 {
-    cardChoice = nullptr;
-    errorHandler = nullptr;
-    accountChoice = nullptr;
+    qDebug()<<"Destroying choices";
+    qDebug()<<"Destroyed choices";
 }
 
 void Choices::getCardInfo(QNetworkReply *cardReply)
@@ -149,7 +149,7 @@ void Choices::jsonError()
     errorHandler = new ErrorScreen(this);
     errorHandler->open();
     connect(errorHandler, SIGNAL(okClickedSignal()),
-            this, SLOT(okClickHandler()));
+            this, SLOT(destroySignalHandler()));
 }
 
 void Choices::createMainMenu()
@@ -157,6 +157,8 @@ void Choices::createMainMenu()
     qDebug() << "create the main menu";
     qDebug() << PIN << cardID << isCardCredit << accountID << BASE_URL << JWT;
     mainWindow = new Menu(this, PIN, cardID, isCardCredit, accountID, BASE_URL, JWT);
+    connect(mainWindow, SIGNAL(destroySignal()),
+            this, SLOT(destroySignalHandler()));
 
     mainWindow->setWindowState(Qt::WindowFullScreen);
 
@@ -164,8 +166,9 @@ void Choices::createMainMenu()
     mainWindow->open();
 }
 
-void Choices::okClickHandler()
+void Choices::destroySignalHandler()
 {
     emit destroySignal();
+    this->close();
 }
 
