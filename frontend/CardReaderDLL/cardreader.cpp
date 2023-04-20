@@ -32,7 +32,7 @@ void CardReader::ReadSignal_clicked()
 {
     readSerialPort();
     qDebug()<<"Trying to send";
-    if (cardID.length() > 0 && cardID != NULL){
+    if (cardID.length() > 0 && !cardID.isEmpty()){
         qDebug()<<"Sent";
         emit RFIDSignal(cardID);
        }
@@ -42,7 +42,7 @@ void CardReader::openSerialPort()
 {
     serial =  new QSerialPort;
     //Setup the Serial connection
-    serial->setPortName("COM10");
+    serial->setPortName("COM3");
     serial->setBaudRate(9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);

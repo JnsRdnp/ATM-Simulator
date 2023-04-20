@@ -53,6 +53,7 @@ void Choices::cardIsCreditOrDebit(int credit, int debit)
         //Creates UI for the user to choose their card type
         cardChoice = new CardChoice(this);
         cardChoice->open();
+        cardChoice->setWindowState(Qt::WindowFullScreen);
         connect(cardChoice, SIGNAL(cardChoice(QString)),
                 this, SLOT(cardChoiceHandler(QString)));
 
@@ -125,7 +126,8 @@ void Choices::getAccInfo(QNetworkReply *accReply)
         connect(accountChoice, SIGNAL(selectedAccountSender(QString)),
                 this, SLOT(selectedAccountHandler(QString)));
         accountChoice->setQJsonArray(jsonAccArray);
-        accountChoice->show();
+        accountChoice->open();
+        accountChoice->setWindowState(Qt::WindowFullScreen);
         qDebug()<<"Arrayn koko on isompi kuin 1";
     }
 
