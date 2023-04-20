@@ -24,14 +24,16 @@ void AccountChoice::setQJsonArray(QJsonArray accountArray)
     foreach (const QJsonValue &value, accountArray) {
         QJsonObject json_obj = value.toObject();
         //qDebug()<<json_obj["idaccounts"].toString();
-        ui->AccountList->addItem(new QListWidgetItem(\
-                QString("Tilinumero: ")+
-                QString::number(json_obj["idaccounts"].toInt())+
-                QString("    |    ")+
-                QString::number(json_obj["balance"].toDouble())+
-                QString("€    |    ")+
-                QString::number(json_obj["creditLimit"].toDouble())
-                ));
+
+        QListWidgetItem* currentItem = new QListWidgetItem(QString\
+                            ("Tilinumero: ")+
+                            QString::number(json_obj["idaccounts"].toInt())+
+                            QString("   |  Saldo: ")+
+                            QString::number(json_obj["balance"].toDouble())+
+                            QString(" €"));
+
+
+        ui->AccountList->addItem(currentItem);
 
         //qDebug()<<QString::number(json_obj["idaccounts"].toInt());
 
@@ -40,7 +42,19 @@ void AccountChoice::setQJsonArray(QJsonArray accountArray)
 
 void AccountChoice::selectHandler(QListWidgetItem *item)
 {
+
     QString selectedAccount = item->text();
-    //qDebug()<<"Selected account: "<<selectedAccount;
-    emit selectedAccountSender(selectedAccount);
+
+    //This parses the account id number form the qList item
+    QStringList parsedSelectedAccount = selectedAccount.split(" "); // split the string at the spaces
+    for (QString part : parsedSelectedAccount) {
+        if (part.contains(QRegularExpression("\\d+"))) { // check if the part contains a number
+            qDebug()<<"part is: "<<part;
+
+            emit selectedAccountSender(part);
+            break;
+        }
+    }
+    //selectedAccount.cend()->isSymbol()
+    qDebug()<<"Selected account: "<<selectedAccount;
 }
