@@ -18,14 +18,22 @@ AccountChoice::~AccountChoice()
 
 void AccountChoice::setQJsonArray(QJsonArray accountArray)
 {
-    qDebug()<<accountArray;
-    qDebug()<<accountArray.empty();
-    qDebug()<<"luodaan esineet";
+//    qDebug()<<accountArray;
+//    qDebug()<<accountArray.empty();
+//    qDebug()<<"luodaan esineet";
     foreach (const QJsonValue &value, accountArray) {
         QJsonObject json_obj = value.toObject();
-        qDebug()<<json_obj["idaccounts"].toString();
-        ui->AccountList->addItem(new QListWidgetItem(QString::number(json_obj["idaccounts"].toInt())));
-        qDebug()<<QString::number(json_obj["idaccounts"].toInt());
+        //qDebug()<<json_obj["idaccounts"].toString();
+        ui->AccountList->addItem(new QListWidgetItem(\
+                QString("Tilinumero: ")+
+                QString::number(json_obj["idaccounts"].toInt())+
+                QString("    |    ")+
+                QString::number(json_obj["balance"].toDouble())+
+                QString("€    |    ")+
+                QString::number(json_obj["creditLimit"].toDouble())
+                ));
+
+        //qDebug()<<QString::number(json_obj["idaccounts"].toInt());
 
     }
 }
@@ -33,6 +41,6 @@ void AccountChoice::setQJsonArray(QJsonArray accountArray)
 void AccountChoice::selectHandler(QListWidgetItem *item)
 {
     QString selectedAccount = item->text();
-    qDebug()<<selectedAccount;
+    //qDebug()<<"Selected account: "<<selectedAccount;
     emit selectedAccountSender(selectedAccount);
 }

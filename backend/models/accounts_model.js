@@ -8,7 +8,7 @@ const accounts={
         return db.query('select * from accounts where idaccounts=?', [id], callback);
     },
     getByCard:function(id, callback) {
-      return db.query('select idaccounts from accounts where card_idcard=?', [id], callback);
+      return db.query('select idaccounts, balance, creditLimit from accounts where card_idcard=?', [id], callback);
     },
     add:function(accounts, callback) {
         return db.query('insert into accounts (balance,creditLimit,card_idcard,idowner)\
