@@ -1,3 +1,3 @@
 # group_15
 
-<img width="422" alt="image" src="https://user-images.githubusercontent.com/103430139/229530847-82d1d202-4528-4d8c-9f1b-c5c36e01cb37.png">
+![image](https://user-images.githubusercontent.com/78476744/233318810-29c73b87-1d22-4804-b861-3252c321e309.png)
