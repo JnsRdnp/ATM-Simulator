@@ -34,16 +34,9 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
 
 Menu::~Menu()
 {
-//    delete pBalanceDialog;
     pBalanceDialog = nullptr;
-
-//    delete pAccountDialog;
     pAccountDialog = nullptr;
-
-//    delete pWithdraw;
     pWithdraw = nullptr;
-
-//    delete timers;
     MainMenuTimer = nullptr;
 
     delete ui;
@@ -76,8 +69,8 @@ void Menu::accountClickHandler()
 
 void Menu::signOutHandler()
 {
+    emit destroySignal();
     this->close();
-    //emit destroySignal();
 }
 
 void Menu::menuTimerRestart()

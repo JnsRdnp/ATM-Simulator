@@ -3,6 +3,7 @@
 Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BASE_URL, QByteArray inJWT) :
     QDialog(parent)
 {
+    this->setAttribute(Qt::WA_DeleteOnClose);
     PIN = inPIN;
     cardID = inCardID;
     BASE_URL = IN_BASE_URL;
@@ -22,9 +23,8 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
 
 Choices::~Choices()
 {
-    cardChoice = nullptr;
-    errorHandler = nullptr;
-    accountChoice = nullptr;
+    qDebug()<<"Destroying choices";
+    qDebug()<<"Destroyed choices";
 }
 
 void Choices::getCardInfo(QNetworkReply *cardReply)
@@ -169,5 +169,6 @@ void Choices::createMainMenu()
 void Choices::destroySignalHandler()
 {
     emit destroySignal();
+    this->close();
 }
 
