@@ -42,7 +42,7 @@
      <property name="checkable">
       <bool>false</bool>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,11">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,10">
       <item>
        <widget class="QPushButton" name="btnReturn">
         <property name="font">

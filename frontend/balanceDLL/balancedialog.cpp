@@ -20,6 +20,7 @@ balanceDialog::balanceDialog(QWidget *parent, int id,QString inBaseUrl,QByteArra
     connect(ui->btnReturn,SIGNAL(clicked()),this,SLOT(backHandler()));
     connect(ui->btnReturn,SIGNAL(clicked()),parent,SLOT(menuTimerRestart()));
 
+    ui->btnReturn->setText((QChar(0x2B05)+QString(" Takaisin")));
 
     balanceNetwork();
 }

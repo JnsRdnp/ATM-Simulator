@@ -27,6 +27,8 @@ withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit,Q
 
     connect(Engine,SIGNAL(responseReady()),this,SLOT(returnHandler()));
 
+    ui->ReturnButton->setText((QChar(0x2B05)+QString(" Takaisin")));
+
 }
 
 withdrawdll::~withdrawdll()
