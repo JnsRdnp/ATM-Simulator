@@ -16,7 +16,7 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,10,1">
+  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,12,1">
    <item>
     <spacer name="verticalSpacer_2">
      <property name="orientation">
@@ -64,7 +64,7 @@
       <enum>QListView::TopToBottom</enum>
      </property>
      <property name="spacing">
-      <number>40</number>
+      <number>15</number>
      </property>
      <property name="viewMode">
       <enum>QListView::ListMode</enum>
