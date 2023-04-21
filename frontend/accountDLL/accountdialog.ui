@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Account</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0">
+  <layout class="QGridLayout" name="gridLayout" rowstretch="0,0">
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
@@ -57,6 +57,9 @@
      </property>
      <property name="title">
       <string>Kaikki tapahtumat</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,0">
       <item>
