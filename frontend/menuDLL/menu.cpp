@@ -15,21 +15,21 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
     accountID = inAccountID;
     BASE_URL = IN_BASE_URL;
     JWT = inJWT;
-    qDebug()<<"JWT on"<<JWT;
+    //qDebug()<<"JWT on"<<JWT;
 
 
-    qDebug()<<"Yhdistetään widget";
+    //qDebug()<<"Yhdistetään widget";
     connect(ui->listMenu, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(generalMenuListHandler(QListWidgetItem*)));
 
     //main menu timer;
-    qDebug()<<"Luodaan ajastin";
+    //qDebug()<<"Luodaan ajastin";
     MainMenuTimer = new QTimer(this);
     MainMenuTimer->start(timeout);
 
     connect(MainMenuTimer, SIGNAL(timeout()), this, SLOT(timedSignout()));
     connect(this, SIGNAL(menuTimerRestartSignal()), this, SLOT(menuTimerRestart()));
-    qDebug()<<"Ajastimet luotu";
+    //qDebug()<<"Ajastimet luotu";
 }
 
 Menu::~Menu()
@@ -75,15 +75,15 @@ void Menu::signOutHandler()
 
 void Menu::menuTimerRestart()
 {
-    qDebug()<<"menutimer restart \r";
+//    qDebug()<<"menutimer restart \r";
     MainMenuTimer->start(timeout);
 }
 
 void Menu::JWThandler(QByteArray jwt)
 {
-    qDebug()<<jwt;
+//    qDebug()<<jwt;
     JWT = "Bearer " + jwt;
-    qDebug()<<"Time is up";
+//    qDebug()<<"Time is up";
 }
 
 

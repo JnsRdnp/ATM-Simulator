@@ -8,7 +8,7 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
     cardID = inCardID;
     BASE_URL = IN_BASE_URL;
     JWT = inJWT;
-    qDebug()<<PIN<<cardID<<JWT<<IN_BASE_URL;
+    //qDebug()<<PIN<<cardID<<JWT<<IN_BASE_URL;
 
     //networking code
     QString site_url= BASE_URL + "cards/" + cardID;
@@ -31,7 +31,7 @@ void Choices::getCardInfo(QNetworkReply *cardReply)
 {
     //original source: https://peatutor.com/qt/http_get.php, refactored by Saku Roininen
     cardResponseData=cardReply->readAll();
-    qDebug()<<"DATA : "+cardResponseData;
+    //qDebug()<<"DATA : "+cardResponseData;
     QString responseString = QString(cardResponseData);
 
     QJsonDocument jsonResponse = QJsonDocument::fromJson(responseString.toUtf8());
@@ -48,7 +48,7 @@ void Choices::cardIsCreditOrDebit(int credit, int debit)
 {
     if(credit == 1 && debit == 1)
     {
-        qDebug()<<"Luodaan käyttäjälle valikko";
+//        qDebug()<<"Luodaan käyttäjälle valikko";
 
         //Creates UI for the user to choose their card type
         cardChoice = new CardChoice(this);
@@ -58,14 +58,14 @@ void Choices::cardIsCreditOrDebit(int credit, int debit)
                 this, SLOT(cardChoiceHandler(QString)));
 
     } else if (credit == 0 && debit == 1){
-        qDebug()<<"Asetetaan käyttäjälle suoraan debit";
+//        qDebug()<<"Asetetaan käyttäjälle suoraan debit";
         isCardCredit = false;
 
         //start the next network request
         startAccountGet();
 
     } else if (credit == 1 && debit == 0){
-        qDebug()<<"Asetetaan käyttäjälle suoraan credit";
+//        qDebug()<<"Asetetaan käyttäjälle suoraan credit";
         isCardCredit = true;
 
         //starts the next network request
@@ -106,7 +106,7 @@ void Choices::getAccInfo(QNetworkReply *accReply)
 {
     //original source: https://peatutor.com/qt/http_get.php, refactored by Saku Roininen
     accResponseData=accReply->readAll();
-    qDebug()<<"DATA : "+accResponseData;
+    //qDebug()<<"DATA : "+accResponseData;
 
     QJsonDocument jsonAccResponse = QJsonDocument::fromJson(accResponseData);
     QJsonArray jsonAccArray = jsonAccResponse.array();
@@ -114,11 +114,11 @@ void Choices::getAccInfo(QNetworkReply *accReply)
 
     if (!(jsonAccArray.size() > 0)){
         jsonError();
-        qDebug()<<"Arrayn koko on 0";
+        //qDebug()<<"Arrayn koko on 0";
     } else if (jsonAccArray.size() == 1){
         jsonAccObject = jsonAccArray[0].toObject();
         accountID = jsonAccObject["idaccounts"].toInt();
-        qDebug()<<"Arrayn koko on 1";
+        //qDebug()<<"Arrayn koko on 1";
         createMainMenu();
     } else {
         //luo accountchoice menu ja laita käyttäjä valitsemaan.
@@ -128,10 +128,10 @@ void Choices::getAccInfo(QNetworkReply *accReply)
         accountChoice->setQJsonArray(jsonAccArray);
         accountChoice->open();
         accountChoice->setWindowState(Qt::WindowFullScreen);
-        qDebug()<<"Arrayn koko on isompi kuin 1";
+        //qDebug()<<"Arrayn koko on isompi kuin 1";
     }
 
-    qDebug()<<jsonAccArray;
+    //qDebug()<<jsonAccArray;
     accReply->deleteLater();
     accGetManager->deleteLater();
 }
@@ -146,7 +146,7 @@ void Choices::selectedAccountHandler(QString accID)
 
 void Choices::jsonError()
 {
-    qDebug()<<"Something has gone wrong";
+    //qDebug()<<"Something has gone wrong";
     noErrors = false;
     errorHandler = new ErrorScreen(this);
     errorHandler->open();
@@ -156,15 +156,15 @@ void Choices::jsonError()
 
 void Choices::createMainMenu()
 {
-    qDebug() << "create the main menu";
-    qDebug() << PIN << cardID << isCardCredit << accountID << BASE_URL << JWT;
+//    qDebug() << "create the main menu";
+//    qDebug() << PIN << cardID << isCardCredit << accountID << BASE_URL << JWT;
     mainWindow = new Menu(this, PIN, cardID, isCardCredit, accountID, BASE_URL, JWT);
     connect(mainWindow, SIGNAL(destroySignal()),
             this, SLOT(destroySignalHandler()));
 
     mainWindow->setWindowState(Qt::WindowFullScreen);
 
-    qDebug() << "aukaistaan ikkuna";
+//    qDebug() << "aukaistaan ikkuna";
     mainWindow->open();
 }
 

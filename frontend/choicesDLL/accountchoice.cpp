@@ -8,7 +8,7 @@ AccountChoice::AccountChoice(QWidget *parent)
     ui->setupUi(this);
     connect(ui->AccountList, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(selectHandler(QListWidgetItem*)));
-    qDebug()<<"Luodaan AC";
+    //qDebug()<<"Luodaan AC";
 }
 
 AccountChoice::~AccountChoice()
@@ -28,19 +28,25 @@ void AccountChoice::setQJsonArray(QJsonArray accountArray)
         QListWidgetItem* currentItem = new QListWidgetItem(QString\
                             ("Tilinumero: ")+
                             QString::number(json_obj["idaccounts"].toInt())+
-                            QString("        Saldo: ")+
+                            QString(" / Saldo: ")+
                             QString::number(json_obj["balance"].toDouble())+
                             QString(" €")+
-                            QString("        Luotto: ")+
+                            QString(" / Luotto: ")+
                             QString::number(json_obj["creditLimit"].toDouble())+
                             QString(" €"));
 
+
+
         currentItem->setTextAlignment( Qt::AlignCenter );
+        currentItem->setFont(QFont("Segoe UI",25));
 
 
         ui->AccountList->addItem(currentItem);
+        ui->AccountList->setSpacing(50);
+        //ui->AccountList->setFixedSize(ui->AccountList->sizeHintForColumn(0) + ui->AccountList->frameWidth() * 2, ui->AccountList->sizeHintForRow(0) * ui->AccountList->count() + 2 * ui->AccountList->frameWidth());
 
-        //qDebug()<<QString::number(json_obj["idaccounts"].toInt());
+        //ui->AccountList->setFont(QFont("Segoe UI",25));
+        //ui->AccountList->setAttribute()
 
     }
 }
