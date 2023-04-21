@@ -8,7 +8,7 @@ AccountChoice::AccountChoice(QWidget *parent)
     ui->setupUi(this);
     connect(ui->AccountList, SIGNAL(itemClicked(QListWidgetItem*)),
             this, SLOT(selectHandler(QListWidgetItem*)));
-    qDebug()<<"Luodaan AC";
+    //qDebug()<<"Luodaan AC";
 }
 
 AccountChoice::~AccountChoice()

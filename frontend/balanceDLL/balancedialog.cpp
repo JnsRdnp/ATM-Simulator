@@ -1,11 +1,6 @@
 #include "balancedialog.h"
 #include "ui_balancedialog.h"
 
-//PIN
-//cardID
-//isCardCredit
-//accountid
-//jwt
 
 balanceDialog::balanceDialog(QWidget *parent, int id,QString inBaseUrl,QByteArray inJwt) :
     QDialog(parent),
@@ -16,7 +11,7 @@ balanceDialog::balanceDialog(QWidget *parent, int id,QString inBaseUrl,QByteArra
     accountID=id;
     baseUrl=inBaseUrl;
     jwt = inJwt;
-    qDebug()<<"JWT on"<<jwt;
+    //qDebug()<<"JWT on"<<jwt;
 
 
     //dialog object gets destroyed when closed
@@ -31,7 +26,7 @@ balanceDialog::balanceDialog(QWidget *parent, int id,QString inBaseUrl,QByteArra
 
 balanceDialog::~balanceDialog()
 {
-    qDebug()<<"Balance object destroyed";
+    //qDebug()<<"Balance object destroyed";
     delete ui;
 }
 
@@ -53,7 +48,7 @@ void balanceDialog::balanceNetwork()
 void balanceDialog::getBalanceSlot(QNetworkReply *balanceReply)
 {
     response_data=balanceReply->readAll();
-    qDebug()<<"DATA : "+response_data;
+    //qDebug()<<"DATA : "+response_data;
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonArray json_array = json_doc.array();
 
@@ -72,7 +67,7 @@ void balanceDialog::getBalanceSlot(QNetworkReply *balanceReply)
         creditLimit+=QString::number(json_obj["creditLimit"].toDouble())+" €";
     }
 
-    qDebug()<<balance;
+    //qDebug()<<balance;
 
     int w_size = balance.size();
     if (w_size > 6) {
@@ -173,7 +168,7 @@ void balanceDialog::getHistorySlot(QNetworkReply *historyReply)
         stringIndex+=1;
     }
 
-    qDebug()<<history;
+    //qDebug()<<history;
 
     historyReply->deleteLater();
     getManager->deleteLater();

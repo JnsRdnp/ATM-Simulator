@@ -19,10 +19,11 @@ CardChoice::~CardChoice()
 
 void CardChoice::choiceHandler()
 {
-    qDebug()<<"hello";
+    //qDebug()<<"hello";
     //gets the buttons name and sets it to QString name
     QPushButton *button = qobject_cast<QPushButton*>(sender());
     QString name = button->objectName();
-    qDebug()<<name;
+
+    //qDebug()<<name;
     emit cardChoice(name);
 }

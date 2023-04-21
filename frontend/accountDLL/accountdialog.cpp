@@ -11,7 +11,7 @@ accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray
     accountID=id;
     baseUrl = inBaseUrl;
     jwt = inJwt;
-    qDebug()<<"JWT on"<<jwt;
+    //qDebug()<<"JWT on"<<jwt;
 
     //dialog object gets destroyed when closed
     this->setAttribute(Qt::WA_DeleteOnClose);
@@ -20,14 +20,14 @@ accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray
     connect(ui->btnReturn,SIGNAL(clicked()),parent,SLOT(menuTimerRestart()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),parent,SLOT(menuTimerRestart()));
-    qDebug()<<jwt<<"and"<<baseUrl;
+    //qDebug()<<jwt<<"and"<<baseUrl;
     historyNetwork(1);
 }
 
 accountDialog::~accountDialog()
 {
     delete ui;
-    qDebug()<<"Account dialog deleted";
+    //qDebug()<<"Account dialog deleted";
 }
 
 void accountDialog::historyNetwork(int historyPage)
@@ -86,7 +86,7 @@ void accountDialog::getHistorySlot(QNetworkReply *reply)
         ui->btnPage->setMaximum(ui->btnPage->value());
     }
 
-    qDebug()<<page;
+    //qDebug()<<page;
 
     //qDebug()<<"DATA : "+response_data;
     //qDebug()<<response_data.count("idhistory");

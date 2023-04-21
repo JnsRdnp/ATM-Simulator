@@ -2,25 +2,25 @@
 
 WithdrawDLLEngine::WithdrawDLLEngine(QWidget *parent, int inAccountID, bool inIsCardCredit,QString inBaseUrl,QByteArray inJwt) : QDialog(parent)
 {
-    qDebug() << "Create DLL Engine";
+//    qDebug() << "Create DLL Engine";
     accountID = inAccountID;
     isCardCredit = inIsCardCredit;
     baseUrl = inBaseUrl;
     jwt = inJwt;
-    qDebug()<<"JWT on"<<jwt;
+//    qDebug()<<"JWT on"<<jwt;
 }
 
 
 WithdrawDLLEngine::~WithdrawDLLEngine()
 {
-    qDebug() << "Destroy DLL Engine";
+//    qDebug() << "Destroy DLL Engine";
 }
 
 void WithdrawDLLEngine::withdraw(float num)
 {
     //Original source: https://peatutor.com/qt/http_put.php, edited by Saku Roininen
-    qDebug() << "Engine Withdraw method";
-    qDebug() << num;
+//    qDebug() << "Engine Withdraw method";
+//    qDebug() << num;
 
     QJsonObject withdrawObj;
     withdrawObj.insert("accountID",accountID);
@@ -52,7 +52,7 @@ void WithdrawDLLEngine::withdrawMoney(QNetworkReply *reply)
 {
     //Original source: https://peatutor.com/qt/http_put.php
     responseData=reply->readAll();
-    qDebug()<<responseData;
+//    qDebug()<<responseData;
     //if responseData == "message which we get when fail"
     //emit failWithdraw()
     //else
