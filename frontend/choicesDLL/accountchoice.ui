@@ -60,7 +60,7 @@
          <font>
           <pointsize>30</pointsize>
           <bold>false</bold>
-          <underline>true</underline>
+          <underline>false</underline>
          </font>
         </property>
         <property name="mouseTracking">
