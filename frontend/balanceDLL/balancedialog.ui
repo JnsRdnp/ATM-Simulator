@@ -73,6 +73,9 @@
      <property name="title">
       <string>Saldo</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QLabel" name="lblBalance">
@@ -101,6 +104,9 @@
      <property name="title">
       <string>Luottoraja</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QLabel" name="lblCreditlimit">
@@ -126,6 +132,9 @@
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
       <string>Viimeisimmät tapahtumat</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="1" column="0">
