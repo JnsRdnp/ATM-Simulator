@@ -3,10 +3,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const jwt = require('jsonwebtoken');
+const https = require("https");
+const fs = require("fs");
 
 const dotenv=require('dotenv');
 dotenv.config();
-const { constants } = require('fs/promises');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
@@ -33,8 +34,16 @@ app.use('/accounts',accountsRouter);
 app.use('/history',historyRouter);
 app.use('/ownership', ownershipRouter);
 
-app.listen(process.env.port, function(){
-    console.log("Application listens to port " + process.env.port);
+const options = {
+	key: fs.readFileSync('/etc/letsencrypt/live/santtuniskanen.com/privkey.pem', 'utf8'),
+	cert: fs.readFileSync('/etc/letsencrypt/live/santtuniskanen.com/cert.pem', 'utf8'),
+	ca: fs.readFileSync('/etc/letsencrypt/live/santtuniskanen.com/chain.pem', 'utf8')
+};
+
+const httpsServer = https.createServer(options, app);
+
+httpsServer.listen(3000, () => {
+	console.log("Application listening to port " + process.env.port);
 });
 
 
