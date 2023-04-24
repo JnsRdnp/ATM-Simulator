@@ -24,21 +24,22 @@ void AccountChoice::setQJsonArray(QJsonArray accountArray)
     foreach (const QJsonValue &value, accountArray) {
         QJsonObject json_obj = value.toObject();
         //qDebug()<<json_obj["idaccounts"].toString();
+        //(QChar(0x27A1)+
+        QListWidgetItem* currentItem = new QListWidgetItem
 
-        QListWidgetItem* currentItem = new QListWidgetItem(QString\
-                            ("Tilinumero: ")+
+            (QChar(0x27A1)+QString("  Tilinumero: ")+
                             QString::number(json_obj["idaccounts"].toInt())+
-                            QString(" / Saldo: ")+
+                            QString("  [ Saldo: ")+
                             QString::number(json_obj["balance"].toDouble())+
-                            QString(" €")+
-                            QString(" / Luotto: ")+
+                            QString(" € ]")+
+                            QString(" [ Luotto: ")+
                             QString::number(json_obj["creditLimit"].toDouble())+
-                            QString(" €"));
+                            QString(" € ]"));
 
 
 
         currentItem->setTextAlignment( Qt::AlignCenter );
-        currentItem->setFont(QFont("Segoe UI",25));
+        //currentItem->setFont(QFont("Segoe UI",25));
 
 
         ui->AccountList->addItem(currentItem);

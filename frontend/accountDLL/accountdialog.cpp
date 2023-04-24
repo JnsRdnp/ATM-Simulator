@@ -21,6 +21,9 @@ accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray
     connect(ui->btnPage,SIGNAL(valueChanged(int)),this, SLOT(pageChange()));
     connect(ui->btnPage,SIGNAL(valueChanged(int)),parent,SLOT(menuTimerRestart()));
     //qDebug()<<jwt<<"and"<<baseUrl;
+
+    ui->btnReturn->setText((QChar(0x2B05)+QString(" Takaisin")));
+
     historyNetwork(1);
 }
 

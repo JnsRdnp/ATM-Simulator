@@ -30,6 +30,7 @@ Menu::Menu(QWidget *parent, QString inPIN, QString inCardID, bool inIsCardCredit
     connect(MainMenuTimer, SIGNAL(timeout()), this, SLOT(timedSignout()));
     connect(this, SIGNAL(menuTimerRestartSignal()), this, SLOT(menuTimerRestart()));
     //qDebug()<<"Ajastimet luotu";
+
 }
 
 Menu::~Menu()
