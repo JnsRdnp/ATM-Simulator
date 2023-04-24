@@ -10,7 +10,7 @@ Choices::Choices(QWidget *parent, QString inPIN, QString inCardID, QString IN_BA
     JWT = inJWT;
     //qDebug()<<PIN<<cardID<<JWT<<IN_BASE_URL;
 
-    //networking code
+    //requests the server for cards' info
     QString site_url= BASE_URL + "cards/" + cardID;
     QNetworkRequest cardRequest((site_url));
     cardRequest.setRawHeader(QByteArray("Authorization"),(JWT));
