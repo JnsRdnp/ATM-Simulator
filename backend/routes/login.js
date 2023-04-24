@@ -27,7 +27,7 @@ function(request, response) {
                         console.log("wrong password");
                         response.send(false);
                     } else {
-                    console.log("succes");
+                    console.log("success");
                     const token = generateAccessToken({ cardID: user });
                     response.send(token);
                     }		
