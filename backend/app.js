@@ -35,9 +35,9 @@ app.use('/history',historyRouter);
 app.use('/ownership', ownershipRouter);
 
 const options = {
-	key: fs.readFileSync('/etc/letsencrypt/live/santtuniskanen.com/privkey.pem', 'utf8'),
-	cert: fs.readFileSync('/etc/letsencrypt/live/santtuniskanen.com/cert.pem', 'utf8'),
-	ca: fs.readFileSync('/etc/letsencrypt/live/santtuniskanen.com/chain.pem', 'utf8')
+	key: fs.readFileSync(process.env.privkey, 'utf8'),
+	cert: fs.readFileSync(process.env.cert, 'utf8'),
+	ca: fs.readFileSync(process.env.chain, 'utf8')
 };
 
 const httpsServer = https.createServer(options, app);
