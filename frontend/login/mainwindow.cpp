@@ -11,9 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
     attempts = 3;
     ui->setupUi(this);
 
-    ui->pushButton->setEnabled(true);
+    ui->btnPin->setEnabled(true);
 
     this->setWindowState(Qt::WindowFullScreen);
+
+
 
     cardReader = new CardReader(this);
 
@@ -21,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
             this,SLOT(receiveCardID(QString)));
 
     connect(ui->cardButtonNotCursed,SIGNAL(clicked()),this,SLOT(on_CardButton_clicked()));
-    connect(ui->btnLogin,SIGNAL(clicked()),this, SLOT(on_btnCredentials_clicked()));
 
+    connect(ui->btnLogin,SIGNAL(clicked()),this, SLOT(on_btnCredentials_clicked()));
 
     updateUI();
 }
@@ -36,9 +38,12 @@ void MainWindow::on_pushButton_clicked()
 {
     updateUI();
     qDebug()<<"clicked button";
+
     pPincode = new pincode(this);
+
     connect(pPincode, SIGNAL(sendPin(QString)),
             this,SLOT(receivePinNumber(QString)));
+
     pPincode->open();
     updateUI();
 
@@ -48,8 +53,10 @@ void MainWindow::receivePinNumber(QString num)
 {
     qDebug()<<"received pin";
     PINCode = num;
-    pPincode->deleteLater();
+
+    //pPincode->deleteLater();
     //pincodep = nullptr;
+    on_pushButton_clicked();
     updateUI();
 }
 
@@ -61,10 +68,6 @@ void MainWindow::updateUI() {
     qDebug()<<attempts;
 }
 
-void MainWindow::checkNumber()
-{
-    updateUI();
-}
 
 void MainWindow::clearLoginData()
 {
@@ -72,7 +75,7 @@ void MainWindow::clearLoginData()
     PINCode = "";
     attempts = 3;
 
-    ui->pushButton->setEnabled(true);
+    ui->btnPin->setEnabled(true);
     ui->btnLogin->setEnabled(true);
 
     updateUI();
@@ -107,6 +110,10 @@ void MainWindow::receiveCardID(QString inCardID)
 
         //this caused problems with reading cardID multiple times
 //    cardReader->deleteLater();
+    if (cardID!=""){
+            on_pushButton_clicked();
+        }
+
     updateUI();
 
 }
@@ -156,7 +163,7 @@ void MainWindow::checkCredentials()
         attempts--;
     }
     if (attempts == 0) {
-        ui->pushButton->setEnabled(false);
+        ui->btnPin->setEnabled(false);
         ui->btnLogin->setEnabled(false);
     }
     updateUI();
