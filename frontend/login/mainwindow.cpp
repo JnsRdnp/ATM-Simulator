@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
             this,SLOT(receiveCardID(QString)));
 
     connect(ui->cardButtonNotCursed,SIGNAL(clicked()),this,SLOT(on_CardButton_clicked()));
+    connect(ui->btnLogin,SIGNAL(clicked()),this, SLOT(on_btnCredentials_clicked()));
 
 
     updateUI();
@@ -65,6 +66,14 @@ void MainWindow::checkNumber()
     updateUI();
 }
 
+void MainWindow::clearLoginData()
+{
+    cardID = "";
+    PINCode = "";
+    updateUI();
+
+}
+
 
 void MainWindow::on_CardButton_clicked()
 {
@@ -76,6 +85,7 @@ void MainWindow::on_CardButton_clicked()
 //    cardReader->open();
 //    updateUI();
     updateUI();
+
 
     qDebug()<<"CardID is: "+cardID;
 
@@ -91,7 +101,7 @@ void MainWindow::receiveCardID(QString inCardID)
     cardID = inCardID;
 
         //this caused problems with reading cardID multiple times
-    //cardReader->deleteLater();
+//    cardReader->deleteLater();
     updateUI();
 
 }
@@ -133,15 +143,15 @@ void MainWindow::checkCredentials()
         choice->open();
         connect(choice, SIGNAL(destroySignal()),
                 this, SLOT(destroySignalHandler()));
-        updateUI();
-
+        //clearsData from login screen if user gets in
+        clearLoginData();
     }
     else if (QString::compare(response_data, "false")==0){
         attempts--;
     }
     if (attempts == 0) {
         ui->pushButton->setEnabled(false);
-        ui->btnCredentials->setEnabled(false);
+        ui->btnLogin->setEnabled(false);
     }
     updateUI();
 }

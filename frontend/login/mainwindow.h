@@ -49,5 +49,7 @@ private:
     QNetworkReply *reply;
     QByteArray response_data;
     QByteArray token;
+
+    void clearLoginData();
 };
 #endif // MAINWINDOW_H
