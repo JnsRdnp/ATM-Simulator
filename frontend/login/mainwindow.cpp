@@ -70,6 +70,11 @@ void MainWindow::clearLoginData()
 {
     cardID = "";
     PINCode = "";
+    attempts = 3;
+
+    ui->pushButton->setEnabled(true);
+    ui->btnLogin->setEnabled(true);
+
     updateUI();
 
 }
