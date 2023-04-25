@@ -11,8 +11,8 @@ CardReader::CardReader(QWidget *parent) :
     qDebug() << "Creating CardReader";
     ui->setupUi(this);
     qDebug() << "Connecting Read Button";
-    connect(ui->Read,SIGNAL(clicked()),
-            this, SLOT(ReadSignal_clicked()));
+//    connect(ui->Read,SIGNAL(clicked()),
+//            this, SLOT(ReadSignal_clicked()));
     qDebug() << "Opening Serial Port";
     openSerialPort();
 }

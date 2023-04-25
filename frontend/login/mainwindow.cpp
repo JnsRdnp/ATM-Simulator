@@ -10,7 +10,18 @@ MainWindow::MainWindow(QWidget *parent)
     cardID = "";
     attempts = 3;
     ui->setupUi(this);
+
     ui->pushButton->setEnabled(true);
+
+    this->setWindowState(Qt::WindowFullScreen);
+
+    cardReader = new CardReader(this);
+    connect(cardReader, SIGNAL(RFIDSignal(QString)),
+            this,SLOT(receiveCardID(QString)));
+
+    connect(ui->cardButtonNotCursed,SIGNAL(clicked()),this,SLOT(on_CardButton_clicked()));
+
+
     updateUI();
 }
 
@@ -56,13 +67,17 @@ void MainWindow::checkNumber()
 
 void MainWindow::on_CardButton_clicked()
 {
+//    updateUI();
+//    qDebug()<<"clicked button";
+//    cardReader = new CardReader(this);
+//    connect(cardReader, SIGNAL(RFIDSignal(QString)),
+//            this,SLOT(receiveCardID(QString)));
+//    cardReader->open();
+//    updateUI();
+
+    cardReader->ReadSignal_clicked();
     updateUI();
-    qDebug()<<"clicked button";
-    cardReader = new CardReader(this);
-    connect(cardReader, SIGNAL(RFIDSignal(QString)),
-            this,SLOT(receiveCardID(QString)));
-    cardReader->open();
-    updateUI();
+
 }
 
 void MainWindow::receiveCardID(QString inCardID)

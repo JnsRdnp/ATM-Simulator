@@ -31,6 +31,7 @@ private slots:
     void addLoginSlot(QNetworkReply * reply);
     void destroySignalHandler();
 
+
 private:
     Ui::MainWindow *ui;
     pincode * pPincode;
