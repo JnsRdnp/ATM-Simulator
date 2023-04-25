@@ -19,6 +19,7 @@ CardReader::CardReader(QWidget *parent) :
 
 CardReader::~CardReader()
 {
+    qDebug()<<"cardreader DESTRUCTOR";
     delete ui;
     serial->clear();
     if (serial->isOpen()){

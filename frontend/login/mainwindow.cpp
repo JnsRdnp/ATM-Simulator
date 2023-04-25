@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowState(Qt::WindowFullScreen);
 
     cardReader = new CardReader(this);
+
     connect(cardReader, SIGNAL(RFIDSignal(QString)),
             this,SLOT(receiveCardID(QString)));
 
@@ -74,16 +75,23 @@ void MainWindow::on_CardButton_clicked()
 //            this,SLOT(receiveCardID(QString)));
 //    cardReader->open();
 //    updateUI();
+    updateUI();
+
+    qDebug()<<"CardID is: "+cardID;
 
     cardReader->ReadSignal_clicked();
+
     updateUI();
+
 
 }
 
 void MainWindow::receiveCardID(QString inCardID)
 {
     cardID = inCardID;
-    cardReader->deleteLater();
+
+        //this caused problems with reading cardID multiple times
+    //cardReader->deleteLater();
     updateUI();
 
 }
@@ -99,8 +107,10 @@ void MainWindow::on_btnCredentials_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     postManager = new QNetworkAccessManager(this);
+
     connect(postManager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(addLoginSlot(QNetworkReply*)));
+
     reply = postManager->post(request, QJsonDocument(jsonObj).toJson());
     qDebug()<<reply;
 }
@@ -109,7 +119,9 @@ void MainWindow::addLoginSlot(QNetworkReply *reply) {
     response_data=reply->readAll();
     qDebug()<<response_data;
     reply->deleteLater();
+
     postManager->deleteLater();
+
     checkCredentials();
 }
 
@@ -121,6 +133,8 @@ void MainWindow::checkCredentials()
         choice->open();
         connect(choice, SIGNAL(destroySignal()),
                 this, SLOT(destroySignalHandler()));
+        updateUI();
+
     }
     else if (QString::compare(response_data, "false")==0){
         attempts--;
