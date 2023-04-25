@@ -145,7 +145,8 @@ void MainWindow::checkCredentials()
     if(QString::compare(response_data, "false")!=0){
         token="Bearer "+response_data;
         choice = new Choices(this, PINCode, cardID, Environment::getBaseUrl(), token);
-        choice->open();
+            //commented out because this somehow created mystery "login" miniwindow
+        //choice->open();
         connect(choice, SIGNAL(destroySignal()),
                 this, SLOT(destroySignalHandler()));
         //clearsData from login screen if user gets in
