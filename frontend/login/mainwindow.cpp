@@ -10,7 +10,20 @@ MainWindow::MainWindow(QWidget *parent)
     cardID = "";
     attempts = 3;
     ui->setupUi(this);
+
     ui->pushButton->setEnabled(true);
+
+    this->setWindowState(Qt::WindowFullScreen);
+
+    cardReader = new CardReader(this);
+
+    connect(cardReader, SIGNAL(RFIDSignal(QString)),
+            this,SLOT(receiveCardID(QString)));
+
+    connect(ui->cardButtonNotCursed,SIGNAL(clicked()),this,SLOT(on_CardButton_clicked()));
+    connect(ui->btnLogin,SIGNAL(clicked()),this, SLOT(on_btnCredentials_clicked()));
+
+
     updateUI();
 }
 
@@ -53,22 +66,47 @@ void MainWindow::checkNumber()
     updateUI();
 }
 
+void MainWindow::clearLoginData()
+{
+    cardID = "";
+    PINCode = "";
+    attempts = 3;
+
+    ui->pushButton->setEnabled(true);
+    ui->btnLogin->setEnabled(true);
+
+    updateUI();
+
+}
+
 
 void MainWindow::on_CardButton_clicked()
 {
+//    updateUI();
+//    qDebug()<<"clicked button";
+//    cardReader = new CardReader(this);
+//    connect(cardReader, SIGNAL(RFIDSignal(QString)),
+//            this,SLOT(receiveCardID(QString)));
+//    cardReader->open();
+//    updateUI();
     updateUI();
-    qDebug()<<"clicked button";
-    cardReader = new CardReader(this);
-    connect(cardReader, SIGNAL(RFIDSignal(QString)),
-            this,SLOT(receiveCardID(QString)));
-    cardReader->open();
+
+
+    qDebug()<<"CardID is: "+cardID;
+
+    cardReader->ReadSignal_clicked();
+
     updateUI();
+
+
 }
 
 void MainWindow::receiveCardID(QString inCardID)
 {
     cardID = inCardID;
-    cardReader->deleteLater();
+
+        //this caused problems with reading cardID multiple times
+//    cardReader->deleteLater();
     updateUI();
 
 }
@@ -84,8 +122,10 @@ void MainWindow::on_btnCredentials_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     postManager = new QNetworkAccessManager(this);
+
     connect(postManager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(addLoginSlot(QNetworkReply*)));
+
     reply = postManager->post(request, QJsonDocument(jsonObj).toJson());
     qDebug()<<reply;
 }
@@ -94,7 +134,9 @@ void MainWindow::addLoginSlot(QNetworkReply *reply) {
     response_data=reply->readAll();
     qDebug()<<response_data;
     reply->deleteLater();
+
     postManager->deleteLater();
+
     checkCredentials();
 }
 
@@ -103,16 +145,19 @@ void MainWindow::checkCredentials()
     if(QString::compare(response_data, "false")!=0){
         token="Bearer "+response_data;
         choice = new Choices(this, PINCode, cardID, Environment::getBaseUrl(), token);
-        choice->open();
+            //commented out because this somehow created mystery "login" miniwindow
+        //choice->open();
         connect(choice, SIGNAL(destroySignal()),
                 this, SLOT(destroySignalHandler()));
+        //clearsData from login screen if user gets in
+        clearLoginData();
     }
     else if (QString::compare(response_data, "false")==0){
         attempts--;
     }
     if (attempts == 0) {
         ui->pushButton->setEnabled(false);
-        ui->btnCredentials->setEnabled(false);
+        ui->btnLogin->setEnabled(false);
     }
     updateUI();
 }

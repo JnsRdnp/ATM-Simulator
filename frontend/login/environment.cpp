@@ -7,5 +7,5 @@ Environment::Environment()
 
 QString Environment::getBaseUrl()
 {
-    return "http://localhost:3000/";
+    return "https://santtuniskanen.com:3000/";
 }

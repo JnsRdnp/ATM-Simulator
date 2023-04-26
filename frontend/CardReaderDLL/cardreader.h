@@ -21,7 +21,7 @@ public:
 signals:
     void RFIDSignal(QString);
 
-private slots:
+public slots:
     void ReadSignal_clicked();
 
 private:

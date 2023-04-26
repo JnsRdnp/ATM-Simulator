@@ -31,6 +31,7 @@ private slots:
     void addLoginSlot(QNetworkReply * reply);
     void destroySignalHandler();
 
+
 private:
     Ui::MainWindow *ui;
     pincode * pPincode;
@@ -48,5 +49,7 @@ private:
     QNetworkReply *reply;
     QByteArray response_data;
     QByteArray token;
+
+    void clearLoginData();
 };
 #endif // MAINWINDOW_H

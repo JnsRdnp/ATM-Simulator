@@ -39,7 +39,7 @@ void AccountChoice::setQJsonArray(QJsonArray accountArray)
 
 
         currentItem->setTextAlignment( Qt::AlignCenter );
-        //currentItem->setFont(QFont("Segoe UI",25));
+        currentItem->setFont(QFont("Segoe UI",25));
 
 
         ui->AccountList->addItem(currentItem);
