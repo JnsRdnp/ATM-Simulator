@@ -8,7 +8,19 @@ Provide a brief and descriptive title for your project.
 
 ## Description
 
-Describe your project in detail. What does it do? What problems does it solve? What technologies were used to build it?
+Learning goals for this project were:
+
+    -Designing databases and programming in SQL
+
+    -Backend programming using Node.js/Express.js
+
+    -Qt/C++, particularly in signal/slot implementation
+
+    -Some kind of understanding of the functionality of the HTTP protocol
+
+    -Utilizing Git, specifically in collaborative work environments
+
+    -Experience working in a team
 
 ## Getting Started
 
