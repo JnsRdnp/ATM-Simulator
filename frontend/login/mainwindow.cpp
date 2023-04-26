@@ -26,6 +26,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->btnLogin,SIGNAL(clicked()),this, SLOT(on_btnCredentials_clicked()));
 
+    connect(ui->btnPin,SIGNAL(clicked()),this,SLOT(on_pushButton_clicked()));
+
+
+
     updateUI();
 }
 
@@ -54,9 +58,6 @@ void MainWindow::receivePinNumber(QString num)
     qDebug()<<"received pin";
     PINCode = num;
 
-    //pPincode->deleteLater();
-    //pincodep = nullptr;
-    on_pushButton_clicked();
     updateUI();
 }
 
@@ -64,7 +65,7 @@ void MainWindow::updateUI() {
     qDebug()<<"Update UI";
     ui->textPin->setText(PINCode);
     ui->textCard->setText(cardID);
-    ui->textAttempts->setText("Attempts = " + QString::number(attempts));
+    ui->textAttempts->setText("Yrityksiä jäljellä: " + QString::number(attempts));
     qDebug()<<attempts;
 }
 
@@ -110,9 +111,11 @@ void MainWindow::receiveCardID(QString inCardID)
 
         //this caused problems with reading cardID multiple times
 //    cardReader->deleteLater();
-    if (cardID!=""){
-            on_pushButton_clicked();
-        }
+
+        //this can be used to automatically open the pindll after reading card
+//    if (cardID!=""){
+//            on_pushButton_clicked();
+//        }
 
     updateUI();
 

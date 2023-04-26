@@ -7,7 +7,6 @@ accountDialog::accountDialog(QWidget *parent,int id,QString inBaseUrl,QByteArray
     ui(new Ui::accountDialog)
 {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);
     accountID=id;
     baseUrl = inBaseUrl;
     jwt = inJwt;
