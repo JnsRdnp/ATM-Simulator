@@ -65,3 +65,8 @@ Connecting QT to the backend
 
 API and JavaScript
 - https://peatutor.com/express/
+
+General QT problems
+- https://forum.qt.io/
+- https://doc.qt.io/
+- https://www.qtcentre.org/_
