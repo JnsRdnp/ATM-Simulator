@@ -69,8 +69,6 @@ API and JavaScript
 General QT problems
 - https://forum.qt.io/
 - https://doc.qt.io/
-<<<<<<< HEAD
 - https://www.qtcentre.org/
-=======
-- https://www.qtcentre.org/
->>>>>>> 1ec55509093b8548a2088c0434f78a3b5db9aa18
+
+
