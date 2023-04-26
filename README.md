@@ -2,31 +2,26 @@
 
 ![image](https://user-images.githubusercontent.com/78476744/233318810-29c73b87-1d22-4804-b861-3252c321e309.png)
 
-# Project Title
+# Bank Simulator
 
-Provide a brief and descriptive title for your project.
+A first-year project for Oulu University of Applied Sciences' ["Software Developement Application Project" -course](https://www.oamk.fi/opinto-opas/en/content-of-studies/curricula?koulutus=tvt2023k-ohj&lk=k2023&alasivu=opintojakso&kieli=en&oj=IN00CS90_en). By [Santtu Niskanen](https://github.com/santtuniskanen), [Saku Roininen](https://github.com/SakRoi), [Joonas Ridanpää](https://github.com/JnsRdnp), and [Lauri Tuovinen](https://github.com/LauriTuovinen).
 
 ## Description
 
-Learning goals for this project were:
-
-- Designing databases and programming in SQL
-
-- Backend programming using Node.js/Express.js
-
-- Qt/C++, particularly in signal/slot implementation
-
-- Some kind of understanding of the functionality of the HTTP protocol
-
-- Utilizing Git, specifically in collaborative work environments
-
-- Experience working in a team
+Bank Simulator is a software made to simulate a real-life bank ATM. This project includes a frontend written in C++ and QT, a backend written in javaScript (using express framework) and MySQL database. 
+This project was built on the plan to make a fully working imitation, with the additional pre-requisites being automated signing out and having the whole backend in the cloud.
 
 ## Getting Started
 
 ### Prerequisites
 
-List any prerequisites required to run your project, such as software or hardware requirements.
+- [**QT**](https://www.qt.io/download-open-source)
+    - QT Serial Port reader
+    - QT network
+    - QT Widgets
+- [**Node.js**](https://nodejs.org/en)
+- [**Express**](https://expressjs.com/)
+- [**Certbot**](https://certbot.eff.org/)
 
 ### Installation
 
@@ -57,7 +52,7 @@ Specify the license under which your project is released.
 List any contributors or resources that you used in the development of your project, including any libraries or frameworks.
 
 
-Working with mySQL database and creating procedures
+Working with MySQL database and creating procedures
 - https://peatutor.com/databases/
 
 Connecting QT to the backend
