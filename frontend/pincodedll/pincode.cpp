@@ -9,6 +9,9 @@ pincode::pincode(QWidget *parent) :
     ui(new Ui::pincode)
 {
     ui->setupUi(this);
+
+    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+
     this->setAttribute(Qt::WA_DeleteOnClose);
     connect(ui->btnPin, SIGNAL(clicked(bool)),
             this, SLOT(on_btnPin_clicked()));
@@ -38,6 +41,7 @@ pincode::pincode(QWidget *parent) :
 
 pincode::~pincode()
 {
+    //qDebug()<<"PINCODE DLL DESTROYED!!!";
     delete ui;
 }
 
