@@ -69,4 +69,4 @@ API and JavaScript
 General QT problems
 - https://forum.qt.io/
 - https://doc.qt.io/
-- https://www.qtcentre.org/_
+- https://www.qtcentre.org/
