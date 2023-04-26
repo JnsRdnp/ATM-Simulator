@@ -93,6 +93,10 @@ void MainWindow::on_CardButton_clicked()
 //            this,SLOT(receiveCardID(QString)));
 //    cardReader->open();
 //    updateUI();
+    if (attempts<=0){
+        clearLoginData();
+    }
+
     updateUI();
 
 
@@ -123,6 +127,7 @@ void MainWindow::receiveCardID(QString inCardID)
 
 void MainWindow::on_btnCredentials_clicked()
 {
+
     qDebug()<<"Pressed a button";
     QJsonObject jsonObj;
     jsonObj.insert("cardID", cardID);
