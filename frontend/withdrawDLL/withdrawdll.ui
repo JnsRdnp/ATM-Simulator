@@ -66,12 +66,16 @@
      <property name="font">
       <font>
        <pointsize>25</pointsize>
+       <italic>true</italic>
        <bold>false</bold>
        <underline>false</underline>
       </font>
      </property>
      <property name="text">
       <string>Nosto epäonnistui. Tarkista saldo.</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
