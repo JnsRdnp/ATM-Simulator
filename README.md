@@ -55,3 +55,13 @@ Specify the license under which your project is released.
 ## Acknowledgements
 
 List any contributors or resources that you used in the development of your project, including any libraries or frameworks.
+
+
+Working with mySQL database and creating procedures
+- https://peatutor.com/databases/
+
+Help connecting QT to the backend
+- https://peatutor.com/qt
+
+API and backend
+- https://peatutor.com/express/
