@@ -10,17 +10,17 @@ Provide a brief and descriptive title for your project.
 
 Learning goals for this project were:
 
-    -Designing databases and programming in SQL
+- Designing databases and programming in SQL
 
-    -Backend programming using Node.js/Express.js
+- Backend programming using Node.js/Express.js
 
-    -Qt/C++, particularly in signal/slot implementation
+- Qt/C++, particularly in signal/slot implementation
 
-    -Some kind of understanding of the functionality of the HTTP protocol
+- Some kind of understanding of the functionality of the HTTP protocol
 
-    -Utilizing Git, specifically in collaborative work environments
+- Utilizing Git, specifically in collaborative work environments
 
-    -Experience working in a team
+- Experience working in a team
 
 ## Getting Started
 
@@ -69,4 +69,4 @@ API and JavaScript
 General QT problems
 - https://forum.qt.io/
 - https://doc.qt.io/
-- https://www.qtcentre.org/_
+- https://www.qtcentre.org/
