@@ -60,8 +60,8 @@ List any contributors or resources that you used in the development of your proj
 Working with mySQL database and creating procedures
 - https://peatutor.com/databases/
 
-Help connecting QT to the backend
+Connecting QT to the backend
 - https://peatutor.com/qt
 
-API and backend
+API and JavaScript
 - https://peatutor.com/express/
