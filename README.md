@@ -2,50 +2,22 @@
 
 ![image](https://user-images.githubusercontent.com/78476744/233318810-29c73b87-1d22-4804-b861-3252c321e309.png)
 
-# Bank Simulator
+Congrats, the program should now be able to work without much changes to the backend itself. You can add new cards by doing the same thing, but without the need of creating the whole system again. You can also add multiple accounts to one card if you so wish to.
 
-A first-year project for Oulu University of Applied Sciences' ["Software Developement Application Project" -course](https://www.oamk.fi/opinto-opas/en/content-of-studies/curricula?koulutus=tvt2023k-ohj&lk=k2023&alasivu=opintojakso&kieli=en&oj=IN00CS90_en). By [Santtu Niskanen](https://github.com/santtuniskanen), [Saku Roininen](https://github.com/SakRoi), [Joonas Ridanpää](https://github.com/JnsRdnp), and [Lauri Tuovinen](https://github.com/LauriTuovinen).
-
-## Description
-
-Bank Simulator is a software made to simulate a real-life bank ATM. This project includes a frontend written in C++ and QT, a backend written in javaScript (using express framework) and MySQL database. 
-This project was built on the plan to make a fully working imitation, with the additional pre-requisites being automated signing out and having the whole backend in the cloud.
-
-## Getting Started
-
-### Prerequisites
-
-- [**QT**](https://www.qt.io/download-open-source)
-    - QT Serial Port reader
-    - QT network
-    - QT Widgets
-- [**Node.js**](https://nodejs.org/en)
-- [**Express**](https://expressjs.com/)
-- [**Certbot**](https://certbot.eff.org/)
-
-### Installation
-
-Provide step-by-step instructions on how to install and run your project. Include any dependencies that need to be installed and any environment variables that need to be set.
+#### 
 
 ## Usage
+Usage of the Bank Simulator is simple. You can login into the bank simulator by giving it a card using RFID-reader and giving it's PIN. If the card is both credit and debit, it will ask the user to choose one of them. If the card has multiple accounts attatched to it, it will ask the user which it wants to use.
 
-Provide instructions on how to use your project. Include examples and any relevant information that the user might need to know.
+In the "main menu", the user can choose to see their balance (saldo), withdraw money (nosto), see history (tili) or sign out (kirjaudu ulos). The main menu also asks the user automatically after 20 seconds of not interfacing with the program, if they want to continue their session. This also automatically sign outs the user after 10 seconds of not choosing.
 
-## Contributing
+## Known Issues
 
-If you're open to contributions, describe how people can contribute to your project. Include information on your code of conduct, how to set up a development environment, and any guidelines for contributing.
+* The addition of new info is unsafe and should be probably done via a different software made for it.
+* The software's installation is cumbersome, would be helped by an installer for the QT fronted.
 
-## Issues
-
-If you have any issues or bugs with your project, describe how people can report them and what information you need to address them.
-
-## Roadmap
-
-If you have any plans for future updates or features, describe them here.
 
 ## License
-
-Specify the license under which your project is released.
 
 ## Acknowledgements
 
