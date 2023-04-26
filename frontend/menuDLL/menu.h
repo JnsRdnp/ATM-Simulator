@@ -45,7 +45,7 @@ private:
     withdrawdll *pWithdraw;
     SignoutTimerInterface *signoutTimer;
     QTimer *MainMenuTimer;
-    int timeout = 30000;
+    int timeout = 15000;
 
     //card info
     QString PIN = "";

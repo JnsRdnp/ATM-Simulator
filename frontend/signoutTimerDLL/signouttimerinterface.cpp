@@ -20,6 +20,7 @@ SignoutTimerInterface::SignoutTimerInterface(QWidget *parent, QString inCardID, 
     ui->setupUi(this);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
+    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
     Engine = new SignoutTimerEngine(this, inCardID, inPIN, IN_BASE_URL);
     connect(ui->pushButton,SIGNAL(clicked(bool)),
