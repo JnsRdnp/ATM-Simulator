@@ -107,7 +107,7 @@ void Menu::generalMenuListHandler(QListWidgetItem *item)
 
 void Menu::timerResetHandler()
 {
-    MainMenuTimer->start();
+    MainMenuTimer->start(timeout);
 }
 
 void Menu::timedSignout()
