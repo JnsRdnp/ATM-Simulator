@@ -21,6 +21,7 @@ private slots:
 
 signals:
     void responseReady();
+    void withdrawFail();
 
 private:
     int accountID;

@@ -10,6 +10,8 @@ withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit,Q
     //sets the object to destroy itself when the window is closed
     this->setAttribute(Qt::WA_DeleteOnClose);
 
+    ui->failLabel->setVisible(false);
+
     Engine = new WithdrawDLLEngine(this, inAccountID, inIsCardCredit,inBaseUrl,inJwt);
 
     connect(ui->ReturnButton, SIGNAL(clicked()),
@@ -27,7 +29,10 @@ withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit,Q
 
     connect(Engine,SIGNAL(responseReady()),this,SLOT(returnHandler()));
 
+    connect(Engine,SIGNAL(withdrawFail()),this,SLOT(withdrawFailSlot()));
+
     ui->ReturnButton->setText((QChar(0x2B05)+QString(" Takaisin")));
+
 
 }
 
@@ -73,5 +78,11 @@ void withdrawdll::returnHandler()
 
     this->close();
     qDebug()<<"Closing and destroying withdraw window";
+}
+
+void withdrawdll::withdrawFailSlot()
+{
+    qDebug()<<"WITHDRAWFAILSLOT WORKING";
+    ui->failLabel->setVisible(true);
 }
 

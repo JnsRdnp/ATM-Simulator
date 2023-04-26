@@ -65,13 +65,17 @@ void WithdrawDLLEngine::withdrawMoney(QNetworkReply *reply)
 
     if(jsonObject["affectedRows"].toInt()==0){
        qDebug()<<"Ei masardia :(";
+       emit withdrawFail();
+       reply->deleteLater();
+       putManager->deleteLater();
 
     }
+    else{
+       reply->deleteLater();
+       putManager->deleteLater();
 
+       emit responseReady();
+    }
 
-    reply->deleteLater();
-    putManager->deleteLater();
-
-    emit responseReady();
 
 }
