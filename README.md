@@ -43,20 +43,21 @@ Bank Simulator also has some basic security features such as JSON Web Token for 
     * port = the port you want the backend to listen to
     * MY_TOKEN = a base 64 random string
 10. Save and then run app.js using node: `node app.js`
-11. in CardReaderDLL, change the settings in the openSerialPort method to be the same as your RFID reader.
-12. Build all projects from the /frontend file using QT.
-13. Run Login.
+11. In CardReaderDLL, change the settings in the openSerialPort method to be the same as your RFID reader.
+12. In Login, in environment.cpp, change the localhost to match your version.
+13. Build all projects from the /frontend file using QT.
+14. Run Login.
     if this causes problems, see https://github.com/banksimul-2023-22spo/group_15/tree/main/frontend for FAQ.
-14. Read one of your RFID cards and save the ID somewhere
-15. Insert into the MySQL database a new user
-16. Using that RFID card's ID, make a POST request to https:/host:port/cards with the following info in its body:
+15. Read one of your RFID cards and save the ID somewhere
+16. Insert into the MySQL database a new user
+17. Using that RFID card's ID, make a POST request to https:/host:port/cards with the following info in its body:
     * id : RFID-card's ID
     * PINcode : 4 numbers
     * idUser : the primary key of the inserted user
     * credit : 1 if the card is supposed to be a credit card, 0 if it's not
     * debit : 1 if the card is supposed to be a debit card, 0 if it's not
-17. Insert an account into the MySQL database with the card's id and owner.
-18. Your card is now able to be used to login into the bank simulator. Uncomment the line 30 in app.js and restart the server.
+18. Insert an account into the MySQL database with the card's id and owner.
+19. Your card is now able to be used to login into the bank simulator. Uncomment the line 30 in app.js and restart the server.
 Congrats, the program should now be able to work without many changes to the backend itself. You can add new cards by doing the same thing but without the need of creating the whole system again. You can also add multiple accounts to one card if you so wish to.
 
 #### 
@@ -66,11 +67,13 @@ Usage of the Bank Simulator is simple. You can log in into the bank simulator by
 
 In the "main menu", the user can choose to see their balance (saldo), withdraw money (nosto), see history (tili), or sign out (kirjaudu ulos). The main menu also asks the user automatically after 20 seconds of not interfacing with the program, if they want to continue their session. This also automatically sign outs the user after 10 seconds of not choosing.
 
+[A short video to show the usage.](https://youtu.be/piatJRwadu4)
+
 ## Known Issues
 
 * The addition of new info is unsafe and should be probably done via a different software made for it.
-* The software's installation is cumbersome and would be helped by an installer for the QT fronted.
 
+* The software's installation is cumbersome and would be helped by an installer for the QT fronted.
 
 ## License
 
