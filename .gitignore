@@ -2,6 +2,7 @@ backend/node_modules
 frontend/build/
 frontend/*.user
 build/
+frontend/login/environment.cpp
 
 # Bak-file
 *.bak
