@@ -39,9 +39,9 @@ Bank Simulator also has some basic security features such as JSON Web Token for 
     for example, if you use NPM, you would run `npm install` in bankSimul/backend
 8. Comment out the line 30 in app.js. (We need to do this to add cards into the database with encrypted PINs)
 9. create a .env file in /backend and include the following data
-    1. SQL_SERVER = 'mysql://username:password@host:3306/database'
-    2. port = the port you want the backend to listen to
-    3. MY_TOKEN = a base 64 random string
+    * SQL_SERVER = 'mysql://username:password@host:3306/database'
+    * port = the port you want the backend to listen to
+    * MY_TOKEN = a base 64 random string
 10. Save and then run app.js using node: `node app.js`
 11. in CardReaderDLL, change the settings in the openSerialPort method to be the same as your RFID reader.
 12. Build all projects from the /frontend file using QT.
