@@ -67,7 +67,7 @@ Usage of the Bank Simulator is simple. You can log in into the bank simulator by
 
 In the "main menu", the user can choose to see their balance (saldo), withdraw money (nosto), see history (tili), or sign out (kirjaudu ulos). The main menu also asks the user automatically after 20 seconds of not interfacing with the program, if they want to continue their session. This also automatically sign outs the user after 10 seconds of not choosing.
 
-[A short video to show the usage.](https://youtu.be/piatJRwadu4)
+## [A short video to show the usage.](https://youtu.be/piatJRwadu4)
 
 ## Known Issues
 
