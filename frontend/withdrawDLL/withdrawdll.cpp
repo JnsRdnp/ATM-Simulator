@@ -10,6 +10,9 @@ withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit,Q
     //sets the object to destroy itself when the window is closed
     this->setAttribute(Qt::WA_DeleteOnClose);
 
+    ui->failLabel->setVisible(false);
+    ui->failLabel->setStyleSheet("QLabel { color : red; }");
+
     Engine = new WithdrawDLLEngine(this, inAccountID, inIsCardCredit,inBaseUrl,inJwt);
 
     connect(ui->ReturnButton, SIGNAL(clicked()),
@@ -27,7 +30,10 @@ withdrawdll::withdrawdll(QWidget *parent, int inAccountID, bool inIsCardCredit,Q
 
     connect(Engine,SIGNAL(responseReady()),this,SLOT(returnHandler()));
 
+    connect(Engine,SIGNAL(withdrawFail()),this,SLOT(withdrawFailSlot()));
+
     ui->ReturnButton->setText((QChar(0x2B05)+QString(" Takaisin")));
+
 
 }
 
@@ -40,6 +46,7 @@ withdrawdll::~withdrawdll()
 
 void withdrawdll::tenEuroClickHandler()
 {
+    ui->failLabel->setVisible(false);
     Engine->withdraw(10);
 
     qDebug()<<"Withdrew 10 €";
@@ -47,6 +54,7 @@ void withdrawdll::tenEuroClickHandler()
 
 void withdrawdll::twentyEuroClickHandler()
 {
+    ui->failLabel->setVisible(false);
     Engine->withdraw(20);
 
     qDebug()<<"Withdrew 20 €";
@@ -54,6 +62,7 @@ void withdrawdll::twentyEuroClickHandler()
 
 void withdrawdll::fiftyEuroClickHandler()
 {
+    ui->failLabel->setVisible(false);
     Engine->withdraw(50);
 
     qDebug()<<"Withdrew 50 €";
@@ -61,6 +70,7 @@ void withdrawdll::fiftyEuroClickHandler()
 
 void withdrawdll::hundredEuroClickHandler()
 {
+    ui->failLabel->setVisible(false);
     Engine->withdraw(100);
 
     qDebug()<<"Withdrew 100 €";
@@ -73,5 +83,11 @@ void withdrawdll::returnHandler()
 
     this->close();
     qDebug()<<"Closing and destroying withdraw window";
+}
+
+void withdrawdll::withdrawFailSlot()
+{
+    qDebug()<<"WITHDRAWFAILSLOT WORKING";
+    ui->failLabel->setVisible(true);
 }
 

@@ -26,6 +26,8 @@ private slots:
     void hundredEuroClickHandler();
     void returnHandler();
 
+    void withdrawFailSlot();
+
 private:
     WithdrawDLLEngine * Engine;
     Ui::withdrawdll *ui;

@@ -52,14 +52,30 @@ void WithdrawDLLEngine::withdrawMoney(QNetworkReply *reply)
 {
     //Original source: https://peatutor.com/qt/http_put.php
     responseData=reply->readAll();
-//    qDebug()<<responseData;
-    //if responseData == "message which we get when fail"
-    //emit failWithdraw()
-    //else
-    //emit successWithdraw()
-    reply->deleteLater();
-    putManager->deleteLater();
 
-    emit responseReady();
+
+
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(responseData);
+
+    QJsonObject jsonObject = jsonResponse.object();
+
+
+    qDebug()<<"affected rows: "<<(jsonObject["affectedRows"].toInt());
+    qDebug()<<"Json response: "<<jsonResponse;
+
+    if(jsonObject["affectedRows"].toInt()==0){
+       qDebug()<<"Ei masardia :(";
+       emit withdrawFail();
+       reply->deleteLater();
+       putManager->deleteLater();
+
+    }
+    else{
+       reply->deleteLater();
+       putManager->deleteLater();
+
+       emit responseReady();
+    }
+
 
 }
